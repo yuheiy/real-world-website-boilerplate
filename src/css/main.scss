@@ -1,0 +1,11 @@
+// core
+@import "vars";
+@import "functions";
+
+// base
+@import "../../node_modules/normalize.css/normalize";
+@import "base";
+
+// component
+@import "components/*";   // shared component
+@import "components/*/*"; // namespaced component

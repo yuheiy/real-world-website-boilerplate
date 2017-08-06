@@ -1,0 +1,40 @@
+html {
+  font-family: $font-stack-system-ui;
+  line-height: 1.5;
+}
+
+body {
+  overflow-wrap: break-word;
+}
+
+a {
+  text-decoration-skip: ink;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  fill: currentcolor;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}

@@ -1,0 +1,11 @@
+.Content {
+  max-width: 75rem;
+  margin: 3rem auto 1.5rem;
+  padding-right: .75rem;
+  padding-left: .75rem;
+
+  @media (min-width: $breakpoint-md) {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+}

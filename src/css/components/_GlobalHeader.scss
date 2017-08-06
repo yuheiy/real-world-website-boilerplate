@@ -1,0 +1,78 @@
+.GlobalHeader {
+  max-width: 75rem;
+  margin: 1.5rem auto;
+  padding-right: .75rem;
+  padding-left: .75rem;
+
+  @media (min-width: $breakpoint-md) {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+}
+
+.GlobalHeader:not(.GlobalHeader--home) {
+  @media (min-width: $breakpoint-sm) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.GlobalHeader.GlobalHeader--home {
+  @media (min-width: $breakpoint-md) {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.GlobalHeader h1 {
+  margin: 0 0 1.5rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.GlobalHeader:not(.GlobalHeader--home) h1 {
+  @media (min-width: $breakpoint-sm) {
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: inherit;
+  }
+}
+
+.GlobalHeader.GlobalHeader--home h1 {
+  @media (min-width: $breakpoint-xs) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: $breakpoint-md) {
+    margin-bottom: 2.25rem;
+    font-size: 3rem;
+  }
+}
+
+.GlobalHeader h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.GlobalHeader nav ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  text-align: center;
+
+  @media (min-width: $breakpoint-xs) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.GlobalHeader nav li:not(:last-child) {
+  @media (min-width: $breakpoint-xs) {
+    margin-right: 1.5rem;
+  }
+}
+
+.GlobalHeader nav a {
+  color: #3498db;
+}
