@@ -58,7 +58,7 @@ yarn start
 │   │   ├── index.pug
 │   │   ├── license.json
 │   │   └── license.pug
-│   └── js
+│   └── js/
 │       ├── components/
 │       │   └── license/
 │       │       └── Display.js
