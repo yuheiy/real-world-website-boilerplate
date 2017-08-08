@@ -40,7 +40,7 @@ const pugConfig = {
 }
 const baseLocals = {
   isProd,
-  relUrl: (pagePath) => path.posix.join(`${siteConfig.baseDir || ''}/`, pagePath),
+  absPath: (pagePath) => path.posix.join(`${siteConfig.baseDir || ''}/`, pagePath),
   absUrl: (pagePath) => `${siteConfig.baseUrl}${path.posix.join('/', pagePath)}`,
   site: siteConfig,
 }
