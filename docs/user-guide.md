@@ -20,15 +20,15 @@
 
 開発時は`false`、本番向けビルド時は`true`になります。
 
-#### `relUrl(pagePath)`
+#### `absPath(pagePath)`
 
-`pagePath`にプロジェクトルートからのパスを与えると、ルート相対のパスが返ります。
+`pagePath`にプロジェクトルートからのパスを与えると、絶対パスが返ります。
 
-例：`relUrl('about.html')` => `/path/to/project/about.html`
+例：`absPath('about.html')` => `/path/to/project/about.html`
 
 #### `absUrl(pagePath)`
 
-`pagePath`にプロジェクトルートからのパスを与えると、絶対パスが返ります。
+`pagePath`にプロジェクトルートからのパスを与えると、絶対URLが返ります。
 
 例：`absUrl('about.html')` => `http://example.com/path/to/project/about.html`
 

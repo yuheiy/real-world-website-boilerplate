@@ -3,9 +3,9 @@ header.GlobalHeader(class= page.isHome && 'GlobalHeader--home')
     if page.isHome
       = site.title
     else
-      a(href= relUrl('/'))= site.title
+      a(href= absPath('/'))= site.title
   nav
     ul
       each link in file.siteNavigation.navLinks
         li
-          a(href= relUrl(link[1]), class= page.path === link[1] && 'is-active')= link[0]
+          a(href= absPath(link[1]), class= page.path === link[1] && 'is-active')= link[0]
