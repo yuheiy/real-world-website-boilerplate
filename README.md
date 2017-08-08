@@ -83,7 +83,7 @@ yarn start
 
 ### `realworld.config.js`
 
-ウェブサイトのURLに応じて`baseUrl`と`baseDir`を設定してください。
+ウェブサイトのURLに応じて`baseUrl`と`basePath`を設定してください。
 
 #### ルート直下の場合
 
@@ -98,7 +98,7 @@ module.exports = {
 ```javascript
 module.exports = {
   baseUrl: 'http://example.com/path/to/project',
-  baseDir: '/path/to/project',
+  basePath: '/path/to/project',
 }
 ```
 

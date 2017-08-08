@@ -8,7 +8,7 @@ const siteConfig = require('./realworld.config')
 
 const isProd = process.argv.includes('--prod')
 const destDir = isProd ? 'dist' : 'tmp'
-const destBaseDir = path.join(destDir, siteConfig.baseDir || '')
+const destBaseDir = path.join(destDir, siteConfig.basePath || '')
 const destAssetsDir = path.join(destBaseDir, 'assets')
 
 const css = () => {
@@ -54,9 +54,9 @@ const js = (done) => {
 }
 
 const renderHtmlMiddleware = (req, res, next) => {
-  const baseDir = siteConfig.baseDir || ''
-  const notCovered = !req.url.startsWith(`${baseDir}/`)
-  const ignoreFileOrDir = req.url.replace(`${baseDir}/`, '').split('/').some(name => name.startsWith('_'))
+  const basePath = siteConfig.basePath || ''
+  const notCovered = !req.url.startsWith(`${basePath}/`)
+  const ignoreFileOrDir = req.url.replace(`${basePath}/`, '').split('/').some(name => name.startsWith('_'))
   if (notCovered || ignoreFileOrDir) {
     return next()
   }
@@ -64,7 +64,7 @@ const renderHtmlMiddleware = (req, res, next) => {
   const file = path.join(
     'src',
     'html',
-    req.url.replace(baseDir, ''),
+    req.url.replace(basePath, ''),
   )
   .replace(/\?.*/, '')
   .replace(/\/$/, '/index.html')
@@ -88,11 +88,11 @@ const serve = (done) => {
         'vendor-public',
       ],
       routes: {
-        [`${siteConfig.baseDir || '/'}`]: 'public',
+        [`${siteConfig.basePath || '/'}`]: 'public',
       },
     },
     middleware: renderHtmlMiddleware,
-    startPath: path.posix.join('/', siteConfig.baseDir || '', '/'),
+    startPath: path.posix.join('/', siteConfig.basePath || '', '/'),
     ghostMode: false,
     open: false,
   }, done)

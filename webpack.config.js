@@ -3,13 +3,13 @@ const webpack = require('webpack')
 const siteConfig = require('./realworld.config')
 
 const isProd = process.argv.includes('--prod')
-const destAssetsDir = path.join(isProd ? 'dist' : 'tmp', siteConfig.baseDir || '', 'assets')
+const destAssetsDir = path.join(isProd ? 'dist' : 'tmp', siteConfig.basePath || '', 'assets')
 
 module.exports = {
   entry: './src/js/main.js',
   output: {
     path: path.join(__dirname, destAssetsDir, 'js'),
-    publicPath: path.posix.join(siteConfig.baseDir || '/', 'assets', 'js', '/'),
+    publicPath: path.posix.join(siteConfig.basePath || '/', 'assets', 'js', '/'),
     filename: '[name].js',
   },
   module: {
