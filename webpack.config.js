@@ -17,7 +17,23 @@ module.exports = {
       {
         test: /\.js$/,
         include: path.join(__dirname, 'src', 'js'),
-        use: 'babel-loader',
+        loader: 'babel-loader',
+        options: {
+          babelrc: false,
+          presets: [
+            ['env', {
+              targets: {
+                modules: false,
+                useBuiltIns: true,
+              },
+            }],
+          ],
+          plugins: [
+            'transform-class-properties',
+            'transform-object-rest-spread',
+          ],
+          cacheDirectory: true,
+        },
       },
     ],
   },
@@ -31,15 +47,17 @@ module.exports = {
         'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       new webpack.optimize.UglifyJsPlugin({
+        beautify: false,
+        mangle: {
+          screw_ie8: true,
+          keep_fnames: true,
+        },
         compress: {
-          warnings: false,
-          comparisons: false,
+          screw_ie8: true,
         },
-        output: {
-          comments: false,
-          ascii_only: true,
-        },
+        comments: false,
       }),
+      new webpack.optimize.ModuleConcatenationPlugin(),
     ] : []),
   ],
   devtool: !isProd && 'cheap-module-source-map',

@@ -2,13 +2,11 @@
   "presets": [
     ["env", {
       "targets": {
-        "node": "current",
-        "useBuiltIns": true
+        "node": "current"
       }
     }]
   ],
   "plugins": [
-    "transform-class-properties",
     "transform-object-rest-spread"
   ]
 }
