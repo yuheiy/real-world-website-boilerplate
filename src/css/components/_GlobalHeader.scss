@@ -40,7 +40,7 @@
 }
 
 .GlobalHeader.GlobalHeader--home h1 {
-  @media (min-width: $breakpoint-xs) {
+  @media (min-width: $breakpoint-sm) {
     font-size: 2rem;
   }
 
@@ -61,14 +61,14 @@
   list-style: none;
   text-align: center;
 
-  @media (min-width: $breakpoint-xs) {
+  @media (min-width: $breakpoint-sm) {
     display: flex;
     justify-content: center;
   }
 }
 
 .GlobalHeader nav li:not(:last-child) {
-  @media (min-width: $breakpoint-xs) {
+  @media (min-width: $breakpoint-sm) {
     margin-right: 1.5rem;
   }
 }
