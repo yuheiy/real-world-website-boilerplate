@@ -10,8 +10,8 @@ HTMLテンプレートを作成するためのシンプルな仕組みや、標�
 git clone https://github.com/yuheiy/real-world-website-boilerplate.git my-app
 cd my-app
 rm -rf .git
-yarn
-yarn start
+npm i
+npm start
 ```
 
 ## はじめに
@@ -25,6 +25,7 @@ yarn start
 │   └── user-guide.md
 ├── gulpfile.babel.js
 ├── node_modules/
+├── package-lock.json
 ├── package.json
 ├── public/                         # `dist/`ディレクトリのプロジェクトルートにそのままコピーされる
 │   ├── assets/
@@ -69,15 +70,14 @@ yarn start
 ├── tmp/                            # 開発時に出力される一時ファイル
 ├── vendor-public/                  # 開発サーバーでルートディレクトリから参照できるファイル。`dist/`ディレクトリに出力されない
 │   └── common.css
-├── webpack.config.js
-└── yarn.lock
+└── webpack.config.js
 ```
 
-### `yarn start`
+### `npm start`
 
 開発用サーバーが起動します。コンソールにサーバーのURLが表示されます。
 
-### `yarn build`
+### `npm run build`
 
 本番向けにビルドしたファイルを`dist/`ディレクトリに出力します。
 

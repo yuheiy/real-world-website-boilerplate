@@ -68,7 +68,7 @@
 
 ## ステージング環境へのデプロイ
 
-`yarn build`を実行すると本番向けにビルドされたファイルが`dist/`ディレクトリに出力されます。`vendor-public/`ディレクトリのファイルは含まれません。
+`npm run build`を実行すると本番向けにビルドされたファイルが`dist/`ディレクトリに出力されます。`vendor-public/`ディレクトリのファイルは含まれません。
 
 ステージング環境などにデプロイする場合は、`dist/`ディレクトリと`vendor-public/`ディレクトリのファイルをコピーしてください。
 
@@ -109,7 +109,7 @@ const serve = (done) => {
 #### 依存モジュールをインストール
 
 ```sh
-yarn add --dev pre-commit
+npm i -D pre-commit
 ```
 
 #### `dist/`ディレクトリをGitに追加
@@ -122,8 +122,6 @@ yarn add --dev pre-commit
 -/dist
 .DS_Store
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 ```
 
 #### `package.json`に`precommit`フックを追加
@@ -144,7 +142,7 @@ yarn-error.log*
 #### 依存モジュールをインストール
 
 ```sh
-yarn add --dev archiver
+npm i -D archiver
 ```
 
 #### `task/archive.js`を追加
@@ -231,8 +229,6 @@ archive()
 +/archive
 .DS_Store
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 ```
 
 #### 使い方
@@ -240,7 +236,7 @@ yarn-error.log*
 次のコマンドで差分ファイルZipを生成します。
 
 ```sh
-yarn archive -- <start-commit> [<end-commit>]
+npm run archive -- <start-commit> [<end-commit>]
 ```
 
 `<start-commit>`に前回納品時のコミット、`<end-commit>`に納品データに含める最新のコミットを指定します。`<end-commit>`を省略すると`HEAD`になります。
@@ -252,6 +248,6 @@ todo...
 https://gist.github.com/yuheiy/28b8441a146c987b4514ce2da32ce8b1
 
  ```sh
-yarn filelist -- <start-commit> [<end-commit>]
+npm run filelist -- <start-commit> [<end-commit>]
 ```
  -->
