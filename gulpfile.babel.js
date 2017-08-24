@@ -12,14 +12,14 @@ const destBaseDir = path.join(destDir, siteConfig.basePath || '')
 const destAssetsDir = path.join(destBaseDir, 'assets')
 
 const css = () => {
-  const globbing = require('node-sass-globbing')
+  const globImporter = require('node-sass-glob-importer')
   const autoprefixer = require('autoprefixer')
   const csswring = require('csswring')
 
   return gulp.src('src/css/main.scss')
     .pipe(plugins.if(!isProd, plugins.sourcemaps.init()))
     .pipe(plugins.sass({
-      importer: globbing,
+      importer: globImporter(),
     }).on('error', plugins.sass.logError))
     .pipe(plugins.postcss([
       autoprefixer({
