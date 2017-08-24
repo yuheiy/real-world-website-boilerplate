@@ -4,11 +4,24 @@ html {
 }
 
 body {
-  overflow-wrap: break-word;
+  // overflow-wrap: break-word;
 }
 
 a {
   text-decoration-skip: ink;
+}
+
+i,
+cite,
+em,
+var,
+address,
+dfn {
+  &:lang(zh),
+  &:lang(ja),
+  &:lang(ko) {
+    font-style: normal;
+  }
 }
 
 audio,
