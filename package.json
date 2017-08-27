@@ -5,20 +5,20 @@
     "build": "gulp build --prod"
   },
   "dependencies": {
-    "babel-polyfill": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "normalize.css": "^7.0.0",
     "picturefill": "^3.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.24.1",
+    "babel-register": "^6.26.0",
     "browser-sync": "^2.18.13",
-    "csswring": "^6.0.0",
+    "csswring": "^6.0.1",
     "del": "^3.0.0",
     "glob": "^7.1.2",
     "gulp": "gulpjs/gulp#4.0",
@@ -26,12 +26,12 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-postcss": "^7.0.0",
     "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.0",
+    "gulp-sourcemaps": "^2.6.1",
     "gulp-util": "^3.0.8",
     "make-dir": "^1.0.0",
     "node-sass-glob-importer": "^5.0.0-alpha.5",
     "pug": "^2.0.0-rc.3",
-    "webpack": "^3.5.4"
+    "webpack": "^3.5.5"
   },
   "engines": {
     "node": ">=8.0.0"
