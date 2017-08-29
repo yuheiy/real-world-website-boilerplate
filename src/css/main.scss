@@ -7,5 +7,4 @@
 @import "base";
 
 // component
-@import "components/*.scss";   // shared component
-@import "components/*/*.scss"; // namespaced component
+@import "components/**/*.scss";
