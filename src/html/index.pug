@@ -1,18 +1,12 @@
-doctype html
-html(lang= site.lang)
-  include /_includes/head
+extends /_extends/default
 
-  body
-    include /_includes/global-header
-
-    main.Content
-      section.Section
-        h2.Section-heading Overview
-        .Section-content
-          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus aliquam ipsam architecto quaerat, quo molestiae sunt fugit placeat deleniti, rerum, veniam sed quas impedit, nesciunt aperiam cumque ratione recusandae earum.
-      section.Section
-        h2.Section-heading Quick start
-        .Section-content
-          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus aliquam ipsam architecto quaerat, quo molestiae sunt fugit placeat deleniti, rerum, veniam sed quas impedit, nesciunt aperiam cumque ratione recusandae earum.
-
-    include /_includes/scripts
+block body
+  main.Content
+    section.Section
+      h2.Section-heading Overview
+      .Section-content
+        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus aliquam ipsam architecto quaerat, quo molestiae sunt fugit placeat deleniti, rerum, veniam sed quas impedit, nesciunt aperiam cumque ratione recusandae earum.
+    section.Section
+      h2.Section-heading Quick start
+      .Section-content
+        p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus aliquam ipsam architecto quaerat, quo molestiae sunt fugit placeat deleniti, rerum, veniam sed quas impedit, nesciunt aperiam cumque ratione recusandae earum.

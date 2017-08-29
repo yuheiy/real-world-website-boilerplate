@@ -1,16 +1,10 @@
-doctype html
-html(lang= site.lang)
-  include /_includes/head
+extends /_extends/default
 
-  body
-    include /_includes/global-header
-
-    main.Content
-      section.Section
-        h2.Section-heading License
-        .Section-content
-          p.license-Display
-            | MI
-            span.license-Display-last T
-
-    include /_includes/scripts
+block body
+  main.Content
+    section.Section
+      h2.Section-heading License
+      .Section-content
+        p.license-Display
+          | MI
+          span.license-Display-last T
