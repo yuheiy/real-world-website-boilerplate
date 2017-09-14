@@ -17,22 +17,22 @@ module.exports = {
       {
         test: /\.js$/,
         include: path.join(__dirname, 'src', 'js'),
-        loader: 'babel-loader',
-        options: {
-          babelrc: false,
-          presets: [
-            ['env', {
-              targets: {
+        use: {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            presets: [
+              ['env', {
                 modules: false,
                 useBuiltIns: true,
-              },
-            }],
-          ],
-          plugins: [
-            'transform-class-properties',
-            'transform-object-rest-spread',
-          ],
-          cacheDirectory: true,
+              }],
+            ],
+            plugins: [
+              'transform-class-properties',
+              'transform-object-rest-spread',
+            ],
+            cacheDirectory: true,
+          },
         },
       },
     ],
