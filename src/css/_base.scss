@@ -11,18 +11,6 @@ a {
   text-decoration-skip: ink;
 }
 
-i,
-cite,
-em,
-address,
-dfn {
-  &:lang(zh),
-  &:lang(ja),
-  &:lang(ko) {
-    font-style: normal;
-  }
-}
-
 audio,
 canvas,
 iframe,
@@ -49,4 +37,10 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+}
+
+:lang(zh),
+:lang(ja),
+:lang(ko) {
+  font-style: normal;
 }
