@@ -109,7 +109,7 @@ const serve = (done) => {
 #### 依存モジュールをインストール
 
 ```sh
-yarn add --dev pre-commit
+yarn add --dev husky
 ```
 
 #### `dist/`ディレクトリをGitに追加
@@ -134,7 +134,6 @@ yarn-error.log*
     "start": "gulp",
     "build": "gulp build --prod"
   },
-+  "precommit": "precommit",
 ```
 
 ### 差分ファイルZip
