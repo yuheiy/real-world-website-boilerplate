@@ -9,14 +9,14 @@ const isProd = process.argv.includes('--prod')
 const getFileData = () => {
   const files = glob.sync('src/html/_data/*.json', {nodir: true})
   const data = files
-  .map((file) => ({
-    name: path.basename(file, '.json'),
-    data: JSON.parse(fs.readFileSync(file, 'utf8') || '{}'),
-  }))
-  .reduce((result, {name, data}) => ({
-    ...result,
-    [name]: data,
-  }), {})
+    .map((file) => ({
+      name: path.basename(file, '.json'),
+      data: JSON.parse(fs.readFileSync(file, 'utf8') || '{}'),
+    }))
+    .reduce((result, {name, data}) => ({
+      ...result,
+      [name]: data,
+    }), {})
   return data
 }
 
@@ -26,9 +26,9 @@ const getPageData = (templateFile) => {
     ? JSON.parse(fs.readFileSync(file) || '{}')
     : {}
   const pagePath = templateFile
-  .replace(/^src\/html/, '')
-  .replace(/\.pug$/, '.html')
-  .replace(/\/index\.html$/, '/')
+    .replace(/^src\/html/, '')
+    .replace(/\.pug$/, '.html')
+    .replace(/\/index\.html$/, '/')
   return {
     ...data,
     path: pagePath,

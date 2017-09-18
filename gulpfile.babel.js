@@ -66,9 +66,9 @@ const renderHtmlMiddleware = (req, res, next) => {
     'html',
     req.url.replace(basePath, ''),
   )
-  .replace(/\?.*/, '')
-  .replace(/\/$/, '/index.html')
-  .replace(/\.html$/, '.pug')
+    .replace(/\?.*/, '')
+    .replace(/\/$/, '/index.html')
+    .replace(/\.html$/, '.pug')
   if (!(fs.existsSync(file) && fs.statSync(file).isFile())) {
     return next()
   }
@@ -133,8 +133,8 @@ const html = (done) => {
   }, (err, files) => {
     files.forEach(file => {
       const outputFile = file
-      .replace(/^src\/html/, destBaseDir)
-      .replace(/\.pug$/, '.html')
+        .replace(/^src\/html/, destBaseDir)
+        .replace(/\.pug$/, '.html')
       const outputDir = path.dirname(outputFile)
       const result = renderHtml(file)
       makeDir.sync(outputDir)

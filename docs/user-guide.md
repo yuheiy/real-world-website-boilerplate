@@ -130,7 +130,7 @@ yarn-error.log*
 
 ```diff
   "scripts": {
-+    "precommit": "npm run build && git add dist/",
++   "precommit": "npm run build && git add dist/",
     "start": "gulp",
     "build": "gulp build --prod"
   },
@@ -194,9 +194,8 @@ const archive = () => {
   const changedFiles = String(
     git('diff', '--diff-filter=AMCR', '--name-only', startCommit, endCommit)
   )
-  .slice(0, -1)
-  .split('\n')
-  .filter(file => file.startsWith(FILE_PATH_PREFIX))
+    .split('\n')
+    .filter(file => file.startsWith(FILE_PATH_PREFIX))
   changedFiles.forEach(file => {
     const resolvedFile = path.resolve(file)
     zip.append(fs.createReadStream(resolvedFile), {
@@ -215,7 +214,7 @@ archive()
 
 ```diff
   "scripts": {
-+    "archive": "node task/archive.js",
++   "archive": "node task/archive.js",
     "precommit": "npm run build && git add dist/",
     "start": "gulp",
     "build": "gulp build --prod"
