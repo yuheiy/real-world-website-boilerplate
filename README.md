@@ -41,6 +41,7 @@ yarn start
 │   │   └── main.scss               # CSSのエントリーポイント。`/assets/css/main.css`に出力される
 │   ├── html/                       # ディレクトリ内の階層のまま`dist/`ディレクトリ内のプロジェクトルートに出力される
 │   │   ├── _data/                  # テンプレート全体から参照できる変数
+│   │   │   ├── meta.json           # テンプレート内の`file.meta`変数から参照できる
 │   │   │   └── siteNavigation.json # テンプレート内の`file.siteNavigation`変数から参照できる
 │   │   ├── _extends/               # ビルド時に除外される
 │   │   │   └── default.pug
