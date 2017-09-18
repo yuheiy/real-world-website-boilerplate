@@ -19,33 +19,31 @@ yarn start
 ### ディレクトリ構成
 
 ```sh
-├── README.md
 ├── dist/                           # 本番向けビルドの結果が出力される
 ├── docs/
 │   └── user-guide.md
-├── gulpfile.babel.js
 ├── node_modules/
-├── package.json
 ├── public/                         # `dist/`ディレクトリのプロジェクトルートにそのままコピーされる
 │   ├── assets/
 │   │   └── img/
 │   └── pub.html
-├── realworld.config.js             # 開発環境の設定ファイル。テンプレート内の`site`変数から参照できる
 ├── src/
 │   ├── css/
+│   │   ├── components/
+│   │   │   ├── license/
+│   │   │   │   └── _Display.scss
+│   │   │   ├── _Content.scss
+│   │   │   ├── _GlobalHeader.scss
+│   │   │   └── _Section.scss
 │   │   ├── _base.scss
 │   │   ├── _functions.scss
 │   │   ├── _vars.scss
-│   │   ├── components/
-│   │   │   ├── _Content.scss
-│   │   │   ├── _GlobalHeader.scss
-│   │   │   ├── _Section.scss
-│   │   │   └── license/
-│   │   │       └── _Display.scss
 │   │   └── main.scss               # CSSのエントリーポイント。`/assets/css/main.css`に出力される
 │   ├── html/                       # ディレクトリ内の階層のまま`dist/`ディレクトリ内のプロジェクトルートに出力される
 │   │   ├── _data/                  # テンプレート全体から参照できる変数
 │   │   │   └── siteNavigation.json # テンプレート内の`file.siteNavigation`変数から参照できる
+│   │   ├── _extends/               # ビルド時に除外される
+│   │   │   └── default.pug
 │   │   ├── _includes/              # ビルド時に除外される
 │   │   │   ├── global-header.pug
 │   │   │   ├── head.pug
@@ -69,6 +67,10 @@ yarn start
 ├── tmp/                            # 開発時に出力される一時ファイル
 ├── vendor-public/                  # 開発サーバーでルートディレクトリから参照できるファイル。`dist/`ディレクトリに出力されない
 │   └── common.css
+├── README.md
+├── gulpfile.babel.js
+├── package.json
+├── realworld.config.js             # 開発環境の設定ファイル
 ├── webpack.config.js
 └── yarn.lock
 ```

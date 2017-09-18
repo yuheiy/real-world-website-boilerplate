@@ -42,7 +42,6 @@ const baseLocals = {
   isProd,
   absPath: (pagePath) => path.posix.join(`${siteConfig.basePath || ''}/`, pagePath),
   absUrl: (pagePath) => `${siteConfig.baseUrl}${path.posix.join('/', pagePath)}`,
-  site: siteConfig,
 }
 
 const getTemplateConfig = (pageFile) => {

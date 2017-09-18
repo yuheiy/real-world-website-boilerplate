@@ -32,10 +32,6 @@
 
 例：`absUrl('about.html')` => `http://example.com/path/to/project/about.html`
 
-#### `site`
-
-`realworld.config.js`を参照できます。
-
 #### `file`
 
 `src/html/_data/`ディレクトリ直下のJSONファイルを参照できます。`src/html/_data/test.json`の場合、`file.test`から参照できます。
