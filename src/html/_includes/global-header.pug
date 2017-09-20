@@ -1,9 +1,9 @@
 header.GlobalHeader(class= page.isHome && 'GlobalHeader--home')
   h1
     if page.isHome
-      = file.meta.title
+      = file.meta.siteTitle
     else
-      a(href= absPath('/'))= file.meta.title
+      a(href= absPath('/'))= file.meta.siteTitle
   nav
     ul
       each link in file.siteNavigation.navLinks

@@ -2,17 +2,17 @@ head(prefix="og: http://ogp.me/ns#")
   meta(charset="utf-8")
   meta(name="viewport", content="width=device-width, initial-scale=1")
   if page.title
-    title= `${page.title} - ${file.meta.title}`
+    title= `${page.title} - ${file.meta.siteTitle}`
   else
-    title= file.meta.title
+    title= file.meta.siteTitle
   meta(name="description", content= page.description)
   meta(name="twitter:card", content="summary_large_image")
-  meta(property="og:title", content= page.title || file.meta.title)
+  meta(property="og:title", content= page.title || file.meta.siteTitle)
   meta(property="og:type", content="website")
   meta(property="og:image", content= absUrl('assets/img/ogimage.png'))
   meta(property="og:url", content= absUrl(page.path))
   meta(property="og:description", content= page.description)
-  meta(property="og:site_name", content= file.meta.title)
+  meta(property="og:site_name", content= file.meta.siteTitle)
   meta(property="og:locale", content= `${file.meta.lang}_${file.meta.region}`)
   link(rel="canonical", href= absPath(page.path))
   link(rel="stylesheet", href= absPath('assets/css/main.css'))
