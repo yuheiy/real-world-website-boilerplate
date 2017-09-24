@@ -1,5 +1,5 @@
 html {
-  font-family: $font-stack-system-ui;
+  font-family: $fontStack-systemUi;
   line-height: 1.5;
 }
 
@@ -9,6 +9,15 @@ body {
 
 a {
   text-decoration-skip: ink;
+}
+
+i,
+cite,
+em,
+var,
+address,
+dfn {
+	font-style: inherit;
 }
 
 audio,
@@ -37,10 +46,4 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-}
-
-:lang(zh),
-:lang(ja),
-:lang(ko) {
-  font-style: normal;
 }
