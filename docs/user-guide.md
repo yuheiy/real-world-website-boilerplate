@@ -50,7 +50,12 @@
 
 ```json
   "browserslist": [
-    "last 1 version",
+    "last 1 Chrome version",
+    "last 1 ChromeAndroid version",
+    "last 1 Edge version",
+    "last 1 Firefox version",
+    "last 1 iOS version",
+    "last 1 Safari version",
     "> 3% in JP"
   ]
 ```
