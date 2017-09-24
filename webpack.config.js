@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const LicenseBannerPlugin = require('license-banner-webpack-plugin')
 const siteConfig = require('./realworld.config')
 
 const isProd = process.argv.includes('--prod')
@@ -58,6 +59,7 @@ module.exports = {
         comments: false,
       }),
       new webpack.optimize.ModuleConcatenationPlugin(),
+      new LicenseBannerPlugin(),
     ] : []),
   ],
   devtool: !isProd && 'cheap-module-source-map',

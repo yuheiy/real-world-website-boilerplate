@@ -28,6 +28,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-util": "^3.0.8",
+    "license-banner-webpack-plugin": "^0.0.4",
     "make-dir": "^1.0.0",
     "node-sass-glob-importer": "^5.0.0-alpha.11",
     "pug": "^2.0.0-rc.4",
