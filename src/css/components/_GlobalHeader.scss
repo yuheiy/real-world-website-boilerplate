@@ -1,8 +1,8 @@
 .GlobalHeader {
   max-width: 75rem;
   margin: 1.5rem auto;
-  padding-right: .75rem;
-  padding-left: .75rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 
   @media (min-width: $breakpoint-md) {
     padding-right: 1.5rem;
