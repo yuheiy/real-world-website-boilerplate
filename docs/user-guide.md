@@ -26,6 +26,12 @@
 
 例：`absPath('about.html')` => `/path/to/project/about.html`
 
+#### `assetPath(pagePath)`
+
+`pagePath`に`assets`ディレクトリからのパスを与えると、絶対パスが返ります。
+
+例：`assetPath('img/logo.svg')` => `/path/to/project/assets/img/logo.svg`
+
 #### `absUrl(pagePath)`
 
 `pagePath`にプロジェクトルートからのパスを与えると、絶対URLが返ります。
