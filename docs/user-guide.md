@@ -28,7 +28,7 @@
 
 #### `assetPath(pagePath)`
 
-`pagePath`に`assets`ディレクトリからのパスを与えると、絶対パスが返ります。
+`pagePath`に`<project-root>/assets/`ディレクトリからのパスを与えると、絶対パスが返ります。
 
 例：`assetPath('img/logo.svg')` => `/path/to/project/assets/img/logo.svg`
 

@@ -7,9 +7,9 @@ HTMLテンプレートを作成するためのシンプルな仕組みや、標�
 ## クイックスタート
 
 ```sh
-git clone https://github.com/yuheiy/real-world-website-boilerplate.git my-app
-cd my-app
-rm -rf .git
+git clone https://github.com/yuheiy/real-world-website-boilerplate.git my-app/
+cd my-app/
+rm -rf .git/
 yarn
 yarn start
 ```
