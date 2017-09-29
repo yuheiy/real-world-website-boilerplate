@@ -34,10 +34,10 @@ img {
   height: auto;
 }
 
-svg {
+svg:not(:root) {
   fill: currentcolor;
-  // max-width: 100%; // hack to replace SVG fragment identifiers (http://caniuse.com/#feat=svg-fragment)
-  // max-height: 100%; // hack to replace SVG fragment identifiers
+  // max-width: 100%; // hack for Safari
+  // max-height: 100%; // hack for Safari
 }
 
 button,
