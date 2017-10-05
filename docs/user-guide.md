@@ -50,20 +50,18 @@
 
 ## 対象ブラウザの設定
 
-ビルドの対象にするブラウザを`package.json`の`browserslist`に設定します。[Browserslist](https://github.com/ai/browserslist)を利用しています。
+ビルドの対象にするブラウザを`.browserslistrc`に設定します。[Browserslist](https://github.com/ai/browserslist)を利用しています。
 
 デフォルトでは次のようになっています。
 
-```json
-  "browserslist": [
-    "last 1 Chrome version",
-    "last 1 ChromeAndroid version",
-    "last 1 Edge version",
-    "last 1 Firefox version",
-    "last 1 iOS version",
-    "last 1 Safari version",
-    "> 3% in JP"
-  ]
+```yaml
+last 1 Chrome version
+last 1 ChromeAndroid version
+last 1 Edge version
+last 1 Firefox version
+last 1 iOS version
+last 1 Safari version
+> 3% in JP
 ```
 
 次のモジュールから参照されます。
