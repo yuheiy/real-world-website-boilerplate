@@ -41,21 +41,21 @@ yarn start
 │   │   └── main.scss               # CSSのエントリーポイント。`/assets/css/main.css`に出力される
 │   ├── html/                       # ディレクトリ内の階層のまま`dist/`ディレクトリ内のプロジェクトルートに出力される
 │   │   ├── _data/                  # テンプレート全体から参照できる変数
-│   │   │   ├── meta.json           # テンプレート内の`file.meta`変数から参照できる
-│   │   │   └── siteNavigation.json # テンプレート内の`file.siteNavigation`変数から参照できる
+│   │   │   ├── meta.yml            # テンプレート内の`file.meta`変数から参照できる
+│   │   │   └── siteNavigation.yml  # テンプレート内の`file.siteNavigation`変数から参照できる
 │   │   ├── _extends/               # ビルド時に除外される
 │   │   │   └── default.pug
 │   │   ├── _includes/              # ビルド時に除外される
 │   │   │   ├── global-header.pug
 │   │   │   ├── head.pug
 │   │   │   └── scripts.pug
-│   │   ├── document.json           # テンプレート内の`page`変数から参照できる。`document.pug`でのみ有効な変数
+│   │   ├── document.yml            # テンプレート内の`page`変数から参照できる。`document.pug`でのみ有効な変数
 │   │   ├── document.pug            # `/document.html`に出力されるファイル
-│   │   ├── getting-started.json
+│   │   ├── getting-started.yml
 │   │   ├── getting-started.pug
-│   │   ├── index.json
+│   │   ├── index.yml
 │   │   ├── index.pug
-│   │   ├── license.json
+│   │   ├── license.yml
 │   │   └── license.pug
 │   └── js/
 │       ├── components/

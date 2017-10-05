@@ -12,7 +12,7 @@
 
 `src/html/`ディレクトリの中のファイルは、同じ階層で`dist/`ディレクトリのプロジェクトルートに出力されます。`_`から始まるファイル、またはディレクトリは個別に出力されません。
 
-`src/html/_data/`ディレクトリ直下のJSONファイルは、テンプレート全体から参照できます。
+`src/html/_data/`ディレクトリ直下のYAMLファイルは、テンプレート全体から参照できます。
 
 ### 有効な変数
 
@@ -40,11 +40,11 @@
 
 #### `file`
 
-`src/html/_data/`ディレクトリ直下のJSONファイルを参照できます。`src/html/_data/test.json`の場合、`file.test`から参照できます。
+`src/html/_data/`ディレクトリ直下のYAMLファイルを参照できます。`src/html/_data/test.yml`の場合、`file.test`から参照できます。
 
 #### `page`
 
-テンプレートファイルと同名のJSONファイルを参照できます。`src/html/about.pug`の場合、`src/html/about.json`を参照できます。
+テンプレートファイルと同名のYAMLファイルを参照できます。`src/html/about.pug`の場合、`src/html/about.yml`を参照できます。
 
 `page.path`からプロジェクトルートからのパスを参照できます。`src/html/about.pug`の場合、`/about.html`になり、`src/html/index.pug`の場合、`/`になります。
 

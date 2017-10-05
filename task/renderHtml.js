@@ -1,17 +1,18 @@
 const path = require('path')
 const fs = require('fs')
 const glob = require('glob')
+const yaml = require('js-yaml')
 const pug = require('pug')
 const siteConfig = require('../realworld.config')
 
 const isProd = process.argv.includes('--prod')
 
 const getFileData = () => {
-  const files = glob.sync('src/html/_data/*.json', {nodir: true})
+  const files = glob.sync('src/html/_data/*.yml', {nodir: true})
   const data = files
     .map((file) => ({
-      name: path.basename(file, '.json'),
-      data: JSON.parse(fs.readFileSync(file, 'utf8') || '{}'),
+      name: path.basename(file, '.yml'),
+      data: yaml.safeLoad(fs.readFileSync(file, 'utf8')),
     }))
     .reduce((result, {name, data}) => ({
       ...result,
@@ -21,9 +22,9 @@ const getFileData = () => {
 }
 
 const getPageData = (templateFile) => {
-  const [file] = glob.sync(templateFile.replace(/\.pug$/, '.json'), {nodir: true})
+  const [file] = glob.sync(templateFile.replace(/\.pug$/, '.yml'), {nodir: true})
   const data = file
-    ? JSON.parse(fs.readFileSync(file) || '{}')
+    ? yaml.safeLoad(fs.readFileSync(file))
     : {}
   const pagePath = templateFile
     .replace(/^src\/html/, '')
