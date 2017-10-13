@@ -7,26 +7,30 @@ body {
   // overflow-wrap: break-word;
 }
 
+[tabindex="-1"]:focus {
+  outline: none !important;
+}
+
 a {
   text-decoration-skip: ink;
 }
 
-i,
-cite,
-em,
-var,
 address,
-dfn {
-	font-style: inherit;
+em,
+cite,
+dfn,
+var,
+i {
+	font-style: inherit; // Don't use `italic` for Japanese
 }
 
-audio,
-canvas,
 iframe,
+video,
+audio,
 img,
 svg,
-video {
-  vertical-align: middle;
+canvas {
+  vertical-align: bottom; // Remove bottom margin
 }
 
 img {
@@ -40,12 +44,13 @@ svg:not(:root) {
   // max-height: 100%; // hack for Safari
 }
 
-button,
 input,
-optgroup,
+button,
 select,
+optgroup,
 textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  color: inherit;
 }
