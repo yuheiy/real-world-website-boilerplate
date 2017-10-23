@@ -7,10 +7,6 @@ body {
   // overflow-wrap: break-word;
 }
 
-[tabindex="-1"]:focus {
-  outline: none !important;
-}
-
 a {
   text-decoration-skip: ink;
 }
@@ -21,7 +17,7 @@ cite,
 dfn,
 var,
 i {
-	font-style: inherit; // Don't use `italic` for Japanese
+  font-style: inherit; // Don't use `italic` for Japanese
 }
 
 iframe,
