@@ -38,15 +38,15 @@ let jsCompiler
 const js = (done) => {
   if (!jsCompiler) {
     const webpack = require('webpack')
-    const webpackConfig = require('./webpack.config.js')
-    jsCompiler = webpack(webpackConfig)
+    const webpackConfig = require('./webpack.config')
+    jsCompiler = webpack(webpackConfig({production: isProd}))
   }
 
   jsCompiler.run((err, stats) => {
-    if (err) throw new plugins.util.PluginError('webpack', err)
-    plugins.util.log('[webpack]', stats.toString({
-      colors: true,
-    }))
+    if (err) {
+      throw new plugins.util.PluginError('webpack', err)
+    }
+    plugins.util.log('[webpack]', stats.toString())
 
     browserSync.reload()
     done()
