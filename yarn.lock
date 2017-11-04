@@ -3919,7 +3919,7 @@ node-pre-gyp@^0.6.36:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
-node-sass-glob-importer@^5.0.0-alpha.15:
+node-sass-glob-importer@^5.0.0-alpha.16:
   version "5.0.0-alpha.16"
   resolved "https://registry.yarnpkg.com/node-sass-glob-importer/-/node-sass-glob-importer-5.0.0-alpha.16.tgz#27578bb1721a01c0576bf1b346dd73f2f1dd005b"
   dependencies:
