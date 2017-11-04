@@ -61,12 +61,10 @@ const renderHtmlMiddleware = (req, res, next) => {
     return next()
   }
 
-  const baseFilePath = path.join('src', 'html', req.url.replace(basePath, ''))
+  const filePath = path.join('src', 'html', req.url.replace(basePath, ''))
     .replace(/\?.*/, '') // remove search params
     .replace(/\/$/, '/index.html') // replace `/` to `/index.html`
-  const fileDir = path.dirname(baseFilePath)
-  const fileName = `${path.basename(baseFilePath, '.html')}.pug`
-  const filePath = path.join(fileDir, fileName)
+    .replace(/\.html$/, '.pug')
   if (!(fs.existsSync(filePath) && fs.statSync(filePath).isFile())) {
     return next()
   }
@@ -129,13 +127,13 @@ const html = (done) => {
       'src/html/**/_*/**',
     ],
   }, (err, filePaths) => {
-    filePaths.forEach(filePath => {
-      const baseOutputFilePath = filePath.replace(/^src\/html/, destBaseDir)
-      const outputDir = path.dirname(baseOutputFilePath)
-      const fileName = `${path.basename(baseOutputFilePath, '.pug')}.html`
-      const outputFilePath = path.join(outputDir, fileName)
-      const result = renderHtml(filePath)
+    filePaths.forEach((filePath) => {
+      const outputFilePath = filePath
+        .replace(/^src\/html/, destBaseDir)
+        .replace(/\.pug$/, '.html')
+      const outputDir = path.dirname(outputFilePath)
       makeDir.sync(outputDir)
+      const result = renderHtml(filePath)
       fs.writeFileSync(outputFilePath, result)
     })
 

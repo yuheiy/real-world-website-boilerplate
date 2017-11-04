@@ -26,10 +26,10 @@ const getPageData = (templateFilePath) => {
   const data = filePath
     ? yaml.safeLoad(fs.readFileSync(filePath))
     : {}
-  const basePagePath = templateFilePath.replace(/^src\/html/, '')
-  const pageDir = path.dirname(basePagePath)
-  const pageFileName = `${path.basename(basePagePath, '.pug')}.html`
-  const pagePath = path.join(pageDir, pageFileName).replace(/\/index\.html$/, '/')
+  const pagePath = templateFilePath
+    .replace(/^src\/html/, '')
+    .replace(/\.pug$/, '.html')
+    .replace(/\/index\.html$/, '/') // replace `/index.html` to `/`
   return {
     ...data,
     path: pagePath,
