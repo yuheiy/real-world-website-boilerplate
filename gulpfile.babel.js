@@ -55,25 +55,23 @@ const js = (done) => {
 
 const renderHtmlMiddleware = (req, res, next) => {
   const basePath = siteConfig.basePath || ''
-  const notCovered = !req.url.startsWith(`${basePath}/`)
-  const ignoreFileOrDir = req.url.replace(`${basePath}/`, '').split('/').some(name => name.startsWith('_'))
-  if (notCovered || ignoreFileOrDir) {
+  const isInternal = req.url.startsWith(`${basePath}/`)
+  const isIgnoreFileOrDir = req.url.replace(`${basePath}/`, '').split('/').some(name => name.startsWith('_'))
+  if (!isInternal || isIgnoreFileOrDir) {
     return next()
   }
 
-  const file = path.join(
-    'src',
-    'html',
-    req.url.replace(basePath, ''),
-  )
-    .replace(/\?.*/, '')
-    .replace(/\/$/, '/index.html')
-    .replace(/\.html$/, '.pug')
-  if (!(fs.existsSync(file) && fs.statSync(file).isFile())) {
+  const baseFilePath = path.join('src', 'html', req.url.replace(basePath, ''))
+    .replace(/\?.*/, '') // remove search params
+    .replace(/\/$/, '/index.html') // replace `/` to `/index.html`
+  const fileDir = path.dirname(baseFilePath)
+  const fileName = `${path.basename(baseFilePath, '.html')}.pug`
+  const filePath = path.join(fileDir, fileName)
+  if (!(fs.existsSync(filePath) && fs.statSync(filePath).isFile())) {
     return next()
   }
 
-  const result = renderHtml(file)
+  const result = renderHtml(filePath)
   res.setHeader('Content-Type', 'text/html')
   res.end(result)
 }
@@ -130,15 +128,15 @@ const html = (done) => {
       'src/html/**/_*',
       'src/html/**/_*/**',
     ],
-  }, (err, files) => {
-    files.forEach(file => {
-      const outputFile = file
-        .replace(/^src\/html/, destBaseDir)
-        .replace(/\.pug$/, '.html')
-      const outputDir = path.dirname(outputFile)
-      const result = renderHtml(file)
+  }, (err, filePaths) => {
+    filePaths.forEach(filePath => {
+      const baseOutputFilePath = filePath.replace(/^src\/html/, destBaseDir)
+      const outputDir = path.dirname(baseOutputFilePath)
+      const fileName = `${path.basename(baseOutputFilePath, '.pug')}.html`
+      const outputFilePath = path.join(outputDir, fileName)
+      const result = renderHtml(filePath)
       makeDir.sync(outputDir)
-      fs.writeFileSync(outputFile, result)
+      fs.writeFileSync(outputFilePath, result)
     })
 
     done()

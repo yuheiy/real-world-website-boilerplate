@@ -8,11 +8,11 @@ const siteConfig = require('../realworld.config')
 const isProd = process.argv.includes('--prod')
 
 const getFileData = () => {
-  const files = glob.sync('src/html/_data/*.yml', {nodir: true})
-  const data = files
-    .map((file) => ({
-      name: path.basename(file, '.yml'),
-      data: yaml.safeLoad(fs.readFileSync(file, 'utf8')),
+  const filePaths = glob.sync('src/html/_data/*.yml', {nodir: true})
+  const data = filePaths
+    .map((filePath) => ({
+      name: path.basename(filePath, '.yml'),
+      data: yaml.safeLoad(fs.readFileSync(filePath, 'utf8')),
     }))
     .reduce((result, {name, data}) => ({
       ...result,
@@ -21,15 +21,15 @@ const getFileData = () => {
   return data
 }
 
-const getPageData = (templateFile) => {
-  const [file] = glob.sync(templateFile.replace(/\.pug$/, '.yml'), {nodir: true})
-  const data = file
-    ? yaml.safeLoad(fs.readFileSync(file))
+const getPageData = (templateFilePath) => {
+  const [filePath] = glob.sync(templateFilePath.replace(/\.pug$/, '.yml'), {nodir: true})
+  const data = filePath
+    ? yaml.safeLoad(fs.readFileSync(filePath))
     : {}
-  const pagePath = templateFile
-    .replace(/^src\/html/, '')
-    .replace(/\.pug$/, '.html')
-    .replace(/\/index\.html$/, '/')
+  const basePagePath = templateFilePath.replace(/^src\/html/, '')
+  const pageDir = path.dirname(basePagePath)
+  const pageFileName = `${path.basename(basePagePath, '.pug')}.html`
+  const pagePath = path.join(pageDir, pageFileName).replace(/\/index\.html$/, '/')
   return {
     ...data,
     path: pagePath,
@@ -46,14 +46,14 @@ const baseLocals = {
   absUrl: (pagePath) => `${siteConfig.baseUrl}${path.posix.join('/', pagePath)}`,
 }
 
-const getTemplateConfig = (pageFile) => {
+const getTemplateConfig = (pageFilePath) => {
   return {
     ...pugConfig,
 
     // locals
     ...baseLocals,
     file: getFileData(),
-    page: getPageData(pageFile),
+    page: getPageData(pageFilePath),
   }
 }
 
@@ -70,9 +70,9 @@ const renderError = (err) => {
 </html>`
 }
 
-const renderHtml = (file) => {
+const renderHtml = (filePath) => {
   try {
-    return pug.renderFile(file, getTemplateConfig(file))
+    return pug.renderFile(filePath, getTemplateConfig(filePath))
   } catch (err) {
     console.log(err.stack)
     return renderError(err)
