@@ -1,39 +1,54 @@
 const path = require('path')
 const fs = require('fs')
+const {promisify} = require('util')
 const glob = require('glob')
 const yaml = require('js-yaml')
 const pug = require('pug')
 const siteConfig = require('../realworld.config')
 
+const readFileAsync = promisify(fs.readFile)
+
 const isProd = process.argv.includes('--prod')
 
-const getFileData = () => {
-  const filePaths = glob.sync('src/html/_data/*.yml', {nodir: true})
-  const data = filePaths
-    .map((filePath) => ({
-      name: path.basename(filePath, '.yml'),
-      data: yaml.safeLoad(fs.readFileSync(filePath, 'utf8')),
-    }))
+const readFileData = async () => {
+  const filePaths = await new Promise((resolve) => {
+    glob('src/html/_data/*.yml', {nodir: true}, (err, filePaths) => {
+      resolve(filePaths)
+    })
+  })
+  const fileData = await Promise.all(
+    filePaths
+      .map(async (filePath) => ({
+        name: path.basename(filePath, '.yml'),
+        data: yaml.safeLoad(await readFileAsync(filePath, 'utf8'))
+      }))
+  )
+  const gatheredFileData = fileData
     .reduce((result, {name, data}) => ({
       ...result,
       [name]: data,
     }), {})
-  return data
+  return gatheredFileData
 }
 
-const getPageData = (templateFilePath) => {
-  const [filePath] = glob.sync(templateFilePath.replace(/\.pug$/, '.yml'), {nodir: true})
-  const data = filePath
-    ? yaml.safeLoad(fs.readFileSync(filePath))
+const readPageData = async (templateFilePath) => {
+  const [filePath] = await new Promise((resolve) => {
+    glob(templateFilePath.replace(/\.pug$/, '.yml'), {nodir: true}, (err, filePaths) => {
+      resolve(filePaths)
+    })
+  })
+  const fileData = filePath
+    ? yaml.safeLoad(await readFileAsync(filePath))
     : {}
   const pagePath = templateFilePath
     .replace(/^src\/html/, '')
     .replace(/\.pug$/, '.html')
     .replace(/\/index\.html$/, '/') // replace `/index.html` to `/`
-  return {
-    ...data,
+  const pageData = {
+    ...fileData,
     path: pagePath,
   }
+  return pageData
 }
 
 const pugConfig = {
@@ -46,14 +61,14 @@ const baseLocals = {
   absUrl: (pagePath) => `${siteConfig.baseUrl}${path.posix.join('/', pagePath)}`,
 }
 
-const getTemplateConfig = (pageFilePath) => {
+const createTemplateConfig = async (pageFilePath) => {
   return {
     ...pugConfig,
 
     // locals
     ...baseLocals,
-    file: getFileData(),
-    page: getPageData(pageFilePath),
+    file: await readFileData(),
+    page: await readPageData(pageFilePath),
   }
 }
 
@@ -70,9 +85,10 @@ const renderError = (err) => {
 </html>`
 }
 
-const renderHtml = (filePath) => {
+const renderHtml = async (filePath) => {
   try {
-    return pug.renderFile(filePath, getTemplateConfig(filePath))
+    const config = await createTemplateConfig(filePath)
+    return pug.renderFile(filePath, config)
   } catch (err) {
     console.log(err.stack)
     return renderError(err)

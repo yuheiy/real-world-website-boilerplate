@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const {promisify} = require('util')
 const browserSync = require('browser-sync').create()
 const gulp = require('gulp')
 const plugins = require('gulp-load-plugins')()
@@ -10,6 +11,8 @@ const isProd = process.argv.includes('--prod')
 const destDir = isProd ? 'dist' : 'tmp'
 const destBaseDir = path.join(destDir, siteConfig.basePath || '')
 const destAssetsDir = path.join(destBaseDir, 'assets')
+
+const writeFileAsync = promisify(fs.writeFile)
 
 const css = () => {
   const globImporter = require('node-sass-glob-importer')
@@ -65,13 +68,16 @@ const renderHtmlMiddleware = (req, res, next) => {
     .replace(/\?.*/, '') // remove search params
     .replace(/\/$/, '/index.html') // replace `/` to `/index.html`
     .replace(/\.html$/, '.pug')
-  if (!(fs.existsSync(filePath) && fs.statSync(filePath).isFile())) {
+  const isFileExists = fs.existsSync(filePath) && fs.statSync(filePath).isFile()
+  if (!isFileExists) {
     return next()
   }
 
-  const result = renderHtml(filePath)
-  res.setHeader('Content-Type', 'text/html')
-  res.end(result)
+  renderHtml(filePath)
+    .then((result) => {
+      res.setHeader('Content-Type', 'text/html')
+      res.end(result)
+    })
 }
 
 const serve = (done) => {
@@ -116,29 +122,37 @@ export default gulp.series(
   watch,
 )
 
-const html = (done) => {
+const html = async () => {
   const glob = require('glob')
   const makeDir = require('make-dir')
 
-  glob('src/html/**/*.pug', {
-    nodir: true,
-    ignore: [
-      'src/html/**/_*',
-      'src/html/**/_*/**',
-    ],
-  }, (err, filePaths) => {
-    filePaths.forEach((filePath) => {
-      const outputFilePath = filePath
-        .replace(/^src\/html/, destBaseDir)
-        .replace(/\.pug$/, '.html')
-      const outputDir = path.dirname(outputFilePath)
-      makeDir.sync(outputDir)
-      const result = renderHtml(filePath)
-      fs.writeFileSync(outputFilePath, result)
+  const filePaths = await new Promise((resolve, reject) => {
+    glob('src/html/**/*.pug', {
+      nodir: true,
+      ignore: [
+        'src/html/**/_*',
+        'src/html/**/_*/**',
+      ],
+    }, (err, filePaths) => {
+      if (err) {
+        return reject(err)
+      }
+      resolve(filePaths)
     })
-
-    done()
   })
+
+  await Promise.all(
+    filePaths
+      .map(async (filePath) => {
+        const outputFilePath = filePath
+          .replace(/^src\/html/, destBaseDir)
+          .replace(/\.pug$/, '.html')
+        const outputDir = path.dirname(outputFilePath)
+        await makeDir(outputDir)
+        const result = await renderHtml(filePath)
+        await writeFileAsync(outputFilePath, result)
+      })
+  )
 }
 
 const copy = () => {
