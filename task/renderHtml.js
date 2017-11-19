@@ -31,17 +31,17 @@ const readFileData = async () => {
   return gatheredFileData
 }
 
-const readPageData = async (templateFilePath) => {
+const readPageData = async (pageFilePath) => {
   const [filePath] = await new Promise((resolve) => {
-    glob(templateFilePath.replace(/\.pug$/, '.yml'), {nodir: true}, (err, filePaths) => {
+    glob(pageFilePath.replace(/\.pug$/, '.yml'), {nodir: true}, (err, filePaths) => {
       resolve(filePaths)
     })
   })
   const fileData = filePath
     ? yaml.safeLoad(await readFileAsync(filePath))
     : {}
-  const pagePath = templateFilePath
-    .replace(/^src\/html/, '')
+  const pagePath = pageFilePath
+    .replace('src/html', '')
     .replace(/\.pug$/, '.html')
     .replace(/\/index\.html$/, '/') // replace `/index.html` to `/`
   const pageData = {

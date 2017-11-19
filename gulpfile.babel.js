@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const url = require('url')
 const {promisify} = require('util')
 const browserSync = require('browser-sync').create()
 const gulp = require('gulp')
@@ -57,17 +58,26 @@ const js = (done) => {
 }
 
 const renderHtmlMiddleware = (req, res, next) => {
+  const {pathname} = url.parse(req.url)
   const basePath = siteConfig.basePath || ''
-  const isInternal = req.url.startsWith(`${basePath}/`)
-  const isIgnoreFileOrDir = req.url.replace(`${basePath}/`, '').split('/').some(name => name.startsWith('_'))
-  if (!isInternal || isIgnoreFileOrDir) {
+  const isInternal = pathname.startsWith(`${basePath}/`)
+  const isStartsWithUnderscore = pathname.replace(`${basePath}/`, '').split('/')
+    .some((name) => name.startsWith('_'))
+  const isHtml = pathname.replace(basePath, '')
+    .replace(/\/$/, '/index.html') // replace `/` to `/index.html`
+    .endsWith('.html')
+  const isIgnoreFile = !isInternal || isStartsWithUnderscore || !isHtml
+  if (isIgnoreFile) {
     return next()
   }
 
-  const filePath = path.join('src', 'html', req.url.replace(basePath, ''))
-    .replace(/\?.*/, '') // remove search params
-    .replace(/\/$/, '/index.html') // replace `/` to `/index.html`
-    .replace(/\.html$/, '.pug')
+  const filePath = path.join(
+    'src',
+    'html',
+    pathname.replace(basePath, '')
+      .replace(/\/$/, '/index.html') // replace `/` to `/index.html`
+      .replace(/\.html$/, '.pug')
+  )
   const isFileExists = fs.existsSync(filePath) && fs.statSync(filePath).isFile()
   if (!isFileExists) {
     return next()
@@ -145,7 +155,7 @@ const html = async () => {
     filePaths
       .map(async (filePath) => {
         const outputFilePath = filePath
-          .replace(/^src\/html/, destBaseDir)
+          .replace('src/html', destBaseDir)
           .replace(/\.pug$/, '.html')
         const outputDir = path.dirname(outputFilePath)
         await makeDir(outputDir)
