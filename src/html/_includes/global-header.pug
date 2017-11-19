@@ -1,11 +1,11 @@
-header.GlobalHeader(class= page.isHome && 'GlobalHeader--home')
+header.GlobalHeader(class={'GlobalHeader--home': page.isHome})
   h1
     if page.isHome
       = file.meta.siteTitle
     else
-      a(href= absPath('/'))= file.meta.siteTitle
+      a(href=absPath('/'))= file.meta.siteTitle
   nav
     ul
       each link in file.siteNavigation.navLinks
         li
-          a(href= absPath(link[1]), class= page.path === link[1] && 'is-active')= link[0]
+          a(href=absPath(link[1]), class={'is-active': page.path === link[1]})= link[0]
