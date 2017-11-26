@@ -8,4 +8,4 @@ header.GlobalHeader(class={'GlobalHeader--home': page.isHome})
     ul
       each link in file.siteNavigation.navLinks
         li
-          a(href=absPath(link[1]), class={'is-active': page.path === link[1]})= link[0]
+          a(href=absPath(link[1]) class={'is-active': page.path === link[1]})= link[0]
