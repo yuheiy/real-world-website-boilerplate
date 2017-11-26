@@ -1,0 +1,27 @@
+@mixin focus-with-keyboard($element: &) {
+  @at-root {
+    html[data-whatinput="keyboard"] #{selector-append($element, ":focus")} {
+      @content;
+    }
+  }
+}
+
+@mixin focus-without-keyboard($element: &) {
+  @at-root {
+    html[data-whatinput="initial"] #{selector-append($element, ":focus")},
+    html[data-whatinput="mouse"] #{selector-append($element, ":focus")},
+    html[data-whatinput="touch"] #{selector-append($element, ":focus")} {
+      @content;
+    }
+  }
+}
+
+@mixin focus-clear {
+  outline: 0;
+}
+
+@mixin focus-clear-without-keyboard {
+  @include focus-without-keyboard {
+    @include focus-clear;
+  }
+}

@@ -2,6 +2,9 @@
 @import "functions";
 @import "variables";
 
+// mixins
+@import "mixins/focus";
+
 // base
 @import "../../node_modules/normalize.css/normalize";
 @import "base";

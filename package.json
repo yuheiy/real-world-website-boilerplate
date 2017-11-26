@@ -7,7 +7,8 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "normalize.css": "^7.0.0",
-    "picturefill": "^3.0.2"
+    "picturefill": "^3.0.2",
+    "what-input": "^5.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
