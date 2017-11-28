@@ -114,7 +114,7 @@ module.exports = {
 
 ## インスピレーション
 
-開発サーバーの仕組みは[bs-compile-middleware](https://github.com/ktsn/bs-compile-middleware)を参考にしています。
+開発サーバーの仕組みは[watch 時のビルドをもっと速くしたい](https://speakerdeck.com/ktsn/watch-shi-falsebirudowomotutosu-kusitai)を参考にしています。
 
 ## ライセンス
 
