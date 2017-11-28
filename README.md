@@ -35,9 +35,11 @@ yarn start
 │   │   │   ├── _Content.scss
 │   │   │   ├── _GlobalHeader.scss
 │   │   │   └── _Section.scss
+│   │   ├── mixins/
+│   │   │   └── _focus.scss
 │   │   ├── _base.scss
 │   │   ├── _functions.scss
-│   │   ├── _vars.scss
+│   │   ├── _variables.scss
 │   │   └── main.scss               # CSSのエントリーポイント。`/assets/css/main.css`に出力される
 │   ├── html/                       # ディレクトリ内の階層のまま`dist/`ディレクトリ内のプロジェクトルートに出力される
 │   │   ├── _data/                  # テンプレート全体から参照できる変数
@@ -47,12 +49,9 @@ yarn start
 │   │   │   └── default.pug
 │   │   ├── _includes/              # ビルド時に除外される
 │   │   │   ├── global-header.pug
-│   │   │   ├── head.pug
-│   │   │   └── scripts.pug
-│   │   ├── document.yml            # テンプレート内の`page`変数から参照できる。`document.pug`でのみ有効な変数
-│   │   ├── document.pug            # `/document.html`に出力されるファイル
-│   │   ├── getting-started.yml
-│   │   ├── getting-started.pug
+│   │   │   └── head.pug
+│   │   ├── getting-started.yml     # テンプレート内の`page`変数から参照できる。`getting-started.pug`でのみ有効な変数
+│   │   ├── getting-started.pug     # `/getting-started.html`に出力されるファイル
 │   │   ├── index.yml
 │   │   ├── index.pug
 │   │   ├── license.yml

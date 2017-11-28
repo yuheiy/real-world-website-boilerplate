@@ -56,21 +56,16 @@
 }
 
 .GlobalHeader nav ul {
+  display: flex;
+  justify-content: center;
   margin: 0;
   padding-left: 0;
   list-style: none;
   text-align: center;
-
-  @media (min-width: $breakpoint-sm) {
-    display: flex;
-    justify-content: center;
-  }
 }
 
 .GlobalHeader nav li:not(:last-child) {
-  @media (min-width: $breakpoint-sm) {
-    margin-right: 1.5rem;
-  }
+  margin-right: 1.5rem;
 }
 
 .GlobalHeader nav a {
