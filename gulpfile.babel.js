@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const url = require('url')
 const {promisify} = require('util')
 const browserSync = require('browser-sync').create()
 const gulp = require('gulp')
@@ -38,26 +37,44 @@ const css = () => {
     .pipe(browserSync.stream({match: '**/*.css'}))
 }
 
-let jsCompiler
 const js = (done) => {
-  if (!jsCompiler) {
-    const webpack = require('webpack')
-    const webpackConfig = require('./webpack.config')
-    jsCompiler = webpack(webpackConfig({production: isProd}))
-  }
+  const webpack = require('webpack')
+  const webpackConfig = require('./webpack.config')
+  const compiler = webpack(webpackConfig)
+  let isFirst = true
 
-  jsCompiler.run((err, stats) => {
+  const callback = (err, stats) => {
     if (err) {
-      throw new plugins.util.PluginError('webpack', err)
+      console.error(err.stack || err)
+      if (err.details) {
+        console.error(err.details)
+      }
+      return
     }
-    plugins.util.log('[webpack]', stats.toString())
+
+    console.log(stats.toString({
+      chunks: false,
+      colors: true,
+    }))
+
+    if (isFirst) {
+      done()
+      isFirst = false
+      return
+    }
 
     browserSync.reload()
-    done()
-  })
+  }
+
+  if (isProd) {
+    return compiler.run(callback)
+  }
+
+  compiler.watch({}, callback)
 }
 
 const renderHtmlMiddleware = (req, res, next) => {
+  const url = require('url')
   const {pathname} = url.parse(req.url)
   const basePath = siteConfig.basePath || ''
   const isInternal = pathname.startsWith(`${basePath}/`)
@@ -117,7 +134,6 @@ const clean = () => {
 
 const watch = (done) => {
   gulp.watch('src/css/**/*.scss', css)
-  gulp.watch('src/js/**/*.js', js)
 
   gulp.watch('src/html/**/*').on('all', browserSync.reload)
   gulp.watch('public/**/*').on('all', browserSync.reload)
