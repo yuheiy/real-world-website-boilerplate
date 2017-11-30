@@ -54,7 +54,7 @@ yarn start
 │   │   ├── getting-started.pug     # `dist/<project>/getting-started.html`に出力されるファイル
 │   │   ├── index.yml
 │   │   ├── index.pug
-│   │   ├── license.yml
+│   │   ├── license.json
 │   │   └── license.pug
 │   └── js/
 │       ├── components/

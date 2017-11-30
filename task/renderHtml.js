@@ -10,12 +10,23 @@ const readFileAsync = promisify(fs.readFile)
 
 const isProd = process.argv[2] === 'build'
 
+const dataFileExts = [
+  '.yml',
+  '.yaml',
+  '.json',
+]
+
 const readFileData = async () => {
-  const filePaths = await globby('src/html/_data/*.yml', {nodir: true})
+  const filePaths = (await globby(dataFileExts.map((ext) => `src/html/_data/*${ext}`), {nodir: true}))
+    .filter((filePath, i, arr) => {
+      const {name} = path.parse(filePath)
+      const prevNames = arr.slice(0, i).map((item) => path.parse(item).name)
+      return !prevNames.includes(name)
+    })
   const fileData = await Promise.all(
     filePaths
       .map(async (filePath) => ({
-        name: path.basename(filePath, '.yml'),
+        name: path.parse(filePath).name,
         data: yaml.safeLoad(await readFileAsync(filePath, 'utf8'))
       }))
   )
@@ -28,7 +39,7 @@ const readFileData = async () => {
 }
 
 const readPageData = async (pageFilePath) => {
-  const [filePath] = await globby(pageFilePath.replace(/\.pug$/, '.yml'), {nodir: true})
+  const [filePath] = await globby(dataFileExts.map((ext) => pageFilePath.replace(/\.pug$/, ext)), {nodir: true})
   const fileData = filePath
     ? yaml.safeLoad(await readFileAsync(filePath))
     : {}
