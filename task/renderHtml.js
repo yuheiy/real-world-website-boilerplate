@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const {promisify} = require('util')
-const glob = require('glob')
+const globby = require('globby')
 const yaml = require('js-yaml')
 const pug = require('pug')
 const siteConfig = require('../realworld.config')
@@ -11,11 +11,7 @@ const readFileAsync = promisify(fs.readFile)
 const isProd = process.argv[2] === 'build'
 
 const readFileData = async () => {
-  const filePaths = await new Promise((resolve) => {
-    glob('src/html/_data/*.yml', {nodir: true}, (err, filePaths) => {
-      resolve(filePaths)
-    })
-  })
+  const filePaths = await globby('src/html/_data/*.yml', {nodir: true})
   const fileData = await Promise.all(
     filePaths
       .map(async (filePath) => ({
@@ -32,11 +28,7 @@ const readFileData = async () => {
 }
 
 const readPageData = async (pageFilePath) => {
-  const [filePath] = await new Promise((resolve) => {
-    glob(pageFilePath.replace(/\.pug$/, '.yml'), {nodir: true}, (err, filePaths) => {
-      resolve(filePaths)
-    })
-  })
+  const [filePath] = await globby(pageFilePath.replace(/\.pug$/, '.yml'), {nodir: true})
   const fileData = filePath
     ? yaml.safeLoad(await readFileAsync(filePath))
     : {}

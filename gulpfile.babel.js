@@ -146,22 +146,15 @@ export default gulp.series(
 )
 
 const html = async () => {
-  const glob = require('glob')
+  const globby = require('globby')
   const makeDir = require('make-dir')
 
-  const filePaths = await new Promise((resolve, reject) => {
-    glob('src/html/**/*.pug', {
-      nodir: true,
-      ignore: [
-        'src/html/**/_*',
-        'src/html/**/_*/**',
-      ],
-    }, (err, filePaths) => {
-      if (err) {
-        return reject(err)
-      }
-      resolve(filePaths)
-    })
+  const filePaths = await globby('src/html/**/*.pug', {
+    nodir: true,
+    ignore: [
+      'src/html/**/_*',
+      'src/html/**/_*/**',
+    ],
   })
 
   await Promise.all(
