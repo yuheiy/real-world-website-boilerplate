@@ -7,12 +7,12 @@ const plugins = require('gulp-load-plugins')()
 const renderHtml = require('./task/renderHtml')
 const siteConfig = require('./realworld.config')
 
-const isProd = process.argv.includes('--prod')
+const writeFileAsync = promisify(fs.writeFile)
+
+const isProd = process.argv[2] === 'build'
 const destDir = isProd ? 'dist' : 'tmp'
 const destBaseDir = path.join(destDir, siteConfig.basePath || '')
 const destAssetsDir = path.join(destBaseDir, 'assets')
-
-const writeFileAsync = promisify(fs.writeFile)
 
 const css = () => {
   const globImporter = require('node-sass-glob-importer')
@@ -134,10 +134,7 @@ const clean = () => {
 
 const watch = (done) => {
   gulp.watch('src/css/**/*.scss', css)
-
-  gulp.watch('src/html/**/*').on('all', browserSync.reload)
-  gulp.watch('public/**/*').on('all', browserSync.reload)
-
+  gulp.watch(['src/html/**/*', 'public/**/*']).on('all', browserSync.reload)
   done()
 }
 

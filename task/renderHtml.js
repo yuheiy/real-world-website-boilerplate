@@ -8,7 +8,7 @@ const siteConfig = require('../realworld.config')
 
 const readFileAsync = promisify(fs.readFile)
 
-const isProd = process.argv.includes('--prod')
+const isProd = process.argv[2] === 'build'
 
 const readFileData = async () => {
   const filePaths = await new Promise((resolve) => {

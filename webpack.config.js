@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const LicenseBannerPlugin = require('license-banner-webpack-plugin')
 const siteConfig = require('./realworld.config')
 
-const isProd = process.argv.includes('--prod')
+const isProd = process.argv[2] === 'build'
 const destDir = isProd ? 'dist' : 'tmp'
 const destBaseDir = path.join(destDir, siteConfig.basePath || '')
 const destAssetsDir = path.join(destBaseDir, 'assets')

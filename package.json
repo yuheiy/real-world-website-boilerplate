@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "gulp",
-    "build": "gulp build --prod"
+    "build": "gulp build"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
