@@ -42,7 +42,12 @@ module.exports = {
         DEBUG: false,
       }),
       new LicenseBannerPlugin(),
-    ] : []),
+    ] : [
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'development',
+        DEBUG: true,
+      }),
+    ]),
   ],
   devtool: !isProd && 'cheap-module-source-map',
 }

@@ -2,4 +2,8 @@ import './polyfill'
 import 'what-input'
 import './components/license/Display'
 
-console.log('hello from main')
+if (process.env.DEBUG) {
+  console.log('development mode')
+} else {
+  console.log('production mode')
+}
