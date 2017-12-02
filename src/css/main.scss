@@ -1,9 +1,7 @@
-// core
-@import "functions";
-@import "variables";
-
-// mixins
-@import "mixins/focus";
+// global
+@import "globals/typography";
+@import "globals/layout";
+@import "globals/util";
 
 // base
 @import "../../node_modules/normalize.css/normalize";
