@@ -1,18 +1,10 @@
 const path = require('path')
 const fs = require('fs')
-const {promisify} = require('util')
 const browserSync = require('browser-sync').create()
 const gulp = require('gulp')
 const plugins = require('gulp-load-plugins')()
 const renderHtml = require('./task/renderHtml')
-const siteConfig = require('./realworld.config')
-
-const writeFileAsync = promisify(fs.writeFile)
-
-const isProd = process.argv[2] === 'build'
-const destDir = isProd ? 'dist' : 'tmp'
-const destBaseDir = path.join(destDir, siteConfig.basePath || '')
-const destAssetsDir = path.join(destBaseDir, 'assets')
+const {isProd, basePath, destDir, destBaseDir, destAssetsDir, writeFileAsync} = require('./task/util')
 
 const css = () => {
   const globImporter = require('node-sass-glob-importer')
@@ -76,7 +68,6 @@ const js = (done) => {
 const renderHtmlMiddleware = (req, res, next) => {
   const url = require('url')
   const {pathname} = url.parse(req.url)
-  const basePath = siteConfig.basePath || ''
   const isInternal = pathname.startsWith(`${basePath}/`)
   const isStartsWithUnderscore = pathname.replace(`${basePath}/`, '').split('/')
     .some((name) => name.startsWith('_'))
@@ -117,11 +108,11 @@ const serve = (done) => {
         'vendor-public',
       ],
       routes: {
-        [`${siteConfig.basePath || '/'}`]: 'public',
+        [`${basePath || '/'}`]: 'public',
       },
     },
     middleware: renderHtmlMiddleware,
-    startPath: path.posix.join('/', siteConfig.basePath || '', '/'),
+    startPath: path.posix.join('/', basePath, '/'),
     ghostMode: false,
     open: false,
   }, done)

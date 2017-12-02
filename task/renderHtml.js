@@ -1,14 +1,8 @@
 const path = require('path')
-const fs = require('fs')
-const {promisify} = require('util')
 const globby = require('globby')
 const yaml = require('js-yaml')
 const pug = require('pug')
-const siteConfig = require('../realworld.config')
-
-const readFileAsync = promisify(fs.readFile)
-
-const isProd = process.argv[2] === 'build'
+const {isProd, basePath, baseUrl, readFileAsync} = require('./util')
 
 const dataFileExts = [
   '.yml',
@@ -59,9 +53,9 @@ const pugConfig = {
 }
 const baseLocals = {
   isProd,
-  absPath: (pagePath) => path.posix.join(`${siteConfig.basePath || ''}/`, pagePath),
-  assetPath: (pagePath) => path.posix.join(`${siteConfig.basePath || ''}/`, 'assets', pagePath),
-  absUrl: (pagePath) => `${siteConfig.baseUrl}${path.posix.join('/', pagePath)}`,
+  absPath: (pagePath) => path.posix.join(`${basePath}/`, pagePath),
+  assetPath: (pagePath) => path.posix.join(`${basePath}/`, 'assets', pagePath),
+  absUrl: (pagePath) => `${baseUrl}${path.posix.join('/', pagePath)}`,
 }
 
 const createTemplateConfig = async (pageFilePath) => {

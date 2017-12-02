@@ -63,7 +63,8 @@ yarn start
 │       ├── main.js                 # JavaScriptのエントリーポイント。`dist/<project>/assets/js/main.js`に出力される
 │       └── polyfill.js
 ├── task/
-│   └── renderHtml.js
+│   ├── renderHtml.js
+│   └── util.js
 ├── tmp/                            # 開発時に出力される一時ファイル
 ├── vendor-public/                  # 開発サーバーでルートディレクトリに対応するファイル。`dist/`ディレクトリに出力されない
 │   └── common.css
