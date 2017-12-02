@@ -1,43 +1,43 @@
 html {
-  font-family: $fontStack-systemUi;
-  line-height: 1.5;
+  font-family: $font-stack__system-ui;
+  line-height: $line-height__default;
 }
 
-body {
-  // overflow-wrap: break-word;
-}
-
-a {
-  text-decoration-skip: ink;
-}
-
-address,
-em,
+i,
 cite,
-dfn,
+em,
 var,
-i {
+address,
+dfn {
   font-style: inherit; // Don't use `italic` for Japanese
 }
 
-iframe,
-video,
 audio,
+canvas,
+iframe,
 img,
 svg,
-canvas {
+video {
+  max-width: 100%;
+  height: auto;
   vertical-align: bottom; // Remove bottom margin
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+svg {
+  fill: currentcolor;
 }
 
-svg:not(:root) {
-  fill: currentcolor;
-  // max-width: 100%; // hack for Safari
-  // max-height: 100%; // hack for Safari
+iframe {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
 }
 
 input,

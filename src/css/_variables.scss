@@ -1,7 +1,10 @@
-$fontStack-systemUi: system-ui, -apple-system, "Yu Gothic UI", "Segoe UI", "Meiryo", sans-serif;
-$fontStack-sansSerif: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+$font-stack__system-ui: system-ui, -apple-system, "Yu Gothic UI", "Segoe UI", "Meiryo", sans-serif;
+$font-stack__sans-serif: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
+$line-height__default: 1.75;
+$line-height__headers: 1.375;
+
+$breakpoint__sm: 576px;
+$breakpoint__md: 768px;
+$breakpoint__lg: 992px;
+$breakpoint__xl: 1200px;

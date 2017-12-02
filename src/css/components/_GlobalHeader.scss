@@ -1,61 +1,56 @@
 .GlobalHeader {
   max-width: 75rem;
-  margin: 1.5rem auto;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 1.75rem 1rem 3.5rem;
+  line-height: $line-height__headers;
 
-  @media (min-width: $breakpoint-md) {
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
+  @media (min-width: $breakpoint__md) {
+    padding-right: 2rem;
+    padding-left: 2rem;
   }
 }
 
 .GlobalHeader:not(.GlobalHeader--home) {
-  @media (min-width: $breakpoint-sm) {
+  @media (min-width: $breakpoint__sm) {
     display: flex;
     justify-content: space-between;
   }
 }
 
-.GlobalHeader.GlobalHeader--home {
-  @media (min-width: $breakpoint-md) {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+.GlobalHeader--home {
+  @media (min-width: $breakpoint__md) {
+    padding-top: 3.5rem;
   }
 }
 
-.GlobalHeader h1 {
-  margin: 0 0 1.5rem;
+.GlobalHeader__heading {
+  margin: 0 0 1.75rem;
   font-size: 1.5rem;
-  line-height: 1.2;
+  font-feature-settings: "palt" 1;
   text-align: center;
 }
 
-.GlobalHeader:not(.GlobalHeader--home) h1 {
-  @media (min-width: $breakpoint-sm) {
+.GlobalHeader:not(.GlobalHeader--home) .GlobalHeader__heading {
+  @media (min-width: $breakpoint__sm) {
     margin-bottom: 0;
     font-size: 1rem;
-    line-height: inherit;
   }
 }
 
-.GlobalHeader.GlobalHeader--home h1 {
-  @media (min-width: $breakpoint-sm) {
-    font-size: 2rem;
-  }
-
-  @media (min-width: $breakpoint-md) {
+.GlobalHeader--home .GlobalHeader__heading {
+  @media (min-width: $breakpoint__md) {
     margin-bottom: 2.25rem;
     font-size: 3rem;
   }
 }
 
-.GlobalHeader h1 a {
+.GlobalHeader__headingLink {
   color: inherit;
   text-decoration: none;
 }
 
-.GlobalHeader nav ul {
+.GlobalHeader__navList {
   display: flex;
   justify-content: center;
   margin: 0;
@@ -64,15 +59,15 @@
   text-align: center;
 }
 
-.GlobalHeader nav li:not(:last-child) {
+.GlobalHeader__navItem:not(:last-child) {
   margin-right: 1.5rem;
 }
 
-.GlobalHeader nav a {
+.GlobalHeader__navLink {
   padding: 2px;
   color: #3498db;
 }
 
-.GlobalHeader nav a.is-active {
-  box-shadow: 0 0 0 2px;
+.GlobalHeader__navLink--active {
+  box-shadow: 0 0 0 2px mix(#3498db, #fff);
 }
