@@ -4,7 +4,17 @@ const browserSync = require('browser-sync').create()
 const gulp = require('gulp')
 const plugins = require('gulp-load-plugins')()
 const renderHtml = require('./task/renderHtml')
-const {isProd, basePath, destDir, destBaseDir, destAssetsDir, writeFileAsync} = require('./task/util')
+const {isProd, basePath, destDir, destBaseDir, destAssetsDir} = require('./task/util')
+
+const {
+  renderMiddleware: renderHtmlMiddleware,
+  buildAllFiles: html,
+} = require('real-world-website-render-helper')({
+  input: './src/html',
+  inputExt: 'pug',
+  output: destBaseDir,
+  task: renderHtml,
+}, basePath)
 
 const css = () => {
   const globImporter = require('node-sass-glob-importer')
@@ -65,39 +75,6 @@ const js = (done) => {
   compiler.watch({}, callback)
 }
 
-const renderHtmlMiddleware = (req, res, next) => {
-  const url = require('url')
-  const {pathname} = url.parse(req.url)
-  const isInternal = pathname.startsWith(`${basePath}/`)
-  const isStartsWithUnderscore = pathname.replace(`${basePath}/`, '').split('/')
-    .some((name) => name.startsWith('_'))
-  const isHtml = pathname.replace(basePath, '')
-    .replace(/\/$/, '/index.html') // replace `/` to `/index.html`
-    .endsWith('.html')
-  const isIgnoreFile = !isInternal || isStartsWithUnderscore || !isHtml
-  if (isIgnoreFile) {
-    return next()
-  }
-
-  const filePath = path.join(
-    'src',
-    'html',
-    pathname.replace(basePath, '')
-      .replace(/\/$/, '/index.html') // replace `/` to `/index.html`
-      .replace(/\.html$/, '.pug')
-  )
-  const isFileExists = fs.existsSync(filePath) && fs.statSync(filePath).isFile()
-  if (!isFileExists) {
-    return next()
-  }
-
-  renderHtml(filePath)
-    .then((result) => {
-      res.setHeader('Content-Type', 'text/html')
-      res.end(result)
-    })
-}
-
 const serve = (done) => {
   browserSync.init({
     notify: false,
@@ -135,32 +112,6 @@ export default gulp.series(
   serve,
   watch,
 )
-
-const html = async () => {
-  const globby = require('globby')
-  const makeDir = require('make-dir')
-
-  const filePaths = await globby('src/html/**/*.pug', {
-    nodir: true,
-    ignore: [
-      'src/html/**/_*',
-      'src/html/**/_*/**',
-    ],
-  })
-
-  await Promise.all(
-    filePaths
-      .map(async (filePath) => {
-        const outputFilePath = filePath
-          .replace('src/html', destBaseDir)
-          .replace(/\.pug$/, '.html')
-        const outputDir = path.dirname(outputFilePath)
-        await makeDir(outputDir)
-        const result = await renderHtml(filePath)
-        await writeFileAsync(outputFilePath, result)
-      })
-  )
-}
 
 const copy = () => {
   return gulp.src('public/**/*')

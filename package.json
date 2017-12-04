@@ -11,7 +11,7 @@
     "what-input": "^5.0.3"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.6",
+    "autoprefixer": "^7.2.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -29,11 +29,11 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
     "js-yaml": "^3.10.0",
-    "license-banner-webpack-plugin": "^0.0.4",
-    "make-dir": "^1.1.0",
-    "node-sass-glob-importer": "^5.0.0-alpha.17",
+    "license-banner-webpack-plugin": "^1.0.0",
+    "node-sass-glob-importer": "^5.0.0",
     "pug": "^2.0.0-rc.4",
-    "webpack": "^3.8.1"
+    "real-world-website-render-helper": "yuheiy/real-world-website-render-helper",
+    "webpack": "^3.9.1"
   },
   "engines": {
     "node": ">=8.0.0"
