@@ -28,10 +28,10 @@
 }
 
 // asset
-@function asset($dir, $relative-path) {
-    @return url("../#{$dir}/#{$relative-path}");
+@function asset($path) {
+    @return url("../#{$path}");
 }
 
-@function image($relative-path) {
-    @return asset("img", $relative-path);
+@function image($path) {
+    @return asset("img/#{$path}");
 }
