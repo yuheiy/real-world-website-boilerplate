@@ -1,6 +1,6 @@
 html {
-  font-family: $font-stack__system-ui;
-  line-height: $line-height__default;
+    font-family: $font-stack__system-ui;
+    line-height: $line-height__default;
 }
 
 i,
@@ -9,7 +9,7 @@ em,
 var,
 address,
 dfn {
-  font-style: inherit; // Don't use `italic` for Japanese
+    font-style: inherit; // Don't use `italic` for Japanese
 }
 
 audio,
@@ -18,26 +18,26 @@ iframe,
 img,
 svg,
 video {
-  max-width: 100%;
-  height: auto;
-  vertical-align: bottom; // Remove bottom margin
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom; // Remove bottom margin
 }
 
 svg {
-  fill: currentcolor;
+    fill: currentcolor;
 }
 
 iframe {
-  border: 0;
+    border: 0;
 }
 
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 th {
-  text-align: left;
+    text-align: left;
 }
 
 input,
@@ -45,8 +45,8 @@ button,
 select,
 optgroup,
 textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
 }

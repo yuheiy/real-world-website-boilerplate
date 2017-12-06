@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const {promisify} = require('util')
+const { promisify } = require('util')
 const config = require('../realworld.config')
 
 const isProd = process.argv[2] === 'build'
@@ -15,11 +15,11 @@ const destAssetsDir = path.join(destBaseDir, 'assets')
 const readFileAsync = promisify(fs.readFile)
 
 module.exports = {
-  isProd,
-  basePath,
-  baseUrl,
-  destDir,
-  destBaseDir,
-  destAssetsDir,
-  readFileAsync,
+    isProd,
+    basePath,
+    baseUrl,
+    destDir,
+    destBaseDir,
+    destAssetsDir,
+    readFileAsync,
 }

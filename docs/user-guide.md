@@ -85,23 +85,23 @@ last 1 Safari version
 
 ```javascript
 const serve = (done) => {
-  browserSync.init({
-    // 省略
-    rewriteRules: [
-      {
-        match: /<!--#include virtual="(.+?)" -->/g,
-        fn(_req, _res, _match, file) {
-          const includeFile = path.join('vendor-public', file)
-          if (fs.existsSync(includeFile) && fs.statSync(includeFile).isFile()) {
-            return fs.readFileSync(includeFile, 'utf8')
-          } else {
-            return `<span style="color: red">\`${includeFile}\` could not be found</span>`
-          }
-        },
-      },
-    ],
-    // 省略
-  }, done)
+    browserSync.init({
+        // 省略
+        rewriteRules: [
+            {
+                match: /<!--#include virtual="(.+?)" -->/g,
+                fn(_req, _res, _match, file) {
+                    const includeFile = path.join('vendor-public', file)
+                    if (fs.existsSync(includeFile) && fs.statSync(includeFile).isFile()) {
+                        return fs.readFileSync(includeFile, 'utf8')
+                    } else {
+                        return `<span style="color: red">\`${includeFile}\` could not be found</span>`
+                    }
+                },
+            },
+        ],
+        // 省略
+    }, done)
 }
 ```
 
@@ -168,48 +168,48 @@ const startCommit = args[0]
 const endCommit = args[1] || 'HEAD'
 
 const getDateString = () => {
-  const d = new Date()
-  return String(d.getFullYear()).padStart(4, 0) +
-    String(d.getMonth() + 1).padStart(2, 0) +
-    String(d.getDate()).padStart(2, 0) +
-    String(d.getHours()).padStart(2, 0) +
-    String(d.getMinutes()).padStart(2, 0) +
-    String(d.getSeconds()).padStart(2, 0) +
-    String(d.getMilliseconds()).padStart(3, 0)
+    const d = new Date()
+    return String(d.getFullYear()).padStart(4, 0) +
+        String(d.getMonth() + 1).padStart(2, 0) +
+        String(d.getDate()).padStart(2, 0) +
+        String(d.getHours()).padStart(2, 0) +
+        String(d.getMinutes()).padStart(2, 0) +
+        String(d.getSeconds()).padStart(2, 0) +
+        String(d.getMilliseconds()).padStart(3, 0)
 }
 
 const git = (...args) => cp.execFileSync('git', [...args])
 
 const archive = () => {
-  makeDir.sync(ARCHIVE_DIR)
+    makeDir.sync(ARCHIVE_DIR)
 
-  const zip = archiver('zip')
-  zip.on('error', err => {
-    throw err
-  })
-
-  const archiveFile = path.resolve(ARCHIVE_DIR, `htdocs-${getDateString()}.zip`)
-  const output = fs.createWriteStream(archiveFile)
-  output.on('close', () => {
-    console.log(`${zip.pointer()} total bytes`)
-    console.log('archiver has been finalized and the output file descriptor has closed.')
-  })
-  zip.pipe(output)
-
-  const changedFiles = String(
-    git('diff', '--diff-filter=AMCR', '--name-only', startCommit, endCommit)
-  )
-    .split('\n')
-    .filter(file => file.startsWith(FILE_PATH_PREFIX))
-  changedFiles.forEach(file => {
-    const resolvedFile = path.resolve(file)
-    zip.append(fs.createReadStream(resolvedFile), {
-      name: file.replace(FILE_PATH_PREFIX, ''),
-      mode: fs.statSync(resolvedFile).mode,
+    const zip = archiver('zip')
+    zip.on('error', (err) => {
+        throw err
     })
-  })
 
-  zip.finalize()
+    const archiveFile = path.resolve(ARCHIVE_DIR, `htdocs-${getDateString()}.zip`)
+    const output = fs.createWriteStream(archiveFile)
+    output.on('close', () => {
+        console.log(`${zip.pointer()} total bytes`)
+        console.log('archiver has been finalized and the output file descriptor has closed.')
+    })
+    zip.pipe(output)
+
+    const changedFiles = String(
+        git('diff', '--diff-filter=AMCR', '--name-only', startCommit, endCommit)
+    )
+        .split('\n')
+        .filter(file => file.startsWith(FILE_PATH_PREFIX))
+    changedFiles.forEach((file) => {
+        const resolvedFile = path.resolve(file)
+        zip.append(fs.createReadStream(resolvedFile), {
+            name: file.replace(FILE_PATH_PREFIX, ''),
+            mode: fs.statSync(resolvedFile).mode,
+        })
+    })
+
+    zip.finalize()
 }
 
 archive()

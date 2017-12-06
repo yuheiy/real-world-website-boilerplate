@@ -1,37 +1,37 @@
 // focus
 @mixin focus-with-keyboard($element: &) {
-  @at-root {
-    html[data-whatinput="keyboard"] #{selector-append($element, ":focus")} {
-      @content;
+    @at-root {
+        html[data-whatinput="keyboard"] #{selector-append($element, ":focus")} {
+            @content;
+        }
     }
-  }
 }
 
 @mixin focus-without-keyboard($element: &) {
-  @at-root {
-    html[data-whatinput="initial"] #{selector-append($element, ":focus")},
-    html[data-whatinput="mouse"] #{selector-append($element, ":focus")},
-    html[data-whatinput="touch"] #{selector-append($element, ":focus")} {
-      @content;
+    @at-root {
+        html[data-whatinput="initial"] #{selector-append($element, ":focus")},
+        html[data-whatinput="mouse"] #{selector-append($element, ":focus")},
+        html[data-whatinput="touch"] #{selector-append($element, ":focus")} {
+            @content;
+        }
     }
-  }
 }
 
 @mixin focus-clear {
-  outline: 0;
+    outline: 0;
 }
 
 @mixin focus-clear-without-keyboard {
-  @include focus-without-keyboard {
-    @include focus-clear;
-  }
+    @include focus-without-keyboard {
+        @include focus-clear;
+    }
 }
 
 // asset
 @function asset($dir, $relative-path) {
-  @return url("../#{$dir}/#{$relative-path}");
+    @return url("../#{$dir}/#{$relative-path}");
 }
 
 @function image($relative-path) {
-  @return asset("img", $relative-path);
+    @return asset("img", $relative-path);
 }

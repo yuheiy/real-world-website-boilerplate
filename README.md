@@ -92,7 +92,7 @@ yarn start
 
 ```javascript
 module.exports = {
-  baseUrl: 'http://example.com',
+    baseUrl: 'http://example.com',
 }
 ```
 
@@ -100,8 +100,8 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  baseUrl: 'http://example.com/path/to/project',
-  basePath: '/path/to/project',
+    baseUrl: 'http://example.com/path/to/project',
+    basePath: '/path/to/project',
 }
 ```
 
