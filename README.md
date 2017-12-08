@@ -35,11 +35,11 @@ yarn start
 │   │   │   ├── _Content.scss
 │   │   │   ├── _GlobalHeader.scss
 │   │   │   └── _Section.scss
-│   │   ├── mixins/
-│   │   │   └── _focus.scss
+│   │   ├── globals/
+│   │   │   ├── _layout.scss
+│   │   │   ├── _typography.scss
+│   │   │   └── _util.scss
 │   │   ├── _base.scss
-│   │   ├── _functions.scss
-│   │   ├── _variables.scss
 │   │   └── main.scss               # CSSのエントリーポイント。`dist/<project>/assets/css/main.css`に出力される
 │   ├── html/                       # ディレクトリの階層のまま`dist/<project>/`ディレクトリに出力される。`_`から始まるファイル及びディレクトリは除外される
 │   │   ├── _data/                  # HTMLテンプレート全体から参照できる変数。ファイル名がキーになる
