@@ -47,7 +47,7 @@ const css = () => {
     .pipe(browserSync.stream({ match: '**/*.css' }))
 }
 
-const js = done => {
+const js = (done) => {
   const webpack = require('webpack')
   const webpackConfig = require('./webpack.config')
   const compiler = webpack(webpackConfig)
@@ -85,7 +85,7 @@ const js = done => {
   compiler.watch({}, callback)
 }
 
-const serve = done => {
+const serve = (done) => {
   browserSync.init(
     {
       notify: false,
@@ -110,7 +110,7 @@ const clean = () => {
   return del(destDir)
 }
 
-const watch = done => {
+const watch = (done) => {
   gulp.watch('src/css/**/*.scss', css)
   gulp.watch(['src/html/**/*', 'public/**/*']).on('all', browserSync.reload)
   done()
