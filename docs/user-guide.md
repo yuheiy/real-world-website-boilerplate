@@ -116,7 +116,7 @@ const serve = (done) => {
 
 #### 依存モジュールをインストール
 
-```sh
+```bash
 yarn add --dev husky
 ```
 
@@ -150,7 +150,7 @@ yarn-error.log*
 
 #### 依存モジュールをインストール
 
-```sh
+```bash
 yarn add --dev archiver
 ```
 
@@ -247,7 +247,7 @@ yarn-error.log*
 
 次のコマンドで差分ファイルZipを生成します。
 
-```sh
+```bash
 yarn archive -- <start-commit> [<end-commit>]
 ```
 
@@ -259,7 +259,7 @@ todo...
 <!--
 https://gist.github.com/yuheiy/28b8441a146c987b4514ce2da32ce8b1
 
- ```sh
+ ```bash
 yarn filelist -- <start-commit> [<end-commit>]
 ```
  -->

@@ -6,7 +6,7 @@ HTMLテンプレートを作成するためのシンプルな仕組みや、標�
 
 ## クイックスタート
 
-```sh
+```bash
 git clone https://github.com/yuheiy/real-world-website-boilerplate.git my-web/
 cd my-web/
 rm -rf .git/
@@ -18,7 +18,7 @@ yarn start
 
 ### ディレクトリ構成
 
-```sh
+```bash
 ├── dist/                           # 本番向けビルドの結果が出力される
 ├── docs/
 │   └── user-guide.md
