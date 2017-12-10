@@ -140,7 +140,7 @@ yarn-error.log*
   "scripts": {
 +   "precommit": "npm run build && git add dist/",
     "start": "gulp",
-    "build": "gulp build --prod"
+    "build": "gulp build"
   },
 ```
 
@@ -227,7 +227,7 @@ archive()
 +   "archive": "node task/archive.js",
     "precommit": "npm run build && git add dist/",
     "start": "gulp",
-    "build": "gulp build --prod"
+    "build": "gulp build"
   },
 ```
 
@@ -248,7 +248,7 @@ yarn-error.log*
 次のコマンドで差分ファイルZipを生成します。
 
 ```bash
-yarn archive -- <start-commit> [<end-commit>]
+yarn archive <start-commit> [<end-commit>]
 ```
 
 `<start-commit>`に前回納品時のコミット、`<end-commit>`に納品データに含める最新のコミットを指定します。`<end-commit>`を省略すると`HEAD`になります。
@@ -260,6 +260,6 @@ todo...
 https://gist.github.com/yuheiy/28b8441a146c987b4514ce2da32ce8b1
 
  ```bash
-yarn filelist -- <start-commit> [<end-commit>]
+yarn filelist <start-commit> [<end-commit>]
 ```
  -->
