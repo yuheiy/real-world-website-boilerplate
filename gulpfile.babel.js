@@ -2,7 +2,6 @@ const path = require('path')
 const fs = require('fs')
 const browserSync = require('browser-sync').create()
 const gulp = require('gulp')
-const plugins = require('gulp-load-plugins')()
 const renderHtml = require('./task/renderHtml')
 const { isProd, basePath, destDir, destBaseDir, destAssetsDir } = require('./task/util')
 
@@ -20,29 +19,31 @@ const {
 )
 
 const css = () => {
+  const gulpif = require('gulp-if')
+  const sourcemaps = require('gulp-sourcemaps')
+  const sass = require('gulp-sass')
   const globImporter = require('node-sass-glob-importer')
+  const postcss = require('gulp-postcss')
   const autoprefixer = require('autoprefixer')
   const csswring = require('csswring')
 
   return gulp
     .src('src/css/main.scss')
-    .pipe(plugins.if(!isProd, plugins.sourcemaps.init()))
+    .pipe(gulpif(!isProd, sourcemaps.init()))
     .pipe(
-      plugins
-        .sass({
-          importer: globImporter(),
-        })
-        .on('error', plugins.sass.logError),
+      sass({
+        importer: globImporter(),
+      }).on('error', sass.logError),
     )
     .pipe(
-      plugins.postcss([
+      postcss([
         autoprefixer({
           cascade: false,
         }),
         ...(isProd ? [csswring()] : []),
       ]),
     )
-    .pipe(plugins.if(!isProd, plugins.sourcemaps.write('.')))
+    .pipe(gulpif(!isProd, sourcemaps.write('.')))
     .pipe(gulp.dest(path.join(destAssetsDir, 'css')))
     .pipe(browserSync.stream({ match: '**/*.css' }))
 }
