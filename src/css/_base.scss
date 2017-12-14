@@ -1,15 +1,31 @@
+// https://github.com/mozilla/kuma/blob/master/kuma/static/styles/base/elements/reset.scss
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, hr, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figure, figcaption, hgroup, menu, footer, header, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+address, caption, cite, code, dfn, th, var {
+  font-style: inherit;
+  font-weight: inherit;
+}
+
+ul, ol {
+  list-style-type: none;
+}
+
 html {
   font-family: $font-stack__system-ui;
   line-height: $line-height__default;
 }
 
-i,
-cite,
-em,
-var,
-address,
-dfn {
-  font-style: inherit; // Don't use `italic` for Japanese
+body {
+  text-align: left; // for `<th>` element
 }
 
 audio,
@@ -18,17 +34,22 @@ iframe,
 img,
 svg,
 video {
+  vertical-align: middle;
+}
+
+img,
+iframe,
+video {
   max-width: 100%;
+}
+
+img,
+iframe {
   height: auto;
-  vertical-align: bottom; // Remove bottom margin
 }
 
 svg {
   fill: currentcolor;
-}
-
-iframe {
-  border: 0;
 }
 
 table {
@@ -37,13 +58,12 @@ table {
 }
 
 th {
-  text-align: left;
+  text-align: inherit;
 }
 
-input,
 button,
+input,
 select,
-optgroup,
 textarea {
   font-family: inherit;
   font-size: inherit;

@@ -17,16 +17,6 @@
   }
 }
 
-@mixin focus-clear {
-  outline: 0;
-}
-
-@mixin focus-clear-without-keyboard {
-  @include focus-without-keyboard {
-    @include focus-clear;
-  }
-}
-
 // asset
 @function asset($path) {
   @return url("../#{$path}");

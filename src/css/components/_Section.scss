@@ -6,7 +6,6 @@
 }
 
 .Section__heading {
-  margin-top: 0;
   margin-bottom: 0.875rem;
   line-height: $line-height__headers;
   font-feature-settings: "palt" 1;
@@ -16,7 +15,8 @@
 }
 
 .Section__paragraph {
-  margin: 1.75rem 0;
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
   font-kerning: none;
 }
 

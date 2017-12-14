@@ -25,7 +25,7 @@
 }
 
 .GlobalHeader__heading {
-  margin: 0 0 1.75rem;
+  margin-bottom: 1.75rem;
   font-size: 1.5rem;
   font-feature-settings: "palt" 1;
   text-align: center;
@@ -50,12 +50,18 @@
   text-decoration: none;
 }
 
+.GlobalHeader__headingLink:focus {
+  outline: 2px solid #2e85c0;
+  outline-offset: 2px;
+}
+
+@include focus-without-keyboard(".GlobalHeader__headingLink") {
+  outline: 0;
+}
+
 .GlobalHeader__navList {
   display: flex;
   justify-content: center;
-  margin: 0;
-  padding-left: 0;
-  list-style: none;
   text-align: center;
 }
 
@@ -68,6 +74,15 @@
   color: #3498db;
 }
 
+.GlobalHeader__navLink:focus {
+  outline: 2px solid #2e85c0;
+  outline-offset: 4px;
+}
+
+@include focus-without-keyboard(".GlobalHeader__navLink") {
+  outline: 0;
+}
+
 .GlobalHeader__navLink--active {
-  box-shadow: 0 0 0 2px mix(#3498db, #fff);
+  box-shadow: 0 0 0 2px #9acced;
 }
