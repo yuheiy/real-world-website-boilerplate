@@ -1,0 +1,12 @@
+// typography
+$font-stack-system-ui: system-ui, -apple-system, "Yu Gothic UI", "Segoe UI", "Meiryo", sans-serif;
+$font-stack-sans-serif: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+
+$line-height-default: 1.8;
+$line-height-headers: 1.4;
+
+// media query
+$mq-sm: "(min-width: 576px)";
+$mq-md: "(min-width: 768px)";
+$mq-lg: "(min-width: 992px)";
+$mq-xl: "(min-width: 1200px)";

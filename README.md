@@ -36,9 +36,9 @@ yarn start
 │   │   │   ├── _GlobalHeader.scss
 │   │   │   └── _Section.scss
 │   │   ├── globals/
-│   │   │   ├── _layout.scss
-│   │   │   ├── _typography.scss
-│   │   │   └── _util.scss
+│   │   │   ├── _functions.scss
+│   │   │   ├── _mixins.scss
+│   │   │   └── _variables.scss
 │   │   ├── _base.scss
 │   │   └── main.scss               # CSSのエントリーポイント。`dist/<project>/assets/css/main.css`に出力される
 │   ├── html/                       # ディレクトリの階層のまま`dist/<project>/`ディレクトリに出力される。`_`から始まるファイル及びディレクトリは除外される

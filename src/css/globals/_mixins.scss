@@ -1,4 +1,4 @@
-// focus
+// focus selector
 @mixin focus-with-keyboard($element: &) {
   @at-root {
     html[data-whatinput="keyboard"] #{selector-append($element, ":focus")} {
@@ -15,13 +15,4 @@
       @content;
     }
   }
-}
-
-// asset
-@function asset($path) {
-  @return url("../#{$path}");
-}
-
-@function image($path) {
-  @return asset("img/#{$path}");
 }

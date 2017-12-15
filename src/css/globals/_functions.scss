@@ -1,0 +1,8 @@
+// asset path
+@function asset($path) {
+  @return url("../#{$path}");
+}
+
+@function image($path) {
+  @return asset("img/#{$path}");
+}

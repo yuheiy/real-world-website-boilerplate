@@ -3,23 +3,23 @@
   margin-right: auto;
   margin-left: auto;
   padding: 1.75rem 1rem 3.5rem;
-  line-height: $line-height__headers;
+  line-height: $line-height-headers;
 
-  @media (min-width: $breakpoint__md) {
+  @media #{$mq-md} {
     padding-right: 2rem;
     padding-left: 2rem;
   }
 }
 
 .GlobalHeader:not(.GlobalHeader--home) {
-  @media (min-width: $breakpoint__sm) {
+  @media #{$mq-sm} {
     display: flex;
     justify-content: space-between;
   }
 }
 
 .GlobalHeader--home {
-  @media (min-width: $breakpoint__md) {
+  @media #{$mq-md} {
     padding-top: 3.5rem;
   }
 }
@@ -32,14 +32,14 @@
 }
 
 .GlobalHeader:not(.GlobalHeader--home) .GlobalHeader__heading {
-  @media (min-width: $breakpoint__sm) {
+  @media #{$mq-sm} {
     margin-bottom: 0;
     font-size: 1rem;
   }
 }
 
 .GlobalHeader--home .GlobalHeader__heading {
-  @media (min-width: $breakpoint__md) {
+  @media #{$mq-md} {
     margin-bottom: 2.25rem;
     font-size: 3rem;
   }
