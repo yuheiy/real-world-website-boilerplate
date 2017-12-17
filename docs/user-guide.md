@@ -114,12 +114,6 @@ const serve = (done) => {
 
 納品ファイルの差分を管理するために、`dist/`ディレクトリをGitで管理します。また生成ファイルをコミットと対応させるために、コミットごとにビルドを実行する設定にします。
 
-#### 依存モジュールをインストール
-
-```bash
-yarn add --dev husky
-```
-
 #### `dist/`ディレクトリをGitに追加
 
 `.gitignore`から`/dist`を取り除く。
@@ -138,9 +132,10 @@ yarn-error.log*
 
 ```diff
   "scripts": {
-+   "precommit": "npm run build && git add dist/",
     "start": "gulp",
-    "build": "gulp build"
+    "build": "gulp build",
+-   "precommit": "lint-staged"
++   "precommit": "lint-staged && npm run build && git add dist/"
   },
 ```
 
@@ -225,9 +220,9 @@ archive()
 ```diff
   "scripts": {
 +   "archive": "node task/archive.js",
-    "precommit": "npm run build && git add dist/",
     "start": "gulp",
-    "build": "gulp build"
+    "build": "gulp build",
+    "precommit": "lint-staged"
   },
 ```
 

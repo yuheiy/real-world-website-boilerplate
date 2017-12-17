@@ -1,1 +1,4 @@
+dist/
+public/
+vendor-public/
 *.md

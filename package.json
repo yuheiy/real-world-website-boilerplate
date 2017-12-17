@@ -2,7 +2,11 @@
   "private": true,
   "scripts": {
     "start": "gulp",
-    "build": "gulp build"
+    "build": "gulp build",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,yml,yaml,css,scss}": ["prettier --write", "git add"]
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
@@ -27,9 +31,12 @@
     "gulp-postcss": "^7.0.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
+    "husky": "^0.14.3",
     "js-yaml": "^3.10.0",
     "license-banner-webpack-plugin": "^1.0.0",
+    "lint-staged": "^6.0.0",
     "node-sass-glob-importer": "^5.0.2",
+    "prettier": "^1.9.2",
     "pug": "^2.0.0-rc.4",
     "real-world-website-render-helper": "yuheiy/real-world-website-render-helper",
     "webpack": "^3.10.0"
