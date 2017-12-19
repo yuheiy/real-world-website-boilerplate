@@ -1,4 +1,5 @@
 dist/
 public/
 vendor-public/
+package.json
 *.md
