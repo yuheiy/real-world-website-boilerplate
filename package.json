@@ -6,7 +6,10 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,json,yml,yaml,css,scss}": ["prettier --write", "git add"]
+    "*.{js,css,scss}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
