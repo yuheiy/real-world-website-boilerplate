@@ -1,88 +1,88 @@
 .GlobalHeader {
-  max-width: 75rem;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 1.75rem 1rem 3.5rem;
-  line-height: $line-height-headers;
+    max-width: 75rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 1.75rem 1rem 3.5rem;
+    line-height: $line-height-headers;
 
-  @media #{$mq-md} {
-    padding-right: 2rem;
-    padding-left: 2rem;
-  }
+    @media #{$mq-md} {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
 }
 
 .GlobalHeader:not(.GlobalHeader--home) {
-  @media #{$mq-sm} {
-    display: flex;
-    justify-content: space-between;
-  }
+    @media #{$mq-sm} {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .GlobalHeader--home {
-  @media #{$mq-md} {
-    padding-top: 3.5rem;
-  }
+    @media #{$mq-md} {
+        padding-top: 3.5rem;
+    }
 }
 
 .GlobalHeader__heading {
-  margin-bottom: 1.75rem;
-  font-size: 1.5rem;
-  font-feature-settings: "palt" 1;
-  text-align: center;
+    margin-bottom: 1.75rem;
+    font-size: 1.5rem;
+    font-feature-settings: "palt" 1;
+    text-align: center;
 }
 
 .GlobalHeader:not(.GlobalHeader--home) .GlobalHeader__heading {
-  @media #{$mq-sm} {
-    margin-bottom: 0;
-    font-size: 1rem;
-  }
+    @media #{$mq-sm} {
+        margin-bottom: 0;
+        font-size: 1rem;
+    }
 }
 
 .GlobalHeader--home .GlobalHeader__heading {
-  @media #{$mq-md} {
-    margin-bottom: 2.25rem;
-    font-size: 3rem;
-  }
+    @media #{$mq-md} {
+        margin-bottom: 2.25rem;
+        font-size: 3rem;
+    }
 }
 
 .GlobalHeader__headingLink {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 .GlobalHeader__headingLink:focus {
-  outline: 2px solid #2e85c0;
-  outline-offset: 2px;
+    outline: 2px solid #2e85c0;
+    outline-offset: 2px;
 }
 
 @include focus-without-keyboard(".GlobalHeader__headingLink") {
-  outline: 0;
+    outline: 0;
 }
 
 .GlobalHeader__navList {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 .GlobalHeader__navItem:not(:last-child) {
-  margin-right: 1.5rem;
+    margin-right: 1.5rem;
 }
 
 .GlobalHeader__navLink {
-  padding: 2px;
-  color: #3498db;
+    padding: 2px;
+    color: #3498db;
 }
 
 .GlobalHeader__navLink:focus {
-  outline: 2px solid #2e85c0;
-  outline-offset: 4px;
+    outline: 2px solid #2e85c0;
+    outline-offset: 4px;
 }
 
 @include focus-without-keyboard(".GlobalHeader__navLink") {
-  outline: 0;
+    outline: 0;
 }
 
 .GlobalHeader__navLink--active {
-  box-shadow: 0 0 0 2px #9acced;
+    box-shadow: 0 0 0 2px #9acced;
 }
