@@ -93,7 +93,7 @@ yarn start
 ```javascript
 module.exports = {
     baseUrl: 'http://example.com',
-};
+}
 ```
 
 #### サブディレクトリの場合
@@ -102,7 +102,7 @@ module.exports = {
 module.exports = {
     baseUrl: 'http://example.com/path/to/project',
     basePath: '/path/to/project',
-};
+}
 ```
 
 ## [ユーザーガイド](/docs/user-guide.md)

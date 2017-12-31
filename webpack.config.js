@@ -1,7 +1,7 @@
-const path = require('path');
-const webpack = require('webpack');
-const LicenseBannerPlugin = require('license-banner-webpack-plugin');
-const { isProd, destAssetsDir } = require('./task/util');
+const path = require('path')
+const webpack = require('webpack')
+const LicenseBannerPlugin = require('license-banner-webpack-plugin')
+const { isProd, destAssetsDir } = require('./task/util')
 
 module.exports = {
     entry: './src/js/main.js',
@@ -52,4 +52,4 @@ module.exports = {
               ]),
     ],
     devtool: !isProd && 'cheap-module-source-map',
-};
+}

@@ -1,9 +1,9 @@
-const path = require('path');
-const fs = require('fs');
-const browserSync = require('browser-sync').create();
-const gulp = require('gulp');
-const renderHtml = require('./task/renderHtml');
-const { isProd, basePath, destDir, destBaseDir, destAssetsDir } = require('./task/util');
+const path = require('path')
+const fs = require('fs')
+const browserSync = require('browser-sync').create()
+const gulp = require('gulp')
+const renderHtml = require('./task/renderHtml')
+const { isProd, basePath, destDir, destBaseDir, destAssetsDir } = require('./task/util')
 
 const {
     renderMiddleware: renderHtmlMiddleware,
@@ -16,16 +16,16 @@ const {
         task: renderHtml,
     },
     basePath,
-);
+)
 
 const css = () => {
-    const gulpif = require('gulp-if');
-    const sourcemaps = require('gulp-sourcemaps');
-    const sass = require('gulp-sass');
-    const globImporter = require('node-sass-glob-importer');
-    const postcss = require('gulp-postcss');
-    const autoprefixer = require('autoprefixer');
-    const csswring = require('csswring');
+    const gulpif = require('gulp-if')
+    const sourcemaps = require('gulp-sourcemaps')
+    const sass = require('gulp-sass')
+    const globImporter = require('node-sass-glob-importer')
+    const postcss = require('gulp-postcss')
+    const autoprefixer = require('autoprefixer')
+    const csswring = require('csswring')
 
     return gulp
         .src('src/css/main.scss')
@@ -45,22 +45,22 @@ const css = () => {
         )
         .pipe(gulpif(!isProd, sourcemaps.write('.')))
         .pipe(gulp.dest(path.join(destAssetsDir, 'css')))
-        .pipe(browserSync.stream({ match: '**/*.css' }));
-};
+        .pipe(browserSync.stream({ match: '**/*.css' }))
+}
 
 const js = (done) => {
-    const webpack = require('webpack');
-    const webpackConfig = require('./webpack.config');
-    const compiler = webpack(webpackConfig);
-    let isFirst = true;
+    const webpack = require('webpack')
+    const webpackConfig = require('./webpack.config')
+    const compiler = webpack(webpackConfig)
+    let isFirst = true
 
     const callback = (err, stats) => {
         if (err) {
-            console.error(err.stack || err);
+            console.error(err.stack || err)
             if (err.details) {
-                console.error(err.details);
+                console.error(err.details)
             }
-            return;
+            return
         }
 
         console.log(
@@ -68,23 +68,23 @@ const js = (done) => {
                 chunks: false,
                 colors: true,
             }),
-        );
+        )
 
         if (isFirst) {
-            done();
-            isFirst = false;
-            return;
+            done()
+            isFirst = false
+            return
         }
 
-        browserSync.reload();
-    };
-
-    if (isProd) {
-        return compiler.run(callback);
+        browserSync.reload()
     }
 
-    compiler.watch({}, callback);
-};
+    if (isProd) {
+        return compiler.run(callback)
+    }
+
+    compiler.watch({}, callback)
+}
 
 const serve = (done) => {
     browserSync.init(
@@ -103,24 +103,24 @@ const serve = (done) => {
             open: false,
         },
         done,
-    );
-};
+    )
+}
 
 const clean = () => {
-    const del = require('del');
-    return del(destDir);
-};
+    const del = require('del')
+    return del(destDir)
+}
 
 const watch = (done) => {
-    gulp.watch('src/css/**/*.scss', css);
-    gulp.watch(['src/html/**/*', 'public/**/*']).on('all', browserSync.reload);
-    done();
-};
+    gulp.watch('src/css/**/*.scss', css)
+    gulp.watch(['src/html/**/*', 'public/**/*']).on('all', browserSync.reload)
+    done()
+}
 
-export default gulp.series(clean, gulp.parallel(css, js), serve, watch);
+export default gulp.series(clean, gulp.parallel(css, js), serve, watch)
 
 const copy = () => {
-    return gulp.src('public/**/*').pipe(gulp.dest(destBaseDir));
-};
+    return gulp.src('public/**/*').pipe(gulp.dest(destBaseDir))
+}
 
-export const build = gulp.series(clean, gulp.parallel(html, css, js, copy));
+export const build = gulp.series(clean, gulp.parallel(html, css, js, copy))
