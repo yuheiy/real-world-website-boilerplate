@@ -1,5 +1,5 @@
 // import "picturefill"
-import "babel-polyfill";
+import 'babel-polyfill';
 
 // https://github.com/zloirock/core-js/issues/329
 // https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach

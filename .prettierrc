@@ -1,3 +1,9 @@
 printWidth: 100
 trailingComma: all
 arrowParens: always
+singleQuote: true
+overrides:
+    -
+        files: "*.scss"
+        options:
+            singleQuote: false

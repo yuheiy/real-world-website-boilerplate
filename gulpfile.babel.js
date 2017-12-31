@@ -1,17 +1,17 @@
-const path = require("path");
-const fs = require("fs");
-const browserSync = require("browser-sync").create();
-const gulp = require("gulp");
-const renderHtml = require("./task/renderHtml");
-const { isProd, basePath, destDir, destBaseDir, destAssetsDir } = require("./task/util");
+const path = require('path');
+const fs = require('fs');
+const browserSync = require('browser-sync').create();
+const gulp = require('gulp');
+const renderHtml = require('./task/renderHtml');
+const { isProd, basePath, destDir, destBaseDir, destAssetsDir } = require('./task/util');
 
 const {
     renderMiddleware: renderHtmlMiddleware,
     buildAllFiles: html,
-} = require("real-world-website-render-helper")(
+} = require('real-world-website-render-helper')(
     {
-        input: "./src/html",
-        inputExt: "pug",
+        input: './src/html',
+        inputExt: 'pug',
         output: destBaseDir,
         task: renderHtml,
     },
@@ -19,21 +19,21 @@ const {
 );
 
 const css = () => {
-    const gulpif = require("gulp-if");
-    const sourcemaps = require("gulp-sourcemaps");
-    const sass = require("gulp-sass");
-    const globImporter = require("node-sass-glob-importer");
-    const postcss = require("gulp-postcss");
-    const autoprefixer = require("autoprefixer");
-    const csswring = require("csswring");
+    const gulpif = require('gulp-if');
+    const sourcemaps = require('gulp-sourcemaps');
+    const sass = require('gulp-sass');
+    const globImporter = require('node-sass-glob-importer');
+    const postcss = require('gulp-postcss');
+    const autoprefixer = require('autoprefixer');
+    const csswring = require('csswring');
 
     return gulp
-        .src("src/css/main.scss")
+        .src('src/css/main.scss')
         .pipe(gulpif(!isProd, sourcemaps.init()))
         .pipe(
             sass({
                 importer: globImporter(),
-            }).on("error", sass.logError),
+            }).on('error', sass.logError),
         )
         .pipe(
             postcss([
@@ -43,14 +43,14 @@ const css = () => {
                 ...(isProd ? [csswring()] : []),
             ]),
         )
-        .pipe(gulpif(!isProd, sourcemaps.write(".")))
-        .pipe(gulp.dest(path.join(destAssetsDir, "css")))
-        .pipe(browserSync.stream({ match: "**/*.css" }));
+        .pipe(gulpif(!isProd, sourcemaps.write('.')))
+        .pipe(gulp.dest(path.join(destAssetsDir, 'css')))
+        .pipe(browserSync.stream({ match: '**/*.css' }));
 };
 
 const js = (done) => {
-    const webpack = require("webpack");
-    const webpackConfig = require("./webpack.config");
+    const webpack = require('webpack');
+    const webpackConfig = require('./webpack.config');
     const compiler = webpack(webpackConfig);
     let isFirst = true;
 
@@ -92,13 +92,13 @@ const serve = (done) => {
             notify: false,
             ui: false,
             server: {
-                baseDir: [destDir, "vendor-public"],
+                baseDir: [destDir, 'vendor-public'],
                 routes: {
-                    [`${basePath || "/"}`]: "public",
+                    [`${basePath || '/'}`]: 'public',
                 },
             },
             middleware: renderHtmlMiddleware,
-            startPath: path.posix.join("/", basePath, "/"),
+            startPath: path.posix.join('/', basePath, '/'),
             ghostMode: false,
             open: false,
         },
@@ -107,20 +107,20 @@ const serve = (done) => {
 };
 
 const clean = () => {
-    const del = require("del");
+    const del = require('del');
     return del(destDir);
 };
 
 const watch = (done) => {
-    gulp.watch("src/css/**/*.scss", css);
-    gulp.watch(["src/html/**/*", "public/**/*"]).on("all", browserSync.reload);
+    gulp.watch('src/css/**/*.scss', css);
+    gulp.watch(['src/html/**/*', 'public/**/*']).on('all', browserSync.reload);
     done();
 };
 
 export default gulp.series(clean, gulp.parallel(css, js), serve, watch);
 
 const copy = () => {
-    return gulp.src("public/**/*").pipe(gulp.dest(destBaseDir));
+    return gulp.src('public/**/*').pipe(gulp.dest(destBaseDir));
 };
 
 export const build = gulp.series(clean, gulp.parallel(html, css, js, copy));

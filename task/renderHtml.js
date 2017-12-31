@@ -1,10 +1,10 @@
-const path = require("path");
-const globby = require("globby");
-const yaml = require("js-yaml");
-const pug = require("pug");
-const { isProd, basePath, baseUrl, readFileAsync } = require("./util");
+const path = require('path');
+const globby = require('globby');
+const yaml = require('js-yaml');
+const pug = require('pug');
+const { isProd, basePath, baseUrl, readFileAsync } = require('./util');
 
-const dataFileExts = [".yml", ".yaml", ".json"];
+const dataFileExts = ['.yml', '.yaml', '.json'];
 
 const readFileData = async () => {
     const filePaths = (await globby(dataFileExts.map((ext) => `src/html/_data/*${ext}`), {
@@ -17,7 +17,7 @@ const readFileData = async () => {
     const fileData = await Promise.all(
         filePaths.map(async (filePath) => ({
             name: path.parse(filePath).name,
-            data: yaml.safeLoad(await readFileAsync(filePath, "utf8")),
+            data: yaml.safeLoad(await readFileAsync(filePath, 'utf8')),
         })),
     );
     const gatheredFileData = fileData.reduce(
@@ -39,9 +39,9 @@ const readPageData = async (pageFilePath) => {
     );
     const fileData = filePath ? yaml.safeLoad(await readFileAsync(filePath)) : {};
     const pagePath = pageFilePath
-        .replace("src/html", "")
-        .replace(/\.pug$/, ".html")
-        .replace(/\/index\.html$/, "/"); // replace `/index.html` to `/`
+        .replace('src/html', '')
+        .replace(/\.pug$/, '.html')
+        .replace(/\/index\.html$/, '/'); // replace `/index.html` to `/`
     const pageData = {
         ...fileData,
         path: pagePath,
@@ -50,13 +50,13 @@ const readPageData = async (pageFilePath) => {
 };
 
 const pugConfig = {
-    basedir: "./src/html",
+    basedir: './src/html',
 };
 const baseLocals = {
     isProd,
     absPath: (pagePath) => path.posix.join(`${basePath}/`, pagePath),
-    assetPath: (pagePath) => path.posix.join(`${basePath}/`, "assets", pagePath),
-    absUrl: (pagePath) => `${baseUrl}${path.posix.join("/", pagePath)}`,
+    assetPath: (pagePath) => path.posix.join(`${basePath}/`, 'assets', pagePath),
+    absUrl: (pagePath) => `${baseUrl}${path.posix.join('/', pagePath)}`,
 };
 
 const createTemplateConfig = async (pageFilePath) => {
