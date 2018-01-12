@@ -24,7 +24,6 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.26.0",
     "browser-sync": "^2.23.3",
     "csswring": "^6.0.2",
     "del": "^3.0.0",

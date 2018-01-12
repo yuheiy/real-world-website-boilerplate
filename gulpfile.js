@@ -118,19 +118,19 @@ const watch = (done) => {
 }
 
 // prettier-ignore
-export default gulp.series(
+gulp.task('default', gulp.series(
     clean,
     gulp.parallel(css, js),
     serve,
     watch,
-)
+))
 
 const copy = () => {
     return gulp.src('public/**/*').pipe(gulp.dest(destBaseDir))
 }
 
 // prettier-ignore
-export const build = gulp.series(
+gulp.task('build', gulp.series(
     clean,
     gulp.parallel(html, css, js, copy),
-)
+))
