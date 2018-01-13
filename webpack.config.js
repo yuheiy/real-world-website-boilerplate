@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const LicenseBannerPlugin = require('license-banner-webpack-plugin')
 const { isProd, destAssetsDir } = require('./task/util')
 
@@ -37,7 +38,7 @@ module.exports = {
     plugins: [
         ...(isProd
             ? [
-                  new webpack.optimize.UglifyJsPlugin(),
+                  new UglifyJsPlugin(),
                   new webpack.EnvironmentPlugin({
                       NODE_ENV: 'production',
                       DEBUG: false,

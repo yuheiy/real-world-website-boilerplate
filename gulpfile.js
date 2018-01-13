@@ -2,21 +2,17 @@ const path = require('path')
 const fs = require('fs')
 const browserSync = require('browser-sync').create()
 const gulp = require('gulp')
+const renderHelper = require('real-world-website-render-helper')
 const renderHtml = require('./task/renderHtml')
 const { isProd, basePath, destDir, destBaseDir, destAssetsDir } = require('./task/util')
 
-const {
-    renderMiddleware: renderHtmlMiddleware,
-    buildAllFiles: html,
-} = require('real-world-website-render-helper')(
-    {
-        input: './src/html',
-        inputExt: 'pug',
-        output: destBaseDir,
-        task: renderHtml,
-    },
-    basePath,
-)
+const renderHelperConfig = {
+    input: 'src/html',
+    inputExt: 'pug',
+    output: destBaseDir,
+    outputExt: 'html',
+    task: renderHtml,
+}
 
 const css = () => {
     const gulpif = require('gulp-if')
@@ -97,7 +93,7 @@ const serve = (done) => {
                     [`${basePath || '/'}`]: 'public',
                 },
             },
-            middleware: renderHtmlMiddleware,
+            middleware: renderHelper.createRenderMiddleware(renderHelperConfig, basePath),
             startPath: path.posix.join('/', basePath, '/'),
             ghostMode: false,
             open: false,
@@ -124,6 +120,10 @@ gulp.task('default', gulp.series(
     serve,
     watch,
 ))
+
+const html = () => {
+    return renderHelper.build(renderHelperConfig)
+}
 
 const copy = () => {
     return gulp.src('public/**/*').pipe(gulp.dest(destBaseDir))
