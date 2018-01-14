@@ -116,16 +116,15 @@ const serve = (done) => {
 
 #### `dist/`ディレクトリをGitに追加
 
-`.gitignore`から`/dist`を取り除く。
+`.gitignore`から`/dist/`を取り除く。
 
 ```diff
-/node_modules
-/tmp
--/dist
-.DS_Store
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# next.js build output
+.next
+
+
+-/dist/
+/tmp/
 ```
 
 #### `package.json`に`precommit`フックを追加
@@ -229,13 +228,12 @@ archive()
 #### `archive/`ディレクトリをGitから除外
 
 ```diff
-/node_modules
-/tmp
-+/archive
-.DS_Store
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# next.js build output
+.next
+
+
+/tmp/
++/archive/
 ```
 
 #### 使い方
