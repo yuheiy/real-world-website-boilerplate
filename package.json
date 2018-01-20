@@ -15,7 +15,7 @@
     "babel-polyfill": "^6.26.0",
     "normalize.css": "^7.0.0",
     "picturefill": "^3.0.2",
-    "what-input": "^5.0.3"
+    "what-input": "^5.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
@@ -36,7 +36,7 @@
     "husky": "^0.14.3",
     "js-yaml": "^3.10.0",
     "license-banner-webpack-plugin": "^1.0.0",
-    "lint-staged": "^6.0.0",
+    "lint-staged": "^6.0.1",
     "node-sass-glob-importer": "^5.1.0",
     "prettier": "^1.10.2",
     "pug": "^2.0.0-rc.4",
