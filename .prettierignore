@@ -1,5 +1,5 @@
-dist/
-public/
-vendor-public/
-package.json
+/dist/
+/public/
+/vendor-public/
+/package.json
 *.md

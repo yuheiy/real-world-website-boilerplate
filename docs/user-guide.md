@@ -119,9 +119,7 @@ const serve = (done) => {
 `.gitignore`から`/dist/`を取り除く。
 
 ```diff
-# next.js build output
-.next
-
+/yarn-error.log*
 
 -/dist/
 /tmp/
@@ -228,9 +226,7 @@ archive()
 #### `archive/`ディレクトリをGitから除外
 
 ```diff
-# next.js build output
-.next
-
+/yarn-error.log*
 
 /tmp/
 +/archive/
