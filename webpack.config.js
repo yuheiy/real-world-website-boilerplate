@@ -36,21 +36,13 @@ module.exports = {
         ],
     },
     plugins: [
-        ...(isProd
-            ? [
-                  new UglifyJsPlugin(),
-                  new webpack.EnvironmentPlugin({
-                      NODE_ENV: 'production',
-                      DEBUG: false,
-                  }),
-                  new LicenseBannerPlugin(),
-              ]
-            : [
-                  new webpack.EnvironmentPlugin({
-                      NODE_ENV: 'development',
-                      DEBUG: true,
-                  }),
-              ]),
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: isProd ? 'production' : 'development',
+        }),
+        new webpack.DefinePlugin({
+            __DEV__: !isProd,
+        }),
+        ...(isProd ? [new UglifyJsPlugin(), new LicenseBannerPlugin()] : []),
     ],
     devtool: !isProd && 'cheap-module-source-map',
 }
