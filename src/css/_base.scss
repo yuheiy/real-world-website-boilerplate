@@ -1,6 +1,13 @@
 html {
-    font-family: $font-stack-system-ui;
-    line-height: $line-height-default;
+    font-family: $font-family-system-ui;
+    line-height: 1.5;
+}
+
+// IE10+ doesn't honor `<meta name="viewport">` in some cases.
+@at-root {
+    @-ms-viewport {
+        width: device-width;
+    }
 }
 
 body {
@@ -38,9 +45,7 @@ video {
 }
 
 img,
-video,
-object,
-embed {
+video {
     max-width: 100%;
     height: auto;
 }
@@ -51,7 +56,6 @@ svg {
 
 table {
     border-collapse: collapse;
-    border-spacing: 0;
 }
 
 th {
