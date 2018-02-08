@@ -107,9 +107,14 @@ const clean = () => {
     return del(destDir)
 }
 
+const reload = (done) => {
+    browserSync.reload()
+    done()
+}
+
 const watch = (done) => {
     gulp.watch('src/css/**/*.scss', css)
-    gulp.watch(['src/html/**/*', 'public/**/*']).on('all', browserSync.reload)
+    gulp.watch(['src/html/**/*', 'public/**/*'], reload)
     done()
 }
 
