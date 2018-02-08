@@ -90,6 +90,9 @@ const renderHtml = async (filePath) => {
         const config = await createTemplateConfig(filePath)
         return pug.renderFile(filePath, config)
     } catch (err) {
+        if (isProd) {
+            throw err
+        }
         console.log(err.stack)
         return renderError(err)
     }
