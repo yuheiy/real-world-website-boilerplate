@@ -4,19 +4,8 @@ html {
 }
 
 // IE10+ doesn't honor `<meta name="viewport">` in some cases.
-@at-root {
-    @-ms-viewport {
-        width: device-width;
-    }
-}
-
-body {
-    text-align: left; // for `<th>` element
-}
-
-fieldset,
-iframe {
-    border: 0;
+@-ms-viewport {
+    width: device-width;
 }
 
 address,
@@ -28,11 +17,6 @@ th,
 var {
     font-style: inherit;
     font-weight: inherit;
-}
-
-ul,
-ol {
-    list-style-type: none;
 }
 
 audio,
@@ -59,15 +43,23 @@ table {
 }
 
 th {
-    text-align: inherit;
+    text-align: left;
 }
 
 button,
 input,
 select,
 textarea {
-    font-family: inherit;
     font-size: inherit;
     line-height: inherit;
     color: inherit;
+    background-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+button[disabled] {
+    cursor: default;
 }
