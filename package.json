@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "normalize.css": "^7.0.0",
+    "normalize.css": "^8.0.0",
     "picturefill": "^3.0.2",
-    "what-input": "^5.0.4"
+    "what-input": "^5.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
