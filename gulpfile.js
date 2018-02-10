@@ -4,7 +4,13 @@ const browserSync = require('browser-sync').create()
 const gulp = require('gulp')
 const renderHelper = require('real-world-website-render-helper')
 const renderHtml = require('./task/renderHtml')
-const { isProd, basePath, destDir, destBaseDir, destAssetsDir } = require('./task/util')
+const {
+    isProd,
+    basePath,
+    destDir,
+    destBaseDir,
+    destAssetsDir,
+} = require('./task/util')
 
 const renderHelperConfig = {
     input: 'src/html',
@@ -93,7 +99,10 @@ const serve = (done) => {
                     [`${basePath || '/'}`]: 'public',
                 },
             },
-            middleware: renderHelper.createRenderMiddleware(renderHelperConfig, basePath),
+            middleware: renderHelper.createRenderMiddleware(
+                renderHelperConfig,
+                basePath,
+            ),
             startPath: path.posix.join('/', basePath, '/'),
             ghostMode: false,
             open: false,
