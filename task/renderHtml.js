@@ -7,9 +7,12 @@ const { isProd, basePath, baseUrl, readFileAsync } = require('./util')
 const dataFileExts = ['.yml', '.yaml', '.json']
 
 const readFileData = async () => {
-    const filePaths = (await globby(dataFileExts.map((ext) => `src/html/_data/*${ext}`), {
-        nodir: true,
-    })).filter((filePath, i, arr) => {
+    const filePaths = (await globby(
+        dataFileExts.map((ext) => `src/html/_data/*${ext}`),
+        {
+            nodir: true,
+        },
+    )).filter((filePath, i, arr) => {
         const { name } = path.parse(filePath)
         const prevNames = arr.slice(0, i).map((item) => path.parse(item).name)
         return !prevNames.includes(name)
@@ -37,7 +40,9 @@ const readPageData = async (pageFilePath) => {
             nodir: true,
         },
     )
-    const fileData = filePath ? yaml.safeLoad(await readFileAsync(filePath)) : {}
+    const fileData = filePath
+        ? yaml.safeLoad(await readFileAsync(filePath))
+        : {}
     const pagePath = pageFilePath
         .replace('src/html', '')
         .replace(/\.pug$/, '.html')
@@ -53,9 +58,10 @@ const pugConfig = {
     basedir: './src/html',
 }
 const baseLocals = {
-    isProd,
+    __DEV__: !isProd,
     absPath: (pagePath) => path.posix.join(`${basePath}/`, pagePath),
-    assetPath: (pagePath) => path.posix.join(`${basePath}/`, 'assets', pagePath),
+    assetPath: (pagePath) =>
+        path.posix.join(`${basePath}/`, 'assets', pagePath),
     absUrl: (pagePath) => `${baseUrl}${path.posix.join('/', pagePath)}`,
 }
 
