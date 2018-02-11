@@ -2,8 +2,14 @@
 
 静的ウェブサイトを開発するためのボイラープレートです。次のような特徴があります。
 
-- デファクトスタンダードである開発ツールを採用  
-[Pug](https://pugjs.org/)、[Sass](https://sass-lang.com/)、[PostCSS](http://postcss.org/)、[webpack](https://webpack.js.org/)、[Babel](https://babeljs.io/)、[Browsersync](https://browsersync.io/)、[Prettier](https://prettier.io/)など
+- デファクトスタンダードである開発ツールを採用
+  - [Pug](https://pugjs.org/)
+  - [Sass](https://sass-lang.com/)
+  - [PostCSS](http://postcss.org/)
+  - [webpack](https://webpack.js.org/)
+  - [Babel](https://babeljs.io/)
+  - [Browsersync](https://browsersync.io/)
+  - [Prettier](https://prettier.io/)など
 - HTMLテンプレートの開発をサポート
   - サイト固有の変数の管理
   - ページのパスの解決
@@ -45,6 +51,7 @@
 │           ├── css/
 │           │   └── main.css
 │           ├── img/
+│           │   └── logo.svg
 │           ├── js/
 │           │   └── main.js
 │           ├── about.html
@@ -53,6 +60,7 @@
 ├── public/                         # コピーされるだけのファイルを格納
 │   ├── assets/
 │   │   └── img/
+│   │       └── logo.svg
 │   └── pub.html
 ├── src/                            # コンパイルなどの処理を行うファイル
 │   ├── css/                        # CSSの元ソースを格納
@@ -175,6 +183,10 @@ module.exports = {
 
 `src/html/_data/siteNavigation.yml`というファイルを作成した場合、ファイルのデータを`file.siteNavigation`から参照できます。
 
+#### `__DEV__`
+
+環境設定を参照できます。開発時は`true`になり、ビルド時は`false`になります。
+
 #### `absPath(pagePath)`
 
 ページのパスを与えると絶対パスを生成します。サブディレクトリの場合のパス解決をすることを目的としています。
@@ -194,10 +206,6 @@ module.exports = {
 ページのパスを与えると絶対URLを生成します。
 
 ルート直下の場合、`absUrl('about.html')`は`http://example.com/about.html`になります。サブディレクトリの場合は`http://example.com/path/to/subdir/about.html`になります。
-
-#### `__DEV__`
-
-環境設定を参照できます。開発時は`true`になり、ビルド時は`false`になります。
 
 ## CSS
 
