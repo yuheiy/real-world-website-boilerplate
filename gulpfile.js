@@ -1,9 +1,7 @@
 const path = require('path')
-const fs = require('fs')
 const browserSync = require('browser-sync').create()
 const gulp = require('gulp')
 const renderHelper = require('real-world-website-render-helper')
-const renderHtml = require('./task/renderHtml')
 const {
     isProd,
     basePath,
@@ -11,6 +9,7 @@ const {
     destBaseDir,
     destAssetsDir,
 } = require('./task/util')
+const renderHtml = require('./task/renderHtml')
 
 const renderHelperConfig = {
     input: 'src/html',
@@ -52,8 +51,8 @@ const css = () => {
 
 const js = (done) => {
     const webpack = require('webpack')
-    const webpackConfig = require('./webpack.config')
-    const compiler = webpack(webpackConfig)
+    const config = require('./webpack.config')
+    const compiler = webpack(config)
     let isFirst = true
 
     const callback = (err, stats) => {
@@ -82,7 +81,8 @@ const js = (done) => {
     }
 
     if (isProd) {
-        return compiler.run(callback)
+        compiler.run(callback)
+        return
     }
 
     compiler.watch({}, callback)
@@ -116,14 +116,14 @@ const clean = () => {
     return del(destDir)
 }
 
-const reload = (done) => {
-    browserSync.reload()
-    done()
-}
-
 const watch = (done) => {
     const options = {
         delay: 50,
+    }
+
+    const reload = (done) => {
+        browserSync.reload()
+        done()
     }
 
     gulp.watch('src/css/**/*.scss', options, css)
