@@ -122,8 +122,12 @@ const reload = (done) => {
 }
 
 const watch = (done) => {
-    gulp.watch('src/css/**/*.scss', css)
-    gulp.watch(['src/html/**/*', 'public/**/*'], reload)
+    const options = {
+        delay: 50,
+    }
+
+    gulp.watch('src/css/**/*.scss', options, css)
+    gulp.watch(['src/html/**/*', 'public/**/*'], options, reload)
     done()
 }
 
