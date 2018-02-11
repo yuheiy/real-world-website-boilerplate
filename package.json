@@ -12,7 +12,7 @@
     "what-input": "^5.0.5"
   },
   "devDependencies": {
-    "autoprefixer": "^7.2.5",
+    "autoprefixer": "^7.2.6",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -32,11 +32,11 @@
     "license-banner-webpack-plugin": "^1.0.0",
     "node-sass-glob-importer": "^5.1.0",
     "prettier": "^1.10.2",
-    "pretty-quick": "^1.4.0",
+    "pretty-quick": "^1.4.1",
     "pug": "^2.0.0-rc.4",
     "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#f07c14ac4a9950b21ef5a298dacdc1f18106e788",
     "uglifyjs-webpack-plugin": "^1.1.8",
-    "webpack": "^3.10.0"
+    "webpack": "^3.11.0"
   },
   "engines": {
     "node": ">=8.9.0"
