@@ -82,9 +82,13 @@ const renderError = (err) => {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>${err.msg}</title>
+    <title>Error: ${err.msg}</title>
+    <style>
+      pre { overflow: auto }
+    </style>
   </head>
   <body>
+    <h1>Error: ${err.msg}</h1>
     <pre><code>${err.stack}</code></pre>
   </body>
 </html>
@@ -99,7 +103,8 @@ const renderHtml = async (filePath) => {
         if (isProd) {
             throw err
         }
-        console.log(err.stack)
+
+        console.error(err.stack)
         return renderError(err)
     }
 }
