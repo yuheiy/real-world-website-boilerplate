@@ -250,8 +250,12 @@ last 1 Safari version
 
 読み込む外部ファイルを`vendor-public/`ディレクトリに配置する場合、次のような実装によって実現できます。
 
+`gulpfile.js`:
+
 ```javascript
 const serve = (done) => {
+    const fs = require('fs')
+
     browserSync.init(
         {
             // 省略
@@ -260,7 +264,11 @@ const serve = (done) => {
                     match: /<!--#include virtual="(.+?)" -->/g,
                     fn(_req, _res, _match, file) {
                         const includeFile = path.join('vendor-public', file)
-                        if (fs.existsSync(includeFile) && fs.statSync(includeFile).isFile()) {
+
+                        if (
+                            fs.existsSync(includeFile) &&
+                            fs.statSync(includeFile).isFile()
+                        ) {
                             return fs.readFileSync(includeFile, 'utf8')
                         } else {
                             return `<strong style="color: red">\`${includeFile}\` could not be found</strong>`
@@ -309,6 +317,8 @@ yarn build
 #### コミット前にビルドを実行させる
 
 プリコミットフックにビルドコマンドを追加します。
+
+`package.json`:
 
 ```diff
   "scripts": {
@@ -406,6 +416,8 @@ yarn add --dev archiver make-dir
 #### npm-scriptsに設定
 
 スクリプトをnpm-scriptsとして実行できるように設定します。
+
+`package.json`:
 
 ```diff
   "scripts": {
