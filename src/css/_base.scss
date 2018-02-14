@@ -66,6 +66,14 @@ button[disabled] {
 
 fieldset {
     min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+legend {
+    display: block;
+    padding: 0;
 }
 
 [hidden] {
