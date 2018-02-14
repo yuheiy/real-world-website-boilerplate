@@ -325,7 +325,7 @@ yarn build
     "start": "gulp",
     "build": "gulp build",
 -   "precommit": "pretty-quick --staged"
-+   "precommit": "pretty-quick --staged && npm run build && git add dist/"
++   "precommit": "pretty-quick --staged && yarn build && git add dist/"
   },
 ```
 
@@ -424,7 +424,7 @@ yarn add --dev archiver make-dir
 +   "archive": "node task/archive.js",
     "start": "gulp",
     "build": "gulp build",
-    "precommit": "pretty-quick --staged && npm run build && git add dist/"
+    "precommit": "pretty-quick --staged && yarn build && git add dist/"
   },
 ```
 
