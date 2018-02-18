@@ -21,7 +21,7 @@
     "browser-sync": "^2.23.6",
     "csswring": "^6.0.3",
     "del": "^3.0.0",
-    "globby": "^8.0.0",
+    "globby": "^8.0.1",
     "gulp": "^4.0.0",
     "gulp-if": "^2.0.2",
     "gulp-postcss": "^7.0.1",
@@ -35,7 +35,8 @@
     "pretty-quick": "^1.4.1",
     "pug": "^2.0.0-rc.4",
     "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#f07c14ac4a9950b21ef5a298dacdc1f18106e788",
-    "uglifyjs-webpack-plugin": "^1.1.8",
+    "replace-ext": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^1.2.0",
     "webpack": "^3.11.0"
   },
   "engines": {

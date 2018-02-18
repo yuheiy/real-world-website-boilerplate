@@ -1,4 +1,5 @@
 const path = require('path')
+const replaceExt = require('replace-ext')
 const globby = require('globby')
 const yaml = require('js-yaml')
 const pug = require('pug')
@@ -12,9 +13,9 @@ const readFileData = async () => {
         {
             nodir: true,
         },
-    )).filter((filePath, i, arr) => {
+    )).filter((filePath, idx, arr) => {
         const { name } = path.parse(filePath)
-        const prevNames = arr.slice(0, i).map((item) => path.parse(item).name)
+        const prevNames = arr.slice(0, idx).map((item) => path.parse(item).name)
         return !prevNames.includes(name)
     })
     const fileData = await Promise.all(
@@ -35,7 +36,7 @@ const readFileData = async () => {
 
 const readPageData = async (pageFilePath) => {
     const [filePath] = await globby(
-        dataFileExts.map((ext) => pageFilePath.replace(/\.pug$/, ext)),
+        dataFileExts.map((ext) => replaceExt(pageFilePath, ext)),
         {
             nodir: true,
         },
@@ -43,10 +44,10 @@ const readPageData = async (pageFilePath) => {
     const fileData = filePath
         ? yaml.safeLoad(await readFileAsync(filePath))
         : {}
-    const pagePath = pageFilePath
-        .replace('src/html', '')
-        .replace(/\.pug$/, '.html')
-        .replace(/\/index\.html$/, '/') // replace `/index.html` to `/`
+    const pagePath = replaceExt(
+        pageFilePath.replace('src/html', ''),
+        '.html',
+    ).replace(/\/index\.html$/, '/')
     const pageData = {
         ...fileData,
         path: pagePath,
