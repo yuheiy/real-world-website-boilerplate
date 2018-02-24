@@ -2,12 +2,12 @@ const path = require('path')
 const webpack = require('webpack')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const LicenseBannerPlugin = require('license-banner-webpack-plugin')
-const { isProd, destAssetsDir } = require('./task/util')
+const { isProd, destAssetDir } = require('./task/util')
 
 module.exports = {
     entry: './src/js/main.js',
     output: {
-        path: path.join(__dirname, destAssetsDir, 'js'),
+        path: path.join(__dirname, destAssetDir, 'js'),
         filename: '[name].js',
     },
     module: {
@@ -28,7 +28,10 @@ module.exports = {
                                 },
                             ],
                         ],
-                        plugins: ['transform-class-properties', 'transform-object-rest-spread'],
+                        plugins: [
+                            'transform-class-properties',
+                            'transform-object-rest-spread',
+                        ],
                         cacheDirectory: true,
                     },
                 },

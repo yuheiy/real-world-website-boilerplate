@@ -7,7 +7,7 @@ const {
     basePath,
     destDir,
     destBaseDir,
-    destAssetsDir,
+    destAssetDir,
 } = require('./task/util')
 const renderHtml = require('./task/renderHtml')
 
@@ -45,7 +45,7 @@ const css = () => {
             ]),
         )
         .pipe(gulpif(!isProd, sourcemaps.write('.')))
-        .pipe(gulp.dest(path.join(destAssetsDir, 'css')))
+        .pipe(gulp.dest(path.join(destAssetDir, 'css')))
         .pipe(browserSync.stream({ match: '**/*.css' }))
 }
 
@@ -103,7 +103,7 @@ const serve = (done) => {
                 renderHelperConfig,
                 basePath,
             ),
-            startPath: path.posix.join('/', basePath, '/'),
+            startPath: path.join(basePath, '/'),
             ghostMode: false,
             open: false,
         },

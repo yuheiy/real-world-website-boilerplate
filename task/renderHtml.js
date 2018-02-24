@@ -3,7 +3,13 @@ const replaceExt = require('replace-ext')
 const globby = require('globby')
 const yaml = require('js-yaml')
 const pug = require('pug')
-const { isProd, basePath, baseUrl, readFileAsync } = require('./util')
+const {
+    isProd,
+    basePath,
+    baseUrl,
+    assetPath,
+    readFileAsync,
+} = require('./util')
 
 const dataFileExts = ['.yml', '.yaml', '.json']
 
@@ -60,10 +66,9 @@ const pugConfig = {
 }
 const baseLocals = {
     __DEV__: !isProd,
-    absPath: (pagePath) => path.posix.join(`${basePath}/`, pagePath),
-    assetPath: (pagePath) =>
-        path.posix.join(`${basePath}/`, 'assets', pagePath),
-    absUrl: (pagePath) => `${baseUrl}${path.posix.join('/', pagePath)}`,
+    absPath: (pagePath) => path.join(basePath, pagePath),
+    assetPath: (pagePath) => path.join(assetPath, pagePath),
+    absUrl: (pagePath) => `${baseUrl}${path.join('/', pagePath)}`,
 }
 
 const createTemplateConfig = async (pageFilePath) => {
