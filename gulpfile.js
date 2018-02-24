@@ -16,7 +16,7 @@ const renderHelperConfig = {
     inputExt: 'pug',
     output: destBaseDir,
     outputExt: 'html',
-    task: renderHtml,
+    render: renderHtml,
 }
 
 const css = () => {

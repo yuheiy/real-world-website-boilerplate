@@ -68,6 +68,7 @@ const baseLocals = {
 const createTemplateConfig = async (pageFilePath) => {
     return {
         ...pugConfig,
+        filename: pageFilePath,
 
         // locals
         ...baseLocals,
@@ -95,10 +96,10 @@ const renderError = (err) => {
 `
 }
 
-const renderHtml = async (filePath) => {
+const renderHtml = async ({ src, filename }) => {
     try {
-        const config = await createTemplateConfig(filePath)
-        return pug.renderFile(filePath, config)
+        const config = await createTemplateConfig(filename)
+        return pug.render(src.toString(), config)
     } catch (err) {
         if (isProd) {
             throw err
