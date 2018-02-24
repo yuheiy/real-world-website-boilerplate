@@ -1,6 +1,6 @@
 const path = require('path')
 const replaceExt = require('replace-ext')
-const globby = require('globby')
+const fg = require('fast-glob')
 const yaml = require('js-yaml')
 const pug = require('pug')
 const {
@@ -14,11 +14,8 @@ const {
 const dataFileExts = ['.yml', '.yaml', '.json']
 
 const readFileData = async () => {
-    const filePaths = (await globby(
+    const filePaths = (await fg(
         dataFileExts.map((ext) => `src/html/_data/*${ext}`),
-        {
-            nodir: true,
-        },
     )).filter((filePath, idx, arr) => {
         const { name } = path.parse(filePath)
         const prevNames = arr.slice(0, idx).map((item) => path.parse(item).name)
@@ -41,11 +38,8 @@ const readFileData = async () => {
 }
 
 const readPageData = async (pageFilePath) => {
-    const [filePath] = await globby(
+    const [filePath] = await fg(
         dataFileExts.map((ext) => replaceExt(pageFilePath, ext)),
-        {
-            nodir: true,
-        },
     )
     const fileData = filePath
         ? yaml.safeLoad(await readFileAsync(filePath))
