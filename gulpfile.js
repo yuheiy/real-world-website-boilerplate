@@ -133,10 +133,10 @@ const watch = (done) => {
 
 // prettier-ignore
 gulp.task('default', gulp.series(
-    clean,
-    gulp.parallel(css, js),
-    serve,
-    watch,
+  clean,
+  gulp.parallel(css, js),
+  serve,
+  watch,
 ))
 
 const html = () => {
@@ -149,6 +149,6 @@ const copy = () => {
 
 // prettier-ignore
 gulp.task('build', gulp.series(
-    clean,
-    gulp.parallel(html, css, js, copy),
+  clean,
+  gulp.parallel(html, css, js, copy),
 ))
