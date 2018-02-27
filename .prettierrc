@@ -1,10 +1,9 @@
-tabWidth: 4
 trailingComma: all
 arrowParens: always
 semi: false
 singleQuote: true
 overrides:
-    -
-        files: "*.scss"
-        options:
-            singleQuote: false
+  -
+    files: "*.scss"
+    options:
+      singleQuote: false

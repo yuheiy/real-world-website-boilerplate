@@ -2,24 +2,24 @@
 }
 
 .Section + .Section {
-    margin-top: 3.5rem;
+  margin-top: 3.5rem;
 }
 
 .Section__heading {
-    margin-bottom: 0.875rem;
-    line-height: 1.4;
-    font-feature-settings: "palt" 1;
+  margin-bottom: 0.875rem;
+  line-height: 1.4;
+  font-feature-settings: "palt" 1;
 }
 
 .Section__content {
 }
 
 .Section__paragraph {
-    margin-top: 1.75rem;
-    margin-bottom: 1.75rem;
-    font-kerning: none;
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  font-kerning: none;
 }
 
 .Section__paragraph:first-child {
-    margin-top: 0;
+  margin-top: 0;
 }

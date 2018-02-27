@@ -1,11 +1,11 @@
 html {
-    font-family: sans-serif;
-    line-height: 1.5;
+  font-family: sans-serif;
+  line-height: 1.5;
 }
 
 // normalize.css v8 removed this
 main {
-    display: block;
+  display: block;
 }
 
 address,
@@ -15,8 +15,8 @@ code,
 dfn,
 th,
 var {
-    font-style: inherit;
-    font-weight: inherit;
+  font-style: inherit;
+  font-weight: inherit;
 }
 
 audio,
@@ -25,57 +25,57 @@ iframe,
 img,
 svg,
 video {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 img,
 video {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 svg {
-    fill: currentcolor;
+  fill: currentcolor;
 }
 
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 th {
-    text-align: left;
+  text-align: left;
 }
 
 button,
 input,
 select,
 textarea {
-    padding: 0;
-    font: inherit;
-    color: inherit;
-    background-color: transparent;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 button[disabled] {
-    cursor: default;
+  cursor: default;
 }
 
 fieldset {
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-    border: 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 legend {
-    display: block;
-    padding: 0;
+  display: block;
+  padding: 0;
 }
 
 [hidden] {
-    display: none !important;
+  display: none !important;
 }

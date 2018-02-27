@@ -16,12 +16,12 @@ const destAssetDir = path.join(destDir, assetPath)
 const readFileAsync = promisify(fs.readFile)
 
 module.exports = {
-    isProd,
-    basePath,
-    baseUrl,
-    assetPath,
-    destDir,
-    destBaseDir,
-    destAssetDir,
-    readFileAsync,
+  isProd,
+  basePath,
+  baseUrl,
+  assetPath,
+  destDir,
+  destBaseDir,
+  destAssetDir,
+  readFileAsync,
 }
