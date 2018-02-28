@@ -28,8 +28,8 @@ const readFileData = async () => {
     })),
   )
   const gatheredFileData = fileData.reduce(
-    (result, { name, data }) => ({
-      ...result,
+    (acc, { name, data }) => ({
+      ...acc,
       [name]: data,
     }),
     {},
@@ -53,7 +53,7 @@ const readPageData = async (pageFilePath) => {
   return pageData
 }
 
-const pugConfig = {
+const baseOpts = {
   basedir: './src/html',
 }
 const baseLocals = {
@@ -65,7 +65,7 @@ const baseLocals = {
 
 const createTemplateConfig = async (pageFilePath) => {
   return {
-    ...pugConfig,
+    ...baseOpts,
     filename: pageFilePath,
 
     // locals

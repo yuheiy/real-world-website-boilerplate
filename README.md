@@ -277,16 +277,16 @@ const serve = (done) => {
       rewriteRules: [
         {
           match: /<!--#include virtual="(.+?)" -->/g,
-          fn(_req, _res, _match, file) {
-            const includeFile = path.join('root-public', file)
+          fn(_req, _res, _match, filePath) {
+            const srcFilePath = path.join('root-public', filePath)
 
             if (
-              fs.existsSync(includeFile) &&
-              fs.statSync(includeFile).isFile()
+              fs.existsSync(srcFilePath) &&
+              fs.statSync(srcFilePath).isFile()
             ) {
-              return fs.readFileSync(includeFile, 'utf8')
+              return fs.readFileSync(srcFilePath, 'utf8')
             } else {
-              return `<strong style="color: red">\`${includeFile}\` could not be found</strong>`
+              return `<strong style="color: red">\`${srcFilePath}\` could not be found</strong>`
             }
           },
         },
@@ -393,8 +393,8 @@ const archive = () => {
     throw err
   })
 
-  const archiveFile = path.resolve(ARCHIVE_DIR, `htdocs-${getDateString()}.zip`)
-  const output = fs.createWriteStream(archiveFile)
+  const archiveFilePath = path.resolve(ARCHIVE_DIR, `htdocs-${getDateString()}.zip`)
+  const output = fs.createWriteStream(archiveFilePath)
   output.on('close', () => {
     console.log(`${zip.pointer()} total bytes`)
     console.log(
@@ -403,16 +403,16 @@ const archive = () => {
   })
   zip.pipe(output)
 
-  const changedFiles = String(
+  const changedFilePaths = String(
     git('diff', '--diff-filter=AMCR', '--name-only', startCommit, endCommit),
   )
     .split('\n')
-    .filter((file) => file.startsWith(FILE_PATH_PREFIX))
-  changedFiles.forEach((file) => {
-    const resolvedFile = path.resolve(file)
-    zip.append(fs.createReadStream(resolvedFile), {
-      name: file.replace(FILE_PATH_PREFIX, ''),
-      mode: fs.statSync(resolvedFile).mode,
+    .filter((filePath) => filePath.startsWith(FILE_PATH_PREFIX))
+  changedFilePaths.forEach((filePath) => {
+    const resolvedFilePath = path.resolve(filePath)
+    zip.append(fs.createReadStream(resolvedFilePath), {
+      name: filePath.replace(FILE_PATH_PREFIX, ''),
+      mode: fs.statSync(resolvedFilePath).mode,
     })
   })
 
