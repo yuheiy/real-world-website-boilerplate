@@ -11,7 +11,7 @@ const {
   readFileAsync,
 } = require('./util')
 
-const dataFileExts = ['.yml', '.yaml', '.json']
+const dataFileExts = ['.yml', '.json']
 
 const readFileData = async () => {
   const filePaths = (await fg(
