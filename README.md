@@ -122,19 +122,19 @@ yarn start
 ```javascript
 // ルート直下の場合
 module.exports = {
-  baseUrl: 'http://example.com',
+  origin: 'http://example.com',
 }
 ```
 
 ```javascript
 // サブディレクトリの場合
 module.exports = {
-  baseUrl: 'http://example.com/path/to/project',
-  basePath: '/path/to/project',
+  origin: 'http://example.com',
+  subdir: 'path/to/project',
 }
 ```
 
-サブディレクトリのパスを設定した場合、開発サーバーが同じパスで起動します。また、ビルド時は、`dist/path/to/project/`のようなディレクトリにファイルが生成されます。
+サブディレクトリのパスを設定した場合、開発サーバーがサブディレクトリで起動します。また、ビルド時は、`dist/path/to/project/`のようなディレクトリにファイルが生成されます。
 
 ## `pre-commit`フック
 

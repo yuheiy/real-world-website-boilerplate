@@ -96,7 +96,7 @@ const serve = (done) => {
       server: {
         baseDir: [destDir, 'root-public'],
         routes: {
-          [`${basePath || '/'}`]: 'public',
+          [basePath]: 'public',
         },
       },
       middleware: renderHelper.createRenderMiddleware(

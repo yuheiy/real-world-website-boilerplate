@@ -6,8 +6,8 @@ const pug = require('pug')
 const {
   isProd,
   basePath,
-  baseUrl,
   assetPath,
+  baseUrl,
   readFileAsync,
 } = require('./util')
 
