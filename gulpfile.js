@@ -1,7 +1,19 @@
-const path = require('path')
-const browserSync = require('browser-sync').create()
+const { join } = require('path')
+const { create: createbrowserSync } = require('browser-sync')
+const {
+  createRenderMiddleware,
+  build: buildFiles,
+} = require('real-world-website-render-helper')
 const gulp = require('gulp')
-const renderHelper = require('real-world-website-render-helper')
+const gulpif = require('gulp-if')
+const sourcemaps = require('gulp-sourcemaps')
+const sass = require('gulp-sass')
+const globImporter = require('node-sass-glob-importer')
+const postcss = require('gulp-postcss')
+const autoprefixer = require('autoprefixer')
+const csswring = require('csswring')
+const webpack = require('webpack')
+const del = require('del')
 const {
   isProd,
   basePath,
@@ -10,6 +22,9 @@ const {
   destAssetDir,
 } = require('./task/util')
 const renderHtml = require('./task/renderHtml')
+const webpackConfig = require('./webpack.config')
+
+const bs = createbrowserSync()
 
 const renderHelperConfig = {
   input: 'src/html',
@@ -20,14 +35,6 @@ const renderHelperConfig = {
 }
 
 const css = () => {
-  const gulpif = require('gulp-if')
-  const sourcemaps = require('gulp-sourcemaps')
-  const sass = require('gulp-sass')
-  const globImporter = require('node-sass-glob-importer')
-  const postcss = require('gulp-postcss')
-  const autoprefixer = require('autoprefixer')
-  const csswring = require('csswring')
-
   return gulp
     .src('src/css/main.scss')
     .pipe(gulpif(!isProd, sourcemaps.init()))
@@ -45,21 +52,19 @@ const css = () => {
       ]),
     )
     .pipe(gulpif(!isProd, sourcemaps.write('.')))
-    .pipe(gulp.dest(path.join(destAssetDir, 'css')))
-    .pipe(browserSync.stream({ match: '**/*.css' }))
+    .pipe(gulp.dest(join(destAssetDir, 'css')))
+    .pipe(bs.stream({ match: '**/*.css' }))
 }
 
 const js = (done) => {
-  const webpack = require('webpack')
-  const config = require('./webpack.config')
-  const compiler = webpack(config)
+  const compiler = webpack(webpackConfig)
   let isFirst = true
 
   const callback = (err, stats) => {
     if (err) {
-      console.error(err.stack || err)
+      console.log(err.stack || err)
       if (err.details) {
-        console.error(err.details)
+        console.log(err.details)
       }
       return
     }
@@ -77,7 +82,7 @@ const js = (done) => {
       return
     }
 
-    browserSync.reload()
+    bs.reload()
   }
 
   if (isProd) {
@@ -89,7 +94,7 @@ const js = (done) => {
 }
 
 const serve = (done) => {
-  browserSync.init(
+  bs.init(
     {
       notify: false,
       ui: false,
@@ -99,11 +104,8 @@ const serve = (done) => {
           [basePath]: 'public',
         },
       },
-      middleware: renderHelper.createRenderMiddleware(
-        renderHelperConfig,
-        basePath,
-      ),
-      startPath: path.join(basePath, '/'),
+      middleware: createRenderMiddleware(renderHelperConfig, basePath),
+      startPath: join(basePath, '/'),
       ghostMode: false,
       open: false,
     },
@@ -112,7 +114,6 @@ const serve = (done) => {
 }
 
 const clean = () => {
-  const del = require('del')
   return del(destDir)
 }
 
@@ -122,7 +123,7 @@ const watch = (done) => {
   }
 
   const reload = (done) => {
-    browserSync.reload()
+    bs.reload()
     done()
   }
 
@@ -140,7 +141,7 @@ gulp.task('default', gulp.series(
 ))
 
 const html = () => {
-  return renderHelper.build(renderHelperConfig)
+  return buildFiles(renderHelperConfig)
 }
 
 const copy = () => {

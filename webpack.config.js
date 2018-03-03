@@ -1,5 +1,5 @@
-const path = require('path')
-const webpack = require('webpack')
+const { join } = require('path')
+const { DefinePlugin } = require('webpack')
 const LicenseInfoWebpackPlugin = require('license-info-webpack-plugin').default
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const { isProd, destAssetDir } = require('./task/util')
@@ -7,14 +7,14 @@ const { isProd, destAssetDir } = require('./task/util')
 module.exports = {
   entry: './src/js/main.js',
   output: {
-    path: path.join(__dirname, destAssetDir, 'js'),
+    path: join(__dirname, destAssetDir, 'js'),
     filename: '[name].js',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: path.join(__dirname, 'src', 'js'),
+        include: join(__dirname, 'src/js'),
         use: {
           loader: 'babel-loader',
           options: {
@@ -39,7 +39,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
+    new DefinePlugin({
       __DEV__: !isProd,
     }),
     ...(isProd

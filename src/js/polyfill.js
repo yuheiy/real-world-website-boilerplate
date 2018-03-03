@@ -1,4 +1,4 @@
-// import "picturefill"
+// import 'picturefill'
 import 'babel-polyfill'
 
 // https://github.com/zloirock/core-js/issues/329

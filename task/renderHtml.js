@@ -1,8 +1,8 @@
-const path = require('path')
-const replaceExt = require('replace-ext')
+const { join, parse } = require('path')
 const fg = require('fast-glob')
-const yaml = require('js-yaml')
-const pug = require('pug')
+const replaceExt = require('replace-ext')
+const { safeLoad: parseYaml } = require('js-yaml')
+const { render: renderPug } = require('pug')
 const {
   isProd,
   basePath,
@@ -11,20 +11,25 @@ const {
   readFileAsync,
 } = require('./util')
 
-const dataFileExts = ['.yml', '.json']
+const loaders = {
+  '.json': (data) => JSON.parse(data),
+  '.yml': (data) => parseYaml(data),
+}
+
+const dataFileExts = Object.keys(loaders)
 
 const readFileData = async () => {
   const filePaths = (await fg(
     dataFileExts.map((ext) => `src/html/_data/*${ext}`),
   )).filter((filePath, idx, arr) => {
-    const { name } = path.parse(filePath)
-    const prevNames = arr.slice(0, idx).map((item) => path.parse(item).name)
+    const { name } = parse(filePath)
+    const prevNames = arr.slice(0, idx).map((item) => parse(item).name)
     return !prevNames.includes(name)
   })
   const fileData = await Promise.all(
     filePaths.map(async (filePath) => ({
-      name: path.parse(filePath).name,
-      data: yaml.safeLoad(await readFileAsync(filePath, 'utf8')),
+      name: parse(filePath).name,
+      data: loaders[parse(filePath).ext](await readFileAsync(filePath, 'utf8')),
     })),
   )
   const gatheredFileData = fileData.reduce(
@@ -41,7 +46,9 @@ const readPageData = async (pageFilePath) => {
   const [filePath] = await fg(
     dataFileExts.map((ext) => replaceExt(pageFilePath, ext)),
   )
-  const fileData = filePath ? yaml.safeLoad(await readFileAsync(filePath)) : {}
+  const fileData = filePath
+    ? loaders[parse(filePath).ext](await readFileAsync(filePath, 'utf8'))
+    : {}
   const pagePath = replaceExt(
     pageFilePath.replace('src/html', ''),
     '.html',
@@ -58,9 +65,9 @@ const baseOpts = {
 }
 const baseLocals = {
   __DEV__: !isProd,
-  absPath: (pagePath) => path.join(basePath, pagePath),
-  assetPath: (pagePath) => path.join(assetPath, pagePath),
-  absUrl: (pagePath) => `${baseUrl}${path.join('/', pagePath)}`,
+  absPath: (pagePath) => join(basePath, pagePath),
+  assetPath: (pagePath) => join(assetPath, pagePath),
+  absUrl: (pagePath) => `${baseUrl}${join('/', pagePath)}`,
 }
 
 const createTemplateConfig = async (pageFilePath) => {
@@ -97,7 +104,7 @@ const renderError = (err) => {
 const renderHtml = async ({ src, filename }) => {
   try {
     const config = await createTemplateConfig(filename)
-    return pug.render(src.toString(), config)
+    return renderPug(src.toString(), config)
   } catch (err) {
     if (isProd) {
       throw err
