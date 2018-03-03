@@ -29,7 +29,7 @@ const readFileData = async () => {
   const fileData = await Promise.all(
     filePaths.map(async (filePath) => ({
       name: parse(filePath).name,
-      data: loaders[parse(filePath).ext](await readFileAsync(filePath, 'utf8')),
+      data: loaders[parse(filePath).ext](await readFileAsync(filePath)),
     })),
   )
   const gatheredFileData = fileData.reduce(
@@ -47,7 +47,7 @@ const readPageData = async (pageFilePath) => {
     dataFileExts.map((ext) => replaceExt(pageFilePath, ext)),
   )
   const fileData = filePath
-    ? loaders[parse(filePath).ext](await readFileAsync(filePath, 'utf8'))
+    ? loaders[parse(filePath).ext](await readFileAsync(filePath))
     : {}
   const pagePath = replaceExt(
     pageFilePath.replace('src/html', ''),
