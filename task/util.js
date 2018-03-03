@@ -1,5 +1,5 @@
 const { join } = require('path')
-const { readFile } = require('fs')
+const { readFile, writeFile } = require('fs')
 const { promisify } = require('util')
 const { origin, subdir } = require('../realworld.config')
 
@@ -14,6 +14,7 @@ const destBaseDir = join(destDir, basePath)
 const destAssetDir = join(destDir, assetPath)
 
 const readFileAsync = promisify(readFile)
+const writeFileAsync = promisify(writeFile)
 
 module.exports = {
   isProd,
@@ -24,4 +25,5 @@ module.exports = {
   destBaseDir,
   destAssetDir,
   readFileAsync,
+  writeFileAsync,
 }
