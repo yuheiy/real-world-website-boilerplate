@@ -1,4 +1,4 @@
-const { join, parse } = require('path')
+const { join, parse, relative } = require('path')
 const fg = require('fast-glob')
 const replaceExt = require('replace-ext')
 const { safeLoad: parseYaml } = require('js-yaml')
@@ -12,8 +12,8 @@ const {
 } = require('./util')
 
 const loaders = {
-  '.json': (data) => JSON.parse(data),
-  '.yml': (data) => parseYaml(data),
+  '.json': JSON.parse,
+  '.yml': parseYaml,
 }
 
 const dataFileExts = Object.keys(loaders)
@@ -26,35 +26,38 @@ const readFileData = async () => {
     const prevNames = arr.slice(0, idx).map((item) => parse(item).name)
     return !prevNames.includes(name)
   })
-  const fileData = await Promise.all(
-    filePaths.map(async (filePath) => ({
-      name: parse(filePath).name,
-      data: loaders[parse(filePath).ext](await readFileAsync(filePath)),
-    })),
+  const dataObjs = await Promise.all(
+    filePaths.map(async (filePath) => {
+      const { name, ext } = parse(filePath)
+      return {
+        name,
+        data: loaders[ext](await readFileAsync(filePath)),
+      }
+    }),
   )
-  const gatheredFileData = fileData.reduce(
+  const fileData = dataObjs.reduce(
     (acc, { name, data }) => ({
       ...acc,
       [name]: data,
     }),
     {},
   )
-  return gatheredFileData
+  return fileData
 }
 
 const readPageData = async (pageFilePath) => {
   const [filePath] = await fg(
     dataFileExts.map((ext) => replaceExt(pageFilePath, ext)),
   )
-  const fileData = filePath
+  const dataObj = filePath
     ? loaders[parse(filePath).ext](await readFileAsync(filePath))
     : {}
-  const pagePath = replaceExt(
-    pageFilePath.replace('src/html', ''),
-    '.html',
+  const pagePath = join(
+    '/',
+    replaceExt(relative('src/html', pageFilePath), '.html'),
   ).replace(/\/index\.html$/, '/')
   const pageData = {
-    ...fileData,
+    ...dataObj,
     path: pagePath,
   }
   return pageData
