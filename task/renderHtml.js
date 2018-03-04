@@ -2,6 +2,7 @@ const { join, parse, relative } = require('path')
 const fg = require('fast-glob')
 const replaceExt = require('replace-ext')
 const { safeLoad: parseYaml } = require('js-yaml')
+const yellow = require('ansi-yellow')
 const { render: renderPug } = require('pug')
 const {
   isProd,
@@ -105,6 +106,20 @@ const renderError = (err) => {
 }
 
 const renderHtml = async ({ src, filename }) => {
+  const filePath = relative('src/html', replaceExt(filename, '.html'))
+  const [preferredFilePath] = await fg([
+    join('root-public', basePath, filePath),
+    join('public', filePath),
+  ])
+  if (preferredFilePath) {
+    console.log(
+      yellow(
+        `Warning: renderHtml() prefers \`${preferredFilePath}\` over \`${filename}\``,
+      ),
+    )
+    return readFileAsync(preferredFilePath)
+  }
+
   try {
     const config = await createTemplateConfig(filename)
     return renderPug(src.toString(), config)

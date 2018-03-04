@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "ansi-red": "^0.1.1",
+    "ansi-yellow": "^0.1.1",
     "autoprefixer": "^8.1.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.3",

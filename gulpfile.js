@@ -133,7 +133,7 @@ const serve = (done) => {
       notify: false,
       ui: false,
       server: {
-        baseDir: [destDir, 'root-public'],
+        baseDir: ['root-public', destDir],
         routes: {
           [basePath]: 'public',
         },
