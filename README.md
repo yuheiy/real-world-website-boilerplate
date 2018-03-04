@@ -427,7 +427,7 @@ archive()
 スクリプトが依存しているパッケージを追加します。
 
 ```bash
-yarn add --dev archiver make-dir
+yarn add --dev archiver
 ```
 
 #### npm-scriptsに設定
