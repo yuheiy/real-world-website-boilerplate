@@ -37,7 +37,7 @@
     "pug": "^2.0.0-rc.4",
     "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#983ad565bf1b5b26e107c4254d3c16ba97d80d68",
     "replace-ext": "^1.0.0",
-    "webpack": "^4.0.1"
+    "webpack": "^4.1.0"
   },
   "engines": {
     "node": ">=8.9.0"
