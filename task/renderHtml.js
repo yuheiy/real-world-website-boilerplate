@@ -127,7 +127,6 @@ const renderHtml = async ({ src, filename }) => {
     if (isProd) {
       throw err
     }
-
     console.error(err.stack)
     return renderError(err)
   }
