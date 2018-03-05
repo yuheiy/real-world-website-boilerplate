@@ -17,6 +17,7 @@ const del = require('del')
 const {
   isProd,
   basePath,
+  assetPath,
   destDir,
   destBaseDir,
   destAssetDir,
@@ -87,7 +88,7 @@ const css = async () => {
       : []),
   ])
 
-  bs.reload('**/*.css')
+  bs.reload(join(assetPath, 'css/main.css'))
 }
 
 const js = (done) => {
@@ -116,7 +117,7 @@ const js = (done) => {
       return
     }
 
-    bs.reload()
+    bs.reload(join(assetPath, 'js/main.js'))
   }
 
   if (isProd) {
