@@ -16,7 +16,7 @@
     "ansi-yellow": "^0.1.1",
     "autoprefixer": "^8.1.0",
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.3",
+    "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -26,7 +26,7 @@
     "fast-glob": "^2.1.0",
     "gulp": "^4.0.0",
     "husky": "^0.14.3",
-    "js-yaml": "^3.10.0",
+    "js-yaml": "^3.11.0",
     "license-info-webpack-plugin": "^1.0.0",
     "make-dir": "^1.2.0",
     "node-sass": "^4.7.2",
@@ -34,10 +34,10 @@
     "postcss": "^6.0.19",
     "prettier": "^1.11.1",
     "pretty-quick": "^1.4.1",
-    "pug": "^2.0.0-rc.4",
+    "pug": "^2.0.1",
     "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#983ad565bf1b5b26e107c4254d3c16ba97d80d68",
     "replace-ext": "^1.0.0",
-    "webpack": "^4.1.0"
+    "webpack": "^4.1.1"
   },
   "engines": {
     "node": ">=8.9.0"
