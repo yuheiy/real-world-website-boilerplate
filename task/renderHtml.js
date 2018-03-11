@@ -69,9 +69,9 @@ const baseOpts = {
 }
 const baseLocals = {
   __DEV__: !isProd,
-  absPath: (pagePath) => join(basePath, pagePath),
-  assetPath: (pagePath) => join(assetPath, pagePath),
-  absUrl: (pagePath) => `${baseUrl}${join('/', pagePath)}`,
+  absPath: (pagePath = '') => join(basePath, pagePath),
+  assetPath: (pagePath = '') => join(assetPath, pagePath),
+  absUrl: (pagePath = '') => `${baseUrl}${join('/', pagePath)}`,
 }
 
 const createTemplateConfig = async (pageFilePath) => {
