@@ -6,9 +6,11 @@ const yellow = require('ansi-yellow')
 const { render: renderPug } = require('pug')
 const {
   isProd,
+  origin,
   basePath,
   assetPath,
   baseUrl,
+  baseAssetUrl,
   readFileAsync,
 } = require('./util')
 
@@ -67,11 +69,14 @@ const readPageData = async (pageFilePath) => {
 const baseOpts = {
   basedir: './src/html',
 }
+
 const baseLocals = {
   __DEV__: !isProd,
+  origin,
   absPath: (pagePath = '') => join(basePath, '/', pagePath),
   assetPath: (pagePath = '') => join(assetPath, '/', pagePath),
   absUrl: (pagePath = '') => `${baseUrl}${join('/', pagePath)}`,
+  assetUrl: (pagePath = '') => `${baseAssetUrl}${join('/', pagePath)}`,
 }
 
 const createTemplateConfig = async (pageFilePath) => {

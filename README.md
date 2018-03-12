@@ -202,6 +202,10 @@ const copy = () => {
 
 環境設定を参照できます。開発時は`true`になり、ビルド時は`false`になります。
 
+### `origin`
+
+`realworld.config.js`に設定した`origin`の値が参照できます。
+
 #### `absPath(pagePath)`
 
 ページのパスを与えると絶対パスを生成します。サブディレクトリの場合のパス解決をすることを目的としています。
@@ -221,6 +225,12 @@ const copy = () => {
 ページのパスを与えると絶対URLを生成します。
 
 ルート直下の場合、`absUrl('about.html')`は`http://example.com/about.html`になります。サブディレクトリの場合は`http://example.com/path/to/subdir/about.html`になります。
+
+#### `assetUrl(pagePath)`
+
+アセットファイルのパスを与えると絶対URLを生成します。
+
+ルート直下の場合、`absUrl('css/main.css')`は`http://example.com/assets/css/main.css`になります。サブディレクトリの場合は`http://example.com/path/to/subdir/assets/css/main.css`になります。
 
 ## CSS
 

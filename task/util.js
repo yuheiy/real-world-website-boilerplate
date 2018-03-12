@@ -8,6 +8,7 @@ const isProd = process.argv[2] === 'build'
 const basePath = join('/', subdir || '')
 const assetPath = join(basePath, 'assets')
 const baseUrl = `${origin}${basePath}`
+const baseAssetUrl = `${origin}${assetPath}`
 
 const destDir = isProd ? 'dist' : 'tmp'
 const destBaseDir = join(destDir, basePath)
@@ -18,9 +19,11 @@ const writeFileAsync = promisify(writeFile)
 
 module.exports = {
   isProd,
+  origin,
   basePath,
   assetPath,
   baseUrl,
+  baseAssetUrl,
   destDir,
   destBaseDir,
   destAssetDir,
