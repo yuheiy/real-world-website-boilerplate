@@ -29,6 +29,7 @@
 - [CSS](#css)
 - [JavaScript](#javascript)
 - [対象ブラウザ](#対象ブラウザ)
+- [assetディレクトリの変更](#asset%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%81%AE%E5%A4%89%E6%9B%B4)
 - [Server Side Includes](#server-side-includes)
 - [本番用ビルド](#本番用ビルド)
 - [ステージングサーバーへのデプロイ](#ステージングサーバーへのデプロイ)
@@ -176,7 +177,7 @@ const copy = () => {
 
 サブディレクトリが設定されていた場合、開発サーバーから`/path/to/project/index.html`というパスで参照できます。ビルド時は`dist/path/to/project/index.html`にコピーされます。
 
-テンプレートファイルと同じファイル名のデータファイルを作成することで、そのテンプレートからのみ参照できるデータを設定することができます。データファイルはYAMLおよびJSONに対応しています。`src/html/index.pug`の場合、`src/html/index.yml`を参照します。データファイルは拡張子が`.yml`、`.json`の順に優先されます。`.yaml`は無視されます。
+テンプレートファイルと同じファイル名のデータファイルを作成することで、そのテンプレートからのみ参照できるデータを設定できます。データファイルはYAMLおよびJSONに対応しています。`src/html/index.pug`の場合、`src/html/index.yml`を参照します。データファイルは拡張子が`.yml`、`.json`の順に優先されます。`.yaml`は無視されます。
 
 `_`から始まるファイルおよびディレクトリは個別に出力されません。テンプレートからインクルードして利用することを想定しています。
 
@@ -268,6 +269,32 @@ last 1 Safari version
 - [babel-preset-env](https://github.com/babel/babel-preset-env)
 
 なお、[IE10以下をサポートする場合、Babelで問題が発生することがあります。](https://babeljs.io/docs/usage/caveats/)
+
+## assetディレクトリの変更
+
+`task/util.js`を編集することでassetディレクトリの配置を変更できます。デフォルトでは次のようになっています。
+
+`task/util.js`:
+
+```js
+const assetPath = join(basePath, 'assets')
+```
+
+プロジェクトのディレクトリ直下に配置する場合は、次のように変更します。
+
+`task/util.js`:
+
+```js
+const assetPath = basePath
+```
+
+`/assets/path/to/project`のようなディレクトリに配置する場合は、次のように変更します。
+
+`task/util.js`:
+
+```js
+const assetPath = join('/assets', basePath)
+```
 
 ## Server Side Includes
 
