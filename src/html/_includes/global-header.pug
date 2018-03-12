@@ -1,4 +1,4 @@
-header.GlobalHeader(class={'GlobalHeader--home': page.isHome})
+header.GlobalHeader(class={'-home': page.isHome})
   h1.GlobalHeader__heading
     if page.isHome
       = file.meta.siteTitle
@@ -8,4 +8,4 @@ header.GlobalHeader(class={'GlobalHeader--home': page.isHome})
     ul.GlobalHeader__navList
       each link in file.siteNavigation.navLinks
         li.GlobalHeader__navItem
-          a.GlobalHeader__navLink(href=absPath(link[1]) class={'GlobalHeader__navLink--active': page.path === link[1]})= link[0]
+          a.GlobalHeader__navLink(href=absPath(link[1]) class={'-current': page.path === link[1]})= link[0]

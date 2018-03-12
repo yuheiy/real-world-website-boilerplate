@@ -11,34 +11,35 @@
   }
 }
 
-.GlobalHeader:not(.GlobalHeader--home) {
+.GlobalHeader:not(.-home) {
   @media #{$mq-sm} {
     display: flex;
     justify-content: space-between;
   }
 }
 
-.GlobalHeader--home {
+.GlobalHeader.-home {
   @media #{$mq-md} {
     padding-top: 3.5rem;
   }
 }
 
 .GlobalHeader__heading {
+  margin-top: 0;
   margin-bottom: 1.75rem;
   font-size: 1.5rem;
   font-feature-settings: "palt" 1;
   text-align: center;
 }
 
-.GlobalHeader:not(.GlobalHeader--home) .GlobalHeader__heading {
+.GlobalHeader:not(.-home) .GlobalHeader__heading {
   @media #{$mq-sm} {
     margin-bottom: 0;
     font-size: 1rem;
   }
 }
 
-.GlobalHeader--home .GlobalHeader__heading {
+.GlobalHeader.-home .GlobalHeader__heading {
   @media #{$mq-md} {
     margin-bottom: 2.25rem;
     font-size: 3rem;
@@ -87,6 +88,6 @@
   outline: 0;
 }
 
-.GlobalHeader__navLink--active {
+.GlobalHeader__navLink.-current {
   box-shadow: 0 0 0 2px #9acced;
 }
