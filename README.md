@@ -332,7 +332,7 @@ const baseLocals = {
 const serve = (done) => {
   const fs = require('fs')
 
-  browserSync.init(
+  bs.init(
     {
       // 省略
       rewriteRules: [
