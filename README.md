@@ -217,7 +217,7 @@ const copy = () => {
 
 #### `assetPath(pagePath)`
 
-`assets/`ディレクトリから見たパスを与えると絶対パスを生成します。
+assetファイルのパスを与えると絶対パスを生成します。
 
 ルート直下の場合、`assetPath('img/logo.svg')`は`/assets/img/logo.svg`になります。サブディレクトリの場合は`/path/to/subdir/assets/img/logo.svg`になります。
 
@@ -229,7 +229,7 @@ const copy = () => {
 
 #### `assetUrl(pagePath)`
 
-アセットファイルのパスを与えると絶対URLを生成します。
+assetファイルのパスを与えると絶対URLを生成します。
 
 ルート直下の場合、`absUrl('css/main.css')`は`http://example.com/assets/css/main.css`になります。サブディレクトリの場合は`http://example.com/path/to/subdir/assets/css/main.css`になります。
 
@@ -280,6 +280,8 @@ last 1 Safari version
 const assetPath = join(basePath, 'assets')
 ```
 
+### ディレクトリの配置を変更する場合
+
 プロジェクトのディレクトリ直下に配置する場合は、次のように変更します。
 
 `task/util.js`:
@@ -295,6 +297,28 @@ const assetPath = basePath
 ```js
 const assetPath = join('/assets', basePath)
 ```
+
+### 別オリジンから配信する場合
+
+`https://assets-cdn.example.com`等の別オリジンから配信する場合、次のように変更します。
+
+`task/renderHtml.js`:
+
+```js
+const baseLocals = {
+  __DEV__: !isProd,
+  origin,
+  absPath: (pagePath = '') => join(basePath, '/', pagePath),
+  absUrl: (pagePath = '') => `${baseUrl}${join('/', pagePath)}`,
+  assetUrl: isProd
+    ? (pagePath = '') => `https://assets-cdn.example.com${join('/', pagePath)}`
+    : (pagePath = '') => join(assetPath, '/', pagePath),
+}
+```
+
+加えて、HTMLテンプレートでは`assetPath()`を利用せず、`assetUrl()`のみを利用するようにします。
+
+デプロイ時は、ビルドによって生成されたassetディレクトリ以下のファイルをCDNにアップロードしてください。
 
 ## Server Side Includes
 
