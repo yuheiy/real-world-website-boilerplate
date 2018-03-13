@@ -203,7 +203,7 @@ const copy = () => {
 
 環境設定を参照できます。開発時は`true`になり、ビルド時は`false`になります。
 
-### `origin`
+#### `origin`
 
 `realworld.config.js`に設定した`origin`の値が参照できます。
 
