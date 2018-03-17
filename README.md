@@ -302,17 +302,27 @@ const assetPath = join('/assets', basePath)
 
 `https://assets-cdn.example.com`等の別オリジンから配信する場合、次のように変更します。
 
+`task/util.js`:
+
+```diff
+const baseUrl = `${origin}${basePath}`
+-const baseAssetUrl = `${origin}${assetPath}`
++const baseAssetUrl = 'https://assets-cdn.example.com'
+```
+
 `task/renderHtml.js`:
 
-```js
+```diff
 const baseLocals = {
   __DEV__: !isProd,
   origin,
   absPath: (pagePath = '') => join(basePath, '/', pagePath),
+- assetPath: (pagePath = '') => join(assetPath, '/', pagePath),
   absUrl: (pagePath = '') => `${baseUrl}${join('/', pagePath)}`,
-  assetUrl: isProd
-    ? (pagePath = '') => `https://assets-cdn.example.com${join('/', pagePath)}`
-    : (pagePath = '') => join(assetPath, '/', pagePath),
+- assetUrl: (pagePath = '') => `${baseAssetUrl}${join('/', pagePath)}`,
++ assetUrl: isProd
++   ? (pagePath = '') => `${baseAssetUrl}${join('/', pagePath)}`
++   : (pagePath = '') => join(assetPath, '/', pagePath),
 }
 ```
 
