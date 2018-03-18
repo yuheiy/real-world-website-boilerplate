@@ -117,7 +117,7 @@ const renderHtml = async ({ src, filename }) => {
     join('public', filePath),
   ])
   if (preferredFilePath) {
-    console.log(
+    console.error(
       yellow(
         `Warning: renderHtml() prefers \`${preferredFilePath}\` over \`${filename}\``,
       ),

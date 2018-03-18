@@ -59,8 +59,8 @@ const css = async () => {
     })
   } catch (err) {
     const filePath = relative(__dirname, err.file)
-    console.log(red(`Error in ${filePath}`))
-    console.log(err.formatted.toString())
+    console.error(red(`Error in ${filePath}`))
+    console.error(err.formatted.toString())
     return
   }
 
@@ -97,9 +97,9 @@ const js = (done) => {
 
   const callback = (err, stats) => {
     if (err) {
-      console.log(err.stack || err)
+      console.error(err.stack || err)
       if (err.details) {
-        console.log(err.details)
+        console.error(err.details)
       }
       return
     }
