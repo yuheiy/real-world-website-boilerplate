@@ -113,7 +113,7 @@ const renderError = (err) => {
 const renderHtml = async ({ src, filename }) => {
   const filePath = relative('src/html', replaceExt(filename, '.html'))
   const [preferredFilePath] = await fg([
-    join('vendor-public', basePath, filePath),
+    join('root-public', basePath, filePath),
     join('public', filePath),
   ])
   if (preferredFilePath) {
