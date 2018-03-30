@@ -12,8 +12,8 @@ const baseUrl = `${origin}${basePath}`
 const baseAssetUrl = `${origin}${assetPath}`
 
 const destDir = isProd ? 'dist' : 'tmp'
-const destBaseDir = posix.join(destDir, basePath)
-const destAssetDir = posix.join(destDir, assetPath)
+const destBaseDir = join(destDir, basePath)
+const destAssetDir = join(destDir, assetPath)
 
 const readFileAsync = promisify(readFile)
 const writeFileAsync = promisify(writeFile)
