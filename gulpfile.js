@@ -175,6 +175,19 @@ gulp.task('default', gulp.series(
   watch,
 ))
 
+gulp.task('serveDist', function(done) {
+  bs.init(
+    {
+      notify: false,
+      ui: false,
+      server: {
+        baseDir: destDir,
+      },
+    },
+    done,
+  )
+})
+
 const html = () => {
   return buildFiles(renderHelperConfig)
 }

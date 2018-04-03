@@ -4,7 +4,7 @@ const { readFile, writeFile } = require('fs')
 const { promisify } = require('util')
 const { origin, subdir } = require('../realworld.config')
 
-const isProd = process.argv[2] === 'build'
+const isProd = process.argv[2] === 'build' || 'serveDist'
 
 const basePath = posix.join('/', subdir || '')
 const assetPath = posix.join(basePath, 'assets')
