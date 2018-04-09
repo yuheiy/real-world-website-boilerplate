@@ -1,4 +1,4 @@
-const { join, parse, relative } = require('path')
+const { join, parse, relative, posix } = require('path')
 const fg = require('fast-glob')
 const replaceExt = require('replace-ext')
 const { safeLoad: parseYaml } = require('js-yaml')
@@ -55,10 +55,9 @@ const createPageConfig = async (pageFilePath) => {
   const userConfig = filePath
     ? await loaders[parse(filePath).ext](filePath)
     : {}
-  const pagePath = join(
-    '/',
-    replaceExt(relative('src/html', pageFilePath), '.html'),
-  ).replace(/\/index\.html$/, '/')
+  const pagePath = posix
+    .join('/', replaceExt(relative('src/html', pageFilePath), '.html'))
+    .replace(/\/index\.html$/, '/')
   const pageConfig = {
     ...userConfig,
     path: pagePath,
@@ -73,10 +72,11 @@ const baseOpts = {
 const baseLocals = {
   __DEV__: !isProd,
   origin,
-  absPath: (pagePath = '') => join(basePath, '/', pagePath),
-  assetPath: (pagePath = '') => join(assetPath, '/', pagePath),
-  absUrl: (pagePath = '') => `${baseUrl}${join('/', pagePath)}`,
-  assetUrl: (pagePath = '') => `${baseAssetUrl}${join('/', pagePath)}`,
+  absPath: (pagePath = '') => posix.join(basePath, '/', pagePath),
+  assetPath: (pagePath = '') => posix.join(assetPath, '/', pagePath),
+  absUrl: (pagePath = '') =>
+    `${baseUrl.replace(/\/$/, '')}${posix.join('/', pagePath)}`,
+  assetUrl: (pagePath = '') => `${baseAssetUrl}${posix.join('/', pagePath)}`,
 }
 
 const createTemplateConfig = async (pageFilePath) => {

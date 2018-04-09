@@ -1,4 +1,4 @@
-const { join, relative } = require('path')
+const { posix, join, relative } = require('path')
 const gulp = require('gulp')
 const { create: createbrowserSync } = require('browser-sync')
 const {
@@ -75,20 +75,20 @@ const css = async () => {
     map: !isProd && { prev: JSON.parse(sassResult.map) },
   })
 
-  await makeDir(join(destAssetDir, 'css'))
+  await makeDir(posix.join(destAssetDir, 'css'))
   await Promise.all([
-    writeFileAsync(join(destAssetDir, 'css/main.css'), postcssResult.css),
+    writeFileAsync(posix.join(destAssetDir, 'css/main.css'), postcssResult.css),
     ...(postcssResult.map
       ? [
           writeFileAsync(
-            join(destAssetDir, 'css/main.css.map'),
+            posix.join(destAssetDir, 'css/main.css.map'),
             postcssResult.map,
           ),
         ]
       : []),
   ])
 
-  bs.reload(join(assetPath, 'css/main.css'))
+  bs.reload(posix.join(assetPath, 'css/main.css'))
 }
 
 const js = (done) => {
@@ -117,7 +117,7 @@ const js = (done) => {
       return
     }
 
-    bs.reload(join(assetPath, 'js/main.js'))
+    bs.reload(posix.join(assetPath, 'js/main.js'))
   }
 
   if (isProd) {
@@ -140,7 +140,7 @@ const serve = (done) => {
         },
       },
       middleware: createRenderMiddleware(renderHelperConfig, basePath),
-      startPath: join(basePath, '/'),
+      startPath: posix.join(basePath, '/'),
       ghostMode: false,
       open: false,
     },
@@ -174,6 +174,19 @@ gulp.task('default', gulp.series(
   serve,
   watch,
 ))
+
+gulp.task('serveDist', function(done) {
+  bs.init(
+    {
+      notify: false,
+      ui: false,
+      server: {
+        baseDir: destDir,
+      },
+    },
+    done,
+  )
+})
 
 const html = () => {
   return buildFiles(renderHelperConfig)

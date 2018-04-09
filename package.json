@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "start": "gulp",
+    "start:dist": "gulp serveDist",
     "build": "gulp build",
     "precommit": "pretty-quick --staged"
   },
