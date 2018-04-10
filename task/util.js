@@ -7,7 +7,7 @@ const isProd = process.argv[2] === 'build'
 
 const basePath = join('/', subdir || '')
 const assetPath = join(basePath, 'assets')
-const baseUrl = `${origin}${basePath}`
+const baseUrl = `${origin}${subdir ? basePath : ''}`
 const baseAssetUrl = `${origin}${assetPath}`
 
 const destDir = isProd ? 'dist' : 'tmp'
