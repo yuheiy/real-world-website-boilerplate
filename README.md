@@ -24,7 +24,7 @@
 - [プロジェクト設定](#プロジェクト設定)
 - [`pre-commit`フック](#pre-commit%E3%83%95%E3%83%83%E3%82%AF)
 - [`public/`ディレクトリ](#public%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA)
-- [`root-public/`ディレクトリ](#root-public%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA)
+- [`vendor-public/`ディレクトリ](#vendor-public%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA)
 - [HTMLテンプレート](#html%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88)
 - [CSS](#css)
 - [JavaScript](#javascript)
@@ -64,7 +64,7 @@
 │   │   └── img/
 │   │       └── logo.svg
 │   └── pub.html
-├── root-public/                    # 開発時のみ必要なファイルを格納
+├── vendor-public/                  # 開発時のみ必要なファイルを格納
 ├── src/                            # コンパイルなどの処理を行うファイル
 │   ├── css/                        # CSSの元ソースを格納
 │   │   ├── components/
@@ -161,11 +161,11 @@ const copy = () => {
 }
 ```
 
-## `root-public/`ディレクトリ
+## `vendor-public/`ディレクトリ
 
 開発時のみ必要で、ビルド時は`dist/`ディレクトリにコピーしたくないファイルを配置します。
 
-`root-public/common.css`というファイルの場合、開発サーバーからは`/common.css`というパスで参照できます。**サブディレクトリが設定されていても参照できるパスは同じです。**
+`vendor-public/common.css`というファイルの場合、開発サーバーからは`/common.css`というパスで参照できます。**サブディレクトリが設定されていても参照できるパスは同じです。**
 
 ## HTMLテンプレート
 
@@ -334,7 +334,7 @@ const baseLocals = {
 
 開発用サーバーでServer Side Includesを利用したい場合、Browsersyncのオプションである`rewriteRules`を設定することで有効になります。
 
-読み込む外部ファイルを`root-public/`ディレクトリに配置する場合、次のような実装によって実現できます。
+読み込む外部ファイルを`vendor-public/`ディレクトリに配置する場合、次のような実装によって実現できます。
 
 `gulpfile.js`:
 
@@ -349,7 +349,7 @@ const serve = (done) => {
         {
           match: /<!--#include virtual="(.+?)" -->/g,
           fn(_req, _res, _match, filePath) {
-            const srcFilePath = path.join('root-public', filePath)
+            const srcFilePath = path.join('vendor-public', filePath)
 
             if (
               fs.existsSync(srcFilePath) &&
@@ -379,7 +379,7 @@ yarn build
 
 ## ステージングサーバーへのデプロイ
 
-`root-public/`ディレクトリのファイルは、ビルド時に`dist/`ディレクトリに含まれません。ステージングサーバーなどにデプロイする場合は、`dist/`ディレクトリおよび`root-public/`ディレクトリの両方のファイルをコピーしてください。
+`vendor-public/`ディレクトリのファイルは、ビルド時に`dist/`ディレクトリに含まれません。ステージングサーバーなどにデプロイする場合は、`dist/`ディレクトリおよび`vendor-public/`ディレクトリの両方のファイルをコピーしてください。
 
 ## 差分管理
 
