@@ -4,6 +4,7 @@ const LicenseBannerPlugin = require('license-banner-webpack-plugin')
 const { isProd, destAssetDir } = require('./task/util')
 
 module.exports = {
+  mode: isProd ? 'production' : 'development',
   entry: './src/js/main.js',
   output: {
     path: join(__dirname, destAssetDir, 'js'),
@@ -37,11 +38,11 @@ module.exports = {
       },
     ],
   },
+  devtool: !isProd && 'cheap-module-source-map',
   plugins: [
     new DefinePlugin({
       __DEV__: !isProd,
     }),
     ...(isProd ? [new LicenseBannerPlugin()] : []),
   ],
-  mode: isProd ? 'production' : 'development',
 }
