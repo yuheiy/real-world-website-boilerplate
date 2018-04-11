@@ -1,6 +1,6 @@
 const { join } = require('path')
 const { DefinePlugin } = require('webpack')
-const LicenseBannerPlugin = require('license-banner-webpack-plugin')
+const LicenseInfoWebpackPlugin = require('license-info-webpack-plugin').default
 const { isProd, destAssetDir } = require('./task/util')
 
 module.exports = {
@@ -43,6 +43,12 @@ module.exports = {
     new DefinePlugin({
       __DEV__: !isProd,
     }),
-    ...(isProd ? [new LicenseBannerPlugin()] : []),
+    ...(isProd
+      ? [
+          new LicenseInfoWebpackPlugin({
+            includeLicenseFile: false,
+          }),
+        ]
+      : []),
   ],
 }
