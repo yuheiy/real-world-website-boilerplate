@@ -3,20 +3,17 @@ html {
   line-height: 1.5;
 }
 
-// normalize.css v8 removed this
 main {
-  display: block;
+  display: block; // normalize.css v8 removed this
 }
 
-address,
-caption,
+i,
 cite,
-code,
-dfn,
-th,
-var {
+em,
+var,
+address,
+dfn {
   font-style: inherit;
-  font-weight: inherit;
 }
 
 audio,
@@ -54,6 +51,7 @@ textarea {
   font: inherit;
   color: inherit;
   background-color: transparent;
+  border: 0;
 }
 
 button {
