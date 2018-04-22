@@ -1,4 +1,4 @@
-const { join, parse, relative } = require('path')
+const { join, parse, relative, normalize } = require('path')
 const fg = require('fast-glob')
 const replaceExt = require('replace-ext')
 const { safeLoad: parseYaml } = require('js-yaml')
@@ -12,6 +12,7 @@ const {
   baseUrl,
   baseAssetUrl,
   readFileAsync,
+  toPosixPath,
 } = require('./util')
 
 const loaders = {
@@ -55,9 +56,8 @@ const createPageConfig = async (pageFilePath) => {
   const userConfig = filePath
     ? await loaders[parse(filePath).ext](filePath)
     : {}
-  const pagePath = join(
-    '/',
-    replaceExt(relative('src/html', pageFilePath), '.html'),
+  const pagePath = toPosixPath(
+    join('/', replaceExt(relative('src/html', pageFilePath), '.html')),
   ).replace(/\/index\.html$/, '/')
   const pageConfig = {
     ...userConfig,
@@ -73,10 +73,11 @@ const baseOpts = {
 const baseLocals = {
   __DEV__: !isProd,
   origin,
-  absPath: (pagePath = '') => join(basePath, '/', pagePath),
-  assetPath: (pagePath = '') => join(assetPath, '/', pagePath),
-  absUrl: (pagePath = '') => `${baseUrl}${join('/', pagePath)}`,
-  assetUrl: (pagePath = '') => `${baseAssetUrl}${join('/', pagePath)}`,
+  absPath: (pagePath = '') => toPosixPath(join(basePath, pagePath)),
+  assetPath: (pagePath = '') => toPosixPath(join(assetPath, pagePath)),
+  absUrl: (pagePath = '') => `${baseUrl}${toPosixPath(join('/', pagePath))}`,
+  assetUrl: (pagePath = '') =>
+    `${baseAssetUrl}${toPosixPath(join('/', pagePath))}`,
 }
 
 const createTemplateConfig = async (pageFilePath) => {
@@ -112,10 +113,10 @@ const renderError = (err) => {
 
 const renderHtml = async ({ src, filename }) => {
   const filePath = relative('src/html', replaceExt(filename, '.html'))
-  const [preferredFilePath] = await fg([
+  const [preferredFilePath] = (await fg([
     join('vendor-public', basePath, filePath),
     join('public', filePath),
-  ])
+  ])).map(normalize)
   if (preferredFilePath) {
     console.error(
       yellow(

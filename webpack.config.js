@@ -1,7 +1,7 @@
 const { join } = require('path')
 const { DefinePlugin } = require('webpack')
 const LicenseInfoWebpackPlugin = require('license-info-webpack-plugin').default
-const { isProd, assetPath, destAssetDir } = require('./task/util')
+const { isProd, assetPath, destAssetDir, toPosixPath } = require('./task/util')
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: join(__dirname, destAssetDir, 'js'),
     filename: '[name].js',
-    publicPath: join(assetPath, '/js/'),
+    publicPath: toPosixPath(join(assetPath, 'js/')),
   },
   module: {
     rules: [

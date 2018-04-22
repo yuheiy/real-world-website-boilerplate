@@ -22,6 +22,7 @@ const {
   destBaseDir,
   destAssetDir,
   writeFileAsync,
+  toPosixPath,
 } = require('./task/util')
 const renderHtml = require('./task/renderHtml')
 const webpackConfig = require('./webpack.config')
@@ -140,7 +141,7 @@ const serve = (done) => {
         },
       },
       middleware: createRenderMiddleware(renderHelperConfig, basePath),
-      startPath: join(basePath, '/'),
+      startPath: toPosixPath(join(basePath, '/')),
       ghostMode: false,
       open: false,
     },

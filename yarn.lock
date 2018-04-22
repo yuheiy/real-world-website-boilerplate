@@ -2124,7 +2124,7 @@ fast-deep-equal@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
 
-fast-glob@^2.0.4, fast-glob@^2.2.0:
+fast-glob@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-2.2.0.tgz#e9d032a69b86bef46fc03d935408f02fb211d9fc"
   dependencies:
@@ -3515,9 +3515,9 @@ mime@1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.3.4.tgz#115f9e3b6b3daf2959983cb38f149a2d40eb5d53"
 
-mime@^2.2.0:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-2.2.2.tgz#6b4c109d88031d7b5c23635f5b923da336d79121"
+mime@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-2.3.1.tgz#b1621c54d63b97c47d3cfe7f7215f7d64517c369"
 
 minimalistic-assert@^1.0.0:
   version "1.0.1"
@@ -4475,13 +4475,13 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-real-world-website-render-helper@yuheiy/real-world-website-render-helper#983ad565bf1b5b26e107c4254d3c16ba97d80d68:
-  version "0.0.3"
-  resolved "https://codeload.github.com/yuheiy/real-world-website-render-helper/tar.gz/983ad565bf1b5b26e107c4254d3c16ba97d80d68"
+real-world-website-render-helper@yuheiy/real-world-website-render-helper#05bca36c82bab13505a826a9890de824af6c5a6e:
+  version "0.0.4"
+  resolved "https://codeload.github.com/yuheiy/real-world-website-render-helper/tar.gz/05bca36c82bab13505a826a9890de824af6c5a6e"
   dependencies:
-    fast-glob "^2.0.4"
+    fast-glob "^2.2.0"
     make-dir "^1.2.0"
-    mime "^2.2.0"
+    mime "^2.3.1"
     minimatch "^3.0.4"
     replace-ext "^1.0.0"
 

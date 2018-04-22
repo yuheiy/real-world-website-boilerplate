@@ -35,7 +35,7 @@
     "prettier": "^1.11.1",
     "pretty-quick": "^1.4.1",
     "pug": "^2.0.3",
-    "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#983ad565bf1b5b26e107c4254d3c16ba97d80d68",
+    "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#05bca36c82bab13505a826a9890de824af6c5a6e",
     "replace-ext": "^1.0.0",
     "webpack": "^4.5.0"
   },
