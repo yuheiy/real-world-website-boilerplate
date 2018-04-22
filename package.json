@@ -14,13 +14,13 @@
   "devDependencies": {
     "ansi-red": "^0.1.1",
     "ansi-yellow": "^0.1.1",
-    "autoprefixer": "^8.2.0",
+    "autoprefixer": "^8.3.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.23.7",
     "csswring": "^6.0.3",
     "del": "^3.0.0",
     "fast-glob": "^2.2.0",
@@ -32,12 +32,12 @@
     "node-sass": "^4.8.3",
     "node-sass-glob-importer": "^5.1.2",
     "postcss": "^6.0.21",
-    "prettier": "^1.11.1",
+    "prettier": "^1.12.1",
     "pretty-quick": "^1.4.1",
     "pug": "^2.0.3",
     "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#05bca36c82bab13505a826a9890de824af6c5a6e",
     "replace-ext": "^1.0.0",
-    "webpack": "^4.5.0"
+    "webpack": "^4.6.0"
   },
   "engines": {
     "node": ">=8.9.0"
