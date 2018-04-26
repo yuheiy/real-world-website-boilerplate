@@ -17,7 +17,6 @@ const del = require('del')
 const {
   isProd,
   basePath,
-  assetPath,
   destDir,
   destBaseDir,
   destAssetDir,
