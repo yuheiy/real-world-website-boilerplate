@@ -45,7 +45,7 @@ const css = async () => {
         {
           file: 'src/css/main.scss',
           importer: globImporter(),
-          outFile: 'src/css/main.css',
+          outFile: 'src/css/main.bundle.css',
           sourceMap: !isProd,
           sourceMapContents: true,
         },
@@ -71,25 +71,28 @@ const css = async () => {
     }),
     ...(isProd ? [csswring()] : []),
   ]).process(sassResult.css, {
-    from: 'main.css',
-    to: 'main.css',
+    from: 'main.bundle.css',
+    to: 'main.bundle.css',
     map: !isProd && { prev: JSON.parse(sassResult.map) },
   })
 
   await makeDir(join(destAssetDir, 'css'))
   await Promise.all([
-    writeFileAsync(join(destAssetDir, 'css/main.css'), postcssResult.css),
+    writeFileAsync(
+      join(destAssetDir, 'css/main.bundle.css'),
+      postcssResult.css,
+    ),
     ...(postcssResult.map
       ? [
           writeFileAsync(
-            join(destAssetDir, 'css/main.css.map'),
+            join(destAssetDir, 'css/main.bundle.css.map'),
             postcssResult.map,
           ),
         ]
       : []),
   ])
 
-  bs.reload(join(assetPath, 'css/main.css'))
+  bs.reload('*.css')
 }
 
 const js = (done) => {
@@ -118,7 +121,7 @@ const js = (done) => {
       return
     }
 
-    bs.reload(join(assetPath, 'js/main.js'))
+    bs.reload('*.js')
   }
 
   if (isProd) {

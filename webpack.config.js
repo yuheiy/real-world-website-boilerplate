@@ -8,7 +8,7 @@ module.exports = {
   entry: './src/js/main.js',
   output: {
     path: join(__dirname, destAssetDir, 'js'),
-    filename: '[name].js',
+    filename: '[name].bundle.js',
     publicPath: toPosixPath(join(assetPath, 'js/')),
   },
   module: {

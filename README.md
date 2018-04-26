@@ -51,11 +51,11 @@
 │   └── path/to/project/
 │       └── assets/
 │           ├── css/
-│           │   └── main.css
+│           │   └── main.bundle.css
 │           ├── img/
 │           │   └── logo.svg
 │           ├── js/
-│           │   └── main.js
+│           │   └── main.bundle.js
 │           ├── about.html
 │           ├── index.html
 │           └── pub.html
@@ -88,11 +88,11 @@
 │   └── path/to/project/
 │       └── assets/
 │           ├── css/
-│           │   ├── main.css
-│           │   └── main.css.map
+│           │   ├── main.bundle.css
+│           │   └── main.bundle.css.map
 │           └── js/
-│               ├── main.js
-│               └── main.js.map
+│               ├── main.bundle.js
+│               └── main.bundle.js.map
 ├── package.json
 └── realworld.config.js             # プロジェクト設定
 ```
@@ -231,17 +231,17 @@ assetファイルのパスを与えると絶対パスを生成します。
 
 assetファイルのパスを与えると絶対URLを生成します。
 
-ルート直下の場合、`absUrl('css/main.css')`は`http://example.com/assets/css/main.css`になります。サブディレクトリの場合は`http://example.com/path/to/subdir/assets/css/main.css`になります。
+ルート直下の場合、`absUrl('css/main.bundle.css')`は`http://example.com/assets/css/main.bundle.css`になります。サブディレクトリの場合は`http://example.com/path/to/subdir/assets/css/main.bundle.css`になります。
 
 ## CSS
 
-`src/css/main.scss`をエントリーポイントとして、`assets/css/main.css`へ向けてビルドします。
+`src/css/main.scss`をエントリーポイントとして、`assets/css/main.bundle.css`へ向けてビルドします。
 
 `src/css/components/`ディレクトリの全てのファイルを自動で読み込むようになっています。
 
 ## JavaScript
 
-`src/js/main.js`をエントリーポイントとして、`assets/js/main.js`へ向けてビルドします。
+`src/js/main.js`をエントリーポイントとして、`assets/js/main.bundle.js`へ向けてビルドします。
 
 `__DEV__`という変数から環境設定を参照できます。開発時は`true`になり、ビルド時は`false`になります。
 
