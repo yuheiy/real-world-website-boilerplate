@@ -184,7 +184,7 @@ const html = () => {
 }
 
 const copy = () => {
-  return gulp.src('public/**/*').pipe(gulp.dest(destBaseDir))
+  return gulp.src('public/**/*', { dot: true }).pipe(gulp.dest(destBaseDir))
 }
 
 // prettier-ignore
