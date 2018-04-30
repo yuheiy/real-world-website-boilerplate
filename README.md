@@ -47,44 +47,37 @@
 
 ```bash
 .
-├── dist/                           # ビルド時にファイルが生成されるディレクトリ
+├── dist/                               # ビルド時にファイルが生成されるディレクトリ
 │   └── path/to/project/
-│       └── assets/
-│           ├── css/
-│           │   └── main.bundle.css
-│           ├── img/
-│           │   └── logo.svg
-│           ├── js/
-│           │   └── main.bundle.js
-│           ├── about.html
-│           ├── index.html
-│           └── pub.html
-├── public/                         # コピーされるだけのファイルを格納
+│       ├── assets/
+│       │   ├── css/
+│       │   │   └── main.bundle.css
+│       │   ├── img/
+│       │   │   └── logo.png
+│       │   └── js/
+│       │       └── main.bundle.js
+│       ├── about.html
+│       ├── index.html
+│       └── pub.html
+├── public/                             # コピーされるだけのファイルを格納
 │   ├── assets/
 │   │   └── img/
-│   │       └── logo.svg
+│   │       └── logo.png
 │   └── pub.html
-├── vendor-public/                  # 開発時のみ必要なファイルを格納
-├── src/                            # コンパイルなどの処理を行うファイル
-│   ├── css/                        # CSSの元ソースを格納
-│   │   ├── components/
-│   │   ├── globals/
-│   │   ├── _base.scss
-│   │   └── main.scss               # CSSのエントリーポイント
-│   ├── html/                       # HTMLの元ソースを格納
-│   │   ├── _data/                  # テンプレート全体から参照できるデータ
-│   │   ├── _extends/
-│   │   ├── _includes/
-│   │   ├── about.pug
-│   │   ├── about.yml
-│   │   ├── index.pug               # HTMLのページに対応するファイル
-│   │   └── index.yml               # 対応するページファイルからのみ参照できるデータ
-│   └── js/                         # JavaScriptの元ソースを格納
-│       ├── components/
-│       ├── main.js                 # JavaScriptのエントリーポイント
-│       └── polyfill.js
-├── task/                           # 開発用タスクで利用するスクリプトを格納
-├── tmp/                            # 開発時に一時的に生成されるディレクトリ
+├── src/                                # コンパイルなどの処理を行うファイル
+│   ├── css/                            # CSSの元ソースを格納
+│   │   └── main.scss                   # CSSのエントリーポイント
+│   ├── html/                           # HTMLの元ソースを格納
+│   │   ├── _data/                      # テンプレート全体から参照できるデータ
+│   │   │   ├── meta.yml
+│   │   │   └── siteNavigation.yml
+│   │   ├── about.pug                   # HTMLのページに対応するファイル
+│   │   ├── about.yml                   # 対応するページファイルからのみ参照できるデータ
+│   │   ├── index.pug
+│   │   └── index.yml
+│   └── js/
+│       └── main.js                     # JavaScriptのエントリーポイント
+├── tmp/                                # 開発時に一時的に生成されるディレクトリ
 │   └── path/to/project/
 │       └── assets/
 │           ├── css/
@@ -93,8 +86,10 @@
 │           └── js/
 │               ├── main.bundle.js
 │               └── main.bundle.js.map
+├── vendor-public/                      # 開発時のみ必要なファイルを格納
+│   └── common.css
 ├── package.json
-└── realworld.config.js             # プロジェクト設定
+└── realworld.config.js                 # プロジェクト設定
 ```
 
 ## 開発準備
