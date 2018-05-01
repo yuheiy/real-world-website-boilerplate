@@ -23,6 +23,7 @@ const {
   writeFileAsync,
   toPosixPath,
 } = require('./task/util')
+const cssImporter = require('./task/cssImporter')
 const renderHtml = require('./task/renderHtml')
 const webpackConfig = require('./webpack.config')
 
@@ -54,7 +55,7 @@ const css = async () => {
           renderSass(
             {
               file: srcPath,
-              importer: globImporter(),
+              importer: [cssImporter, globImporter()],
               outFile: join(dirname(srcPath), destFilename),
               sourceMap: !isProd,
               sourceMapContents: true,
