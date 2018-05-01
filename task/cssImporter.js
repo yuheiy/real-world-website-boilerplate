@@ -7,38 +7,39 @@ const uniq = (arr) => {
 }
 
 const cssImporter = (url, prev, done) => {
-  const specifiedPath = join(dirname(prev), url)
-  const hasExt = Boolean(extname(specifiedPath))
+  const resolvedPath = join(dirname(prev), url)
+  const hasExt = Boolean(extname(resolvedPath))
 
   if (hasExt) {
     return null
   }
 
-  const resolvedDir = dirname(specifiedPath)
-  const specifiedName = basename(specifiedPath)
+  const resolvedDir = dirname(resolvedPath)
+  const resolvedName = basename(resolvedPath)
   const candidateNames = uniq([
-    specifiedName,
-    specifiedName.replace(/^_/, ''),
-    `_${specifiedName}`,
+    resolvedName,
+    resolvedName.replace(/^_/, ''),
+    `_${resolvedName}`,
   ])
 
-  for (const ext of ['.sass', '.scss']) {
+  const isSassFileExists = ['.sass', '.scss'].some((ext) => {
     const isFileExists = candidateNames
       .map((name) => join(resolvedDir, `${name}${ext}`))
       .some((filePath) => existsSync(filePath))
+    return isFileExists
+  })
 
-    if (isFileExists) {
-      return null
-    }
+  if (isSassFileExists) {
+    return null
   }
 
-  const cssFilePath = join(resolvedDir, `${specifiedName}.css`)
+  const cssFilePath = join(resolvedDir, `${resolvedName}.css`)
   const isCssFileExists = existsSync(cssFilePath)
 
   if (isCssFileExists) {
     readFileAsync(cssFilePath, 'utf8').then((contents) => done({ contents }))
   } else {
-    done(new Error(`File to import not found: ${url}.`))
+    return new Error(`File to import not found: ${cssFilePath}`)
   }
 }
 
