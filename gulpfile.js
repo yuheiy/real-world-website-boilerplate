@@ -1,4 +1,4 @@
-const { join, relative } = require('path')
+const { dirname, join, relative } = require('path')
 const gulp = require('gulp')
 const { create: createbrowserSync } = require('browser-sync')
 const {
@@ -28,6 +28,10 @@ const webpackConfig = require('./webpack.config')
 
 const bs = createbrowserSync()
 
+const cssEntries = {
+  main: 'src/css/main.scss',
+}
+
 const renderHelperConfig = {
   input: 'src/html',
   inputExt: 'pug',
@@ -37,59 +41,65 @@ const renderHelperConfig = {
 }
 
 const css = async () => {
-  let sassResult
-  try {
-    sassResult = await new Promise((resolve, reject) => {
-      renderSass(
-        {
-          file: 'src/css/main.scss',
-          importer: globImporter(),
-          outFile: 'src/css/main.bundle.css',
-          sourceMap: !isProd,
-          sourceMapContents: true,
-        },
-        (err, result) => {
-          if (err) {
-            reject(err)
-            return
-          }
-          resolve(result)
-        },
-      )
-    })
-  } catch (err) {
-    const filePath = relative(__dirname, err.file)
-    console.error(red(`Error in ${filePath}`))
-    console.error(err.formatted.toString())
-    return
-  }
+  const destCssDir = join(destAssetDir, 'css')
 
-  const postcssResult = await postcss([
-    autoprefixer({
-      cascade: false,
+  await Promise.all(
+    Object.entries(cssEntries).map(async ([name, srcPath]) => {
+      const destFilename = `${name}.bundle.css`
+      const destMapFilename = `${destFilename}.map`
+
+      let sassResult
+      try {
+        sassResult = await new Promise((resolve, reject) => {
+          renderSass(
+            {
+              file: srcPath,
+              importer: globImporter(),
+              outFile: join(dirname(srcPath), destFilename),
+              sourceMap: !isProd,
+              sourceMapContents: true,
+            },
+            (err, result) => {
+              if (err) {
+                reject(err)
+                return
+              }
+              resolve(result)
+            },
+          )
+        })
+      } catch (err) {
+        const filePath = relative(__dirname, err.file)
+        console.error(red(`Error in ${filePath}`))
+        console.error(err.formatted.toString())
+        return
+      }
+
+      const postcssResult = await postcss([
+        autoprefixer({
+          cascade: false,
+        }),
+        ...(isProd ? [csswring()] : []),
+      ]).process(sassResult.css, {
+        from: destFilename,
+        to: destFilename,
+        map: !isProd && { prev: JSON.parse(sassResult.map) },
+      })
+
+      await makeDir(destCssDir)
+      await Promise.all([
+        writeFileAsync(join(destCssDir, destFilename), postcssResult.css),
+        ...(postcssResult.map
+          ? [
+              writeFileAsync(
+                join(destCssDir, destMapFilename),
+                postcssResult.map,
+              ),
+            ]
+          : []),
+      ])
     }),
-    ...(isProd ? [csswring()] : []),
-  ]).process(sassResult.css, {
-    from: 'main.bundle.css',
-    to: 'main.bundle.css',
-    map: !isProd && { prev: JSON.parse(sassResult.map) },
-  })
-
-  await makeDir(join(destAssetDir, 'css'))
-  await Promise.all([
-    writeFileAsync(
-      join(destAssetDir, 'css/main.bundle.css'),
-      postcssResult.css,
-    ),
-    ...(postcssResult.map
-      ? [
-          writeFileAsync(
-            join(destAssetDir, 'css/main.bundle.css.map'),
-            postcssResult.map,
-          ),
-        ]
-      : []),
-  ])
+  )
 
   bs.reload('*.css')
 }
