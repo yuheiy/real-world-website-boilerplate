@@ -47,23 +47,6 @@
 
 ```bash
 .
-├── dist/                               # ビルド時にファイルが生成されるディレクトリ
-│   └── path/to/project/
-│       ├── assets/
-│       │   ├── css/
-│       │   │   └── main.bundle.css
-│       │   ├── img/
-│       │   │   └── logo.png
-│       │   └── js/
-│       │       └── main.bundle.js
-│       ├── about.html
-│       ├── index.html
-│       └── pub.html
-├── public/                             # コピーされるだけのファイルを格納
-│   ├── assets/
-│   │   └── img/
-│   │       └── logo.png
-│   └── pub.html
 ├── src/                                # コンパイルなどの処理を行うファイル
 │   ├── css/                            # CSSの元ソースを格納
 │   │   └── main.scss                   # CSSのエントリーポイント
@@ -77,6 +60,13 @@
 │   │   └── index.yml
 │   └── js/
 │       └── main.js                     # JavaScriptのエントリーポイント
+├── public/                             # コピーされるだけのファイルを格納
+│   ├── assets/
+│   │   └── img/
+│   │       └── logo.png
+│   └── pub.html
+├── vendor-public/                      # 開発時のみ必要なファイルを格納
+│   └── common.css
 ├── tmp/                                # 開発時に一時的に生成されるディレクトリ
 │   └── path/to/project/
 │       └── assets/
@@ -86,8 +76,18 @@
 │           └── js/
 │               ├── main.bundle.js
 │               └── main.bundle.js.map
-├── vendor-public/                      # 開発時のみ必要なファイルを格納
-│   └── common.css
+├── dist/                               # ビルド時にファイルが生成されるディレクトリ
+│   └── path/to/project/
+│       ├── assets/
+│       │   ├── css/
+│       │   │   └── main.bundle.css
+│       │   ├── img/
+│       │   │   └── logo.png
+│       │   └── js/
+│       │       └── main.bundle.js
+│       ├── about.html
+│       ├── index.html
+│       └── pub.html
 ├── package.json
 └── realworld.config.js                 # プロジェクト設定
 ```
