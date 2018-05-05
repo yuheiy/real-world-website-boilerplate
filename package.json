@@ -9,7 +9,7 @@
     "babel-polyfill": "^6.26.0",
     "normalize.css": "^8.0.0",
     "picturefill": "^3.0.2",
-    "what-input": "^5.0.5"
+    "what-input": "^5.0.7"
   },
   "devDependencies": {
     "ansi-red": "^0.1.1",
@@ -20,7 +20,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "browser-sync": "^2.24.1",
+    "browser-sync": "^2.24.4",
     "csswring": "^6.0.3",
     "del": "^3.0.0",
     "fast-glob": "^2.2.1",
@@ -37,7 +37,7 @@
     "pug": "^2.0.3",
     "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#05bca36c82bab13505a826a9890de824af6c5a6e",
     "replace-ext": "^1.0.0",
-    "webpack": "^4.6.0"
+    "webpack": "^4.7.0"
   },
   "engines": {
     "node": ">=8.9.0"
