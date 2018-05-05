@@ -1,17 +1,10 @@
-const { dirname, join, relative } = require('path')
+const { join } = require('path')
 const gulp = require('gulp')
 const { create: createbrowserSync } = require('browser-sync')
 const {
   createRenderMiddleware,
   build: buildFiles,
 } = require('real-world-website-render-helper')
-const { render: renderSass } = require('node-sass')
-const globImporter = require('node-sass-glob-importer')
-const red = require('ansi-red')
-const postcss = require('postcss')
-const autoprefixer = require('autoprefixer')
-const csswring = require('csswring')
-const makeDir = require('make-dir')
 const webpack = require('webpack')
 const del = require('del')
 const {
@@ -19,11 +12,9 @@ const {
   basePath,
   destDir,
   destBaseDir,
-  destAssetDir,
-  writeFileAsync,
   toPosixPath,
 } = require('./task/util')
-const cssImporter = require('./task/cssImporter')
+const buildCss = require('./task/buildCss')
 const renderHtml = require('./task/renderHtml')
 const webpackConfig = require('./webpack.config')
 
@@ -42,66 +33,7 @@ const renderHelperConfig = {
 }
 
 const css = async () => {
-  const destCssDir = join(destAssetDir, 'css')
-
-  await Promise.all(
-    Object.entries(cssEntries).map(async ([name, srcPath]) => {
-      const destFilename = `${name}.bundle.css`
-      const destMapFilename = `${destFilename}.map`
-
-      let sassResult
-      try {
-        sassResult = await new Promise((resolve, reject) => {
-          renderSass(
-            {
-              file: srcPath,
-              importer: [cssImporter, globImporter()],
-              outFile: join(dirname(srcPath), destFilename),
-              sourceMap: !isProd,
-              sourceMapContents: true,
-            },
-            (err, result) => {
-              if (err) {
-                reject(err)
-                return
-              }
-              resolve(result)
-            },
-          )
-        })
-      } catch (err) {
-        const filePath = relative(__dirname, err.file)
-        console.error(red(`Error in ${filePath}`))
-        console.error(err.formatted.toString())
-        return
-      }
-
-      const postcssResult = await postcss([
-        autoprefixer({
-          cascade: false,
-        }),
-        ...(isProd ? [csswring()] : []),
-      ]).process(sassResult.css, {
-        from: destFilename,
-        to: destFilename,
-        map: !isProd && { prev: JSON.parse(sassResult.map) },
-      })
-
-      await makeDir(destCssDir)
-      await Promise.all([
-        writeFileAsync(join(destCssDir, destFilename), postcssResult.css),
-        ...(postcssResult.map
-          ? [
-              writeFileAsync(
-                join(destCssDir, destMapFilename),
-                postcssResult.map,
-              ),
-            ]
-          : []),
-      ])
-    }),
-  )
-
+  await buildCss(cssEntries)
   bs.reload('*.css')
 }
 
