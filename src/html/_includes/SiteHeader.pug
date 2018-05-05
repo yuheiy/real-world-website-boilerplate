@@ -1,0 +1,7 @@
+header.SiteHeader
+  nav.SiteHeader__nav
+    ul.SiteHeader__navList
+      each link in [[file.meta.siteTitle, '/']].concat(file.SiteHeader.navLinks)
+        - const isCurrent = link[1] === page.path
+        li.SiteHeader__navItem
+          a.SiteHeader__navLink(class={'-current': isCurrent} href=isCurrent ? '#main' : absPath(link[1]) aria-current=isCurrent && 'page')= link[0]

@@ -1,9 +1,9 @@
-.Content {
+.SiteFooter {
   max-width: 60rem;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding: 1rem;
+  text-align: center;
 
   @media #{$mq-md} {
     padding-right: 2rem;
