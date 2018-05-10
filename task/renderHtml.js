@@ -1,9 +1,9 @@
 const { join, parse, relative, normalize } = require('path')
 const fg = require('fast-glob')
 const replaceExt = require('replace-ext')
-const { safeLoad: parseYaml } = require('js-yaml')
+const { safeLoad } = require('js-yaml')
 const yellow = require('ansi-yellow')
-const { render: renderPug } = require('pug')
+const { render } = require('pug')
 const {
   isProd,
   origin,
@@ -16,7 +16,7 @@ const {
 } = require('./util')
 
 const loaders = {
-  '.yml': async (filePath) => parseYaml(await readFileAsync(filePath)),
+  '.yml': async (filePath) => safeLoad(await readFileAsync(filePath)),
   '.json': async (filePath) => JSON.parse(await readFileAsync(filePath)),
 }
 
@@ -128,7 +128,7 @@ const renderHtml = async ({ src, filename }) => {
 
   try {
     const config = await createTemplateConfig(filename)
-    return renderPug(src.toString(), config)
+    return render(src.toString(), config)
   } catch (err) {
     if (isProd) {
       throw err
