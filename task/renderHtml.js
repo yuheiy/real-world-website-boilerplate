@@ -1,4 +1,5 @@
 const { join, parse, relative, normalize } = require('path')
+const uniqWith = require('lodash.uniqwith')
 const fg = require('fast-glob')
 const replaceExt = require('replace-ext')
 const { safeLoad } = require('js-yaml')
@@ -20,16 +21,13 @@ const loaders = {
   '.json': async (filePath) => JSON.parse(await readFileAsync(filePath)),
 }
 
-const configFileExts = Object.keys(loaders)
+const configFileExts = ['.yml', '.json']
 
 const createFileConfig = async () => {
-  const filePaths = (await fg(
-    configFileExts.map((ext) => `src/html/_data/*${ext}`),
-  )).filter((filePath, idx, arr) => {
-    const { name } = parse(filePath)
-    const prevNames = arr.slice(0, idx).map((item) => parse(item).name)
-    return !prevNames.includes(name)
-  })
+  const filePaths = uniqWith(
+    await fg(configFileExts.map((ext) => `src/html/_data/*${ext}`)),
+    (a, b) => parse(a).name === parse(b).name,
+  )
   const userConfigs = await Promise.all(
     filePaths.map(async (filePath) => {
       const { name, ext } = parse(filePath)
