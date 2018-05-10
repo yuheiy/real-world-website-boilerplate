@@ -20,8 +20,8 @@ const postcssPlugins = [
   ...(isProd ? [csswring()] : []),
 ]
 
-const buildCss = (entries) => {
-  return Promise.all(
+const buildCss = async (entries) => {
+  await Promise.all(
     Object.entries(entries).map(async ([name, srcPath]) => {
       const destFilename = `${name}.bundle.css`
       const destMapFilename = `${destFilename}.map`
