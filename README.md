@@ -57,11 +57,13 @@
 ## 導入
 
 1. 最新版のボイラープレートを取得
+
     ```bash
     git clone https://github.com/yuheiy/real-world-website-boilerplate.git my-project/
     cd my-project/
     rm -rf .git/
     ```
+
 1. `yarn install`を実行して依存パッケージのインストール
 1. `yarn start`を実行して開発用サーバーの起動
 
@@ -260,41 +262,41 @@ last 1 Safari version
 const assetPath = path.join(basePath, 'assets')
 ```
 
-プロジェクトのディレクトリ直下に配置する場合は、次のように変更します。
+- プロジェクトのディレクトリ直下に配置する場合は、次のように変更します。
 
-```javascript
-const assetPath = basePath
-```
+  ```javascript
+  const assetPath = basePath
+  ```
 
-サブディレクトリとして`path/to/project`が指定されており、`/assets/path/to/project`というディレクトリに配置する場合は、次のように変更します。
+- サブディレクトリとして`path/to/project`が指定されており、`/assets/path/to/project`というディレクトリに配置する場合は、次のように変更します。
 
-```javascript
-const assetPath = join('/assets', basePath)
-```
+  ```javascript
+  const assetPath = join('/assets', basePath)
+  ```
 
-`https://assets-cdn.example.com`という別オリジンから配信する場合は、次のように変更します。
+- `https://assets-cdn.example.com`という別オリジンから配信する場合は、次のように変更します。
 
-```diff
--const baseAssetUrl = `${origin}${toPosixPath(assetPath)}`
-+const baseAssetUrl = 'https://assets-cdn.example.com'
-```
+  ```diff
+  -const baseAssetUrl = `${origin}${toPosixPath(assetPath)}`
+  +const baseAssetUrl = 'https://assets-cdn.example.com'
+  ```
 
-加えて、HTMLテンプレートでは`assetPath()`を利用せず、`assetUrl()`のみを利用するようにします。`task/renderHtml.js`は次のように変更します。
+  加えて、HTMLテンプレートでは`assetPath()`を利用せず、`assetUrl()`のみを利用するようにします。`task/renderHtml.js`は次のように変更します。
 
-```diff
-const baseLocals = {
-  __DEV__: !isProd,
-  origin,
-  absPath: (pagePath = '') => toPosixPath(join(basePath, pagePath)),
-- assetPath: (filePath = '') => toPosixPath(join(assetPath, filePath)),
-  absUrl: (pagePath = '') => `${baseUrl}${toPosixPath(join('/', pagePath))}`,
-+ assetUrl: isProd
-+   ? (filePath = '') => `${baseAssetUrl}${toPosixPath(join('/', filePath))}`
-+   : (filePath = '') => toPosixPath(join(assetPath, '/', filePath)),
-}
-```
+  ```diff
+  const baseLocals = {
+    __DEV__: !isProd,
+    origin,
+    absPath: (pagePath = '') => toPosixPath(join(basePath, pagePath)),
+  - assetPath: (filePath = '') => toPosixPath(join(assetPath, filePath)),
+    absUrl: (pagePath = '') => `${baseUrl}${toPosixPath(join('/', pagePath))}`,
+  + assetUrl: isProd
+  +   ? (filePath = '') => `${baseAssetUrl}${toPosixPath(join('/', filePath))}`
+  +   : (filePath = '') => toPosixPath(join(assetPath, '/', filePath)),
+  }
+  ```
 
-デプロイ時は、ビルドによって生成されたassetディレクトリ以下のファイルをCDNにアップロードしてください。
+  デプロイ時は、ビルドによって生成されたassetディレクトリ以下のファイルをCDNにアップロードしてください。
 
 ### Server Side Includesの設定
 
