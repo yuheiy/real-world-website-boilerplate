@@ -19,7 +19,7 @@
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "browser-sync": "^2.24.4",
     "csswring": "^6.0.3",
     "del": "^3.0.0",
@@ -29,7 +29,7 @@
     "js-yaml": "^3.11.0",
     "license-info-webpack-plugin": "^1.0.0",
     "lodash.uniqwith": "^4.5.0",
-    "make-dir": "^1.2.0",
+    "make-dir": "^1.3.0",
     "node-sass": "^4.9.0",
     "node-sass-glob-importer": "^5.1.2",
     "postcss": "^6.0.22",
@@ -38,7 +38,7 @@
     "pug": "^2.0.3",
     "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#05bca36c82bab13505a826a9890de824af6c5a6e",
     "replace-ext": "^1.0.0",
-    "webpack": "^4.7.0"
+    "webpack": "^4.8.2"
   },
   "engines": {
     "node": ">=8.9.0"
