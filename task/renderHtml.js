@@ -72,10 +72,10 @@ const baseLocals = {
   __DEV__: !isProd,
   origin,
   absPath: (pagePath = '') => toPosixPath(join(basePath, pagePath)),
-  assetPath: (pagePath = '') => toPosixPath(join(assetPath, pagePath)),
+  assetPath: (filePath = '') => toPosixPath(join(assetPath, filePath)),
   absUrl: (pagePath = '') => `${baseUrl}${toPosixPath(join('/', pagePath))}`,
-  assetUrl: (pagePath = '') =>
-    `${baseAssetUrl}${toPosixPath(join('/', pagePath))}`,
+  assetUrl: (filePath = '') =>
+    `${baseAssetUrl}${toPosixPath(join('/', filePath))}`,
 }
 
 const createTemplateConfig = async (pageFilePath) => {

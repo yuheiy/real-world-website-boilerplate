@@ -36,9 +36,9 @@
   - [`page`（個別ページ用データ）](#page個別ページ用データ)
   - [`origin`](#origin)
   - [`absPath(pagePath)`](#abspathpagepath)
-  - [`assetPath(pagePath)`](#assetpathpagepath)
+  - [`assetPath(filePath)`](#assetpathfilepath)
   - [`absUrl(pagePath)`](#absurlpagepath)
-  - [`assetUrl(pagePath)`](#asseturlpagepath)
+  - [`assetUrl(filePath)`](#asseturlfilepath)
   - [`__DEV__`](#__dev__)
 - [対象ブラウザ](#対象ブラウザ)
 - [レシピ](#レシピ)
@@ -209,7 +209,7 @@ Pugファイルと同名のYAMLファイルまたはJSONファイルを作成す
 
 指定されたサブディレクトリを基準とした相対パスを、絶対パスに変換します。サブディレクトリとして`path/to/project`が指定されていた場合、`absPath('page.html')`は`/path/to/project/page.html`になります。
 
-### `assetPath(pagePath)`
+### `assetPath(filePath)`
 
 アセットディレクトリを基準とした相対パスを、絶対パスに変換します。`assetPath('img/logo.svg')`は`/assets/img/logo.svg`になります。
 
@@ -217,7 +217,7 @@ Pugファイルと同名のYAMLファイルまたはJSONファイルを作成す
 
 指定されたサブディレクトリを基準とした相対パスを、絶対URLに変換します。`origin`に`http://example.com`が指定されていた場合、`absUrl('page.html')`は`http://example.com/page.html`になります。
 
-### `assetUrl(pagePath)`
+### `assetUrl(filePath)`
 
 アセットディレクトリを基準とした相対パスを、絶対URLに変換します。`origin`に`http://example.com`が指定されていた場合、`assetUrl('img/logo.svg')`は`http://example.com/assets/img/logo.svg`になります。
 
@@ -286,11 +286,11 @@ const baseLocals = {
   __DEV__: !isProd,
   origin,
   absPath: (pagePath = '') => toPosixPath(join(basePath, pagePath)),
-- assetPath: (pagePath = '') => toPosixPath(join(assetPath, pagePath)),
+- assetPath: (filePath = '') => toPosixPath(join(assetPath, filePath)),
   absUrl: (pagePath = '') => `${baseUrl}${toPosixPath(join('/', pagePath))}`,
 + assetUrl: isProd
-+   ? (pagePath = '') => `${baseAssetUrl}${toPosixPath(join('/', pagePath))}`
-+   : (pagePath = '') => toPosixPath(join(assetPath, '/', pagePath)),
++   ? (filePath = '') => `${baseAssetUrl}${toPosixPath(join('/', filePath))}`
++   : (filePath = '') => toPosixPath(join(assetPath, '/', filePath)),
 }
 ```
 
