@@ -7,6 +7,10 @@ main {
   display: block; // normalize.css v8 removed this
 }
 
+a {
+  text-underline-position: under;
+}
+
 i,
 cite,
 em,
