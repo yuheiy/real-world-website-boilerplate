@@ -14,7 +14,7 @@
   "devDependencies": {
     "ansi-red": "^0.1.1",
     "ansi-yellow": "^0.1.1",
-    "autoprefixer": "^8.4.1",
+    "autoprefixer": "^8.5.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -38,7 +38,7 @@
     "pug": "^2.0.3",
     "real-world-website-render-helper": "yuheiy/real-world-website-render-helper#05bca36c82bab13505a826a9890de824af6c5a6e",
     "replace-ext": "^1.0.0",
-    "webpack": "^4.8.2"
+    "webpack": "^4.8.3"
   },
   "engines": {
     "node": ">=8.9.0"
