@@ -1,0 +1,4 @@
+.VisuallyHidden {
+  @include visually-hidden;
+  user-select: none;
+}
