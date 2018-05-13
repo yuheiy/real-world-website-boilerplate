@@ -42,6 +42,7 @@
   - [`__DEV__`](#__dev__)
 - [対象ブラウザ](#対象ブラウザ)
 - [レシピ](#レシピ)
+  - [CSSファイルのエントリーポイントの設定](#cssファイルのエントリーポイントの設定)
   - [アセットディレクトリの変更](#アセットディレクトリの変更)
   - [Server Side Includesの設定](##server-side-includesの設定)
   - [差分納品ファイル管理ガイド](##差分納品ファイル管理ガイド)
@@ -69,8 +70,7 @@
 
 ## 本番用ビルド
 
-`yarn build`を実行すると`dist/`ディレクトリにビルドされたファイルが生成されます。<br>
-`vendor-public/`ディレクトリのファイルは含まれません。
+`yarn build`を実行すると`dist/`ディレクトリにビルドされたファイルが生成されます。`vendor-public/`ディレクトリのファイルは含まれません。
 
 ## ディレクトリ構造
 
@@ -108,10 +108,6 @@
 ├── vendor-public/
 │   └── common.css
 ├── task/
-│   ├── buildCss.js
-│   ├── cssImporter.js
-│   ├── renderHtml.js
-│   └── util.js
 ├── tmp/
 │   └── path/to/project/
 │       └── assets/
@@ -125,7 +121,7 @@
 └── realworld.config.js
 ```
 
-サブディレクトリが設定されていない場合、ファイルは`dist/`ディレクトリあるいは`tmp/`ディレクトリに生成されます。サブディレクトリが設定されている場合、それらのディレクトリを基準として指定されたサブディレクトリにファイルが生成されます。
+サブディレクトリが設定されていない場合、ファイルは`dist/`ディレクトリあるいは`tmp/`ディレクトリの直下に生成されます。サブディレクトリが設定されている場合、それらのディレクトリを基準として、指定されたサブディレクトリにファイルが生成されます。
 
 サブディレクトリの設定方法は[`realworld.config.js`ファイル](#realworldconfigjsファイル)を参照してください。
 
@@ -167,22 +163,22 @@ JavaScriptは`src/js/main.js`ファイルが、アセットディレクトリの
 
 プロジェクトのURLを設定します。
 
-サブディレクトリを設定しない場合は次のようにします。
+- サブディレクトリを設定しない場合は次のようにします。
 
-```javascript
-module.exports = {
-  origin: 'http://example.com',
-}
-```
+  ```javascript
+  module.exports = {
+    origin: 'http://example.com',
+  }
+  ```
 
-サブディレクトリを設定する場合は次のようにします。
+- サブディレクトリを設定する場合は次のようにします。
 
-```javascript
-module.exports = {
-  origin: 'http://example.com',
-  subdir: 'path/to/project',
-}
-```
+  ```javascript
+  module.exports = {
+    origin: 'http://example.com',
+    subdir: 'path/to/project',
+  }
+  ```
 
 ## HTMLテンプレート
 
@@ -252,6 +248,27 @@ last 1 Safari version
 
 ## レシピ
 
+### CSSファイルのエントリーポイントの設定
+
+`gulpfile.js`を編集してCSSファイルのエントリーポイントを変更できます。デフォルトでは`src/css/main.scss`がアセットディレクトリに`css/main.bundle.css`として出力されます。
+
+```javascript
+const cssEntries = {
+  main: 'src/css/main.scss',
+}
+```
+
+オブジェクトのキーが出力されるファイル名、対応する値がソースファイルのパスです。
+
+`src/css/print.scss`をエントリーポイントとして追加したい場合、次のように設定します。アセットディレクトリに`css/print.bundle.css`として出力されます。
+
+```javascript
+const cssEntries = {
+  main: 'src/css/main.scss',
+  print: 'src/css/print.scss',
+}
+```
+
 ### アセットディレクトリの変更
 
 `task/util.js`を編集することでアセットディレクトリを変更することができます。
@@ -296,7 +313,7 @@ const assetPath = path.join(basePath, 'assets')
   }
   ```
 
-  デプロイ時は、ビルドによって生成されたassetディレクトリ以下のファイルをCDNにアップロードしてください。
+  デプロイ時は、ビルドによって生成されたアセットディレクトリ以下のファイルをCDNにアップロードしてください。
 
 ### Server Side Includesの設定
 
