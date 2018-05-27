@@ -277,13 +277,13 @@ const cssEntries = {
 
 `task/util.js`を編集することでアセットディレクトリを変更することができます。
 
-デフォルトでは、プロジェクト直下の`assets/`ディレクトリに設定されています。
+- デフォルトでは、プロジェクトディレクトリ直下の`assets/`ディレクトリが設定されています。
 
-```javascript
-const assetPath = path.join(basePath, 'assets')
-```
+  ```javascript
+  const assetPath = path.join(basePath, 'assets')
+  ```
 
-- プロジェクトのディレクトリ直下に配置する場合は、次のように変更します。
+- プロジェクトディレクトリ直下に配置する場合は、次のように変更します。
 
   ```javascript
   const assetPath = basePath
