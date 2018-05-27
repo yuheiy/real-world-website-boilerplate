@@ -45,7 +45,6 @@
   - [アセットディレクトリの変更](#アセットディレクトリの変更)
   - [Server Side Includesの設定](#server-side-includesの設定)
   - [差分納品ファイル管理ガイド](#差分納品ファイル管理ガイド)
-- [参考](#参考)
 
 ## 推奨環境
 
@@ -390,7 +389,3 @@ git archive --format=zip --prefix=htdocs/ HEAD:dist `git diff --diff-filter=ACMR
 ```bash
 git diff release-20180101 --name-only --diff-filter=D | grep "^dist" | sed -e "s/dist\///" > deleted-files.txt
 ```
-
-## 参考
-
-開発サーバーの仕組みは『[watch 時のビルドをもっと速くしたい](https://speakerdeck.com/ktsn/watch-shi-falsebirudowomotutosu-kusitai)』を参考にしています。
