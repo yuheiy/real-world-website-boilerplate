@@ -44,12 +44,9 @@ module.exports = {
     new DefinePlugin({
       __DEV__: !isProd,
     }),
-    ...(isProd
-      ? [
-          new LicenseInfoWebpackPlugin({
-            includeLicenseFile: false,
-          }),
-        ]
-      : []),
-  ],
+    isProd &&
+      new LicenseInfoWebpackPlugin({
+        includeLicenseFile: false,
+      }),
+  ].filter(Boolean),
 }

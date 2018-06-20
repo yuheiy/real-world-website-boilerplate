@@ -16,8 +16,8 @@ const postcssPlugins = [
   autoprefixer({
     cascade: false,
   }),
-  ...(isProd ? [csswring()] : []),
-]
+  isProd && csswring(),
+].filter(Boolean)
 
 const buildCss = async (entries) => {
   await Promise.all(
@@ -62,17 +62,16 @@ const buildCss = async (entries) => {
       )
 
       await makeDir(destCssDir)
-      await Promise.all([
-        writeFileAsync(join(destCssDir, destFilename), postcssResult.css),
-        ...(postcssResult.map
-          ? [
-              writeFileAsync(
-                join(destCssDir, destMapFilename),
-                postcssResult.map,
-              ),
-            ]
-          : []),
-      ])
+      await Promise.all(
+        [
+          writeFileAsync(join(destCssDir, destFilename), postcssResult.css),
+          postcssResult.map &&
+            writeFileAsync(
+              join(destCssDir, destMapFilename),
+              postcssResult.map,
+            ),
+        ].filter(Boolean),
+      )
     }),
   )
 }
