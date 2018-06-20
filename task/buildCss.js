@@ -7,11 +7,10 @@ const autoprefixer = require('autoprefixer')
 const csswring = require('csswring')
 const makeDir = require('make-dir')
 const { isProd, destAssetDir, writeFileAsync } = require('./util')
-const cssImporter = require('./cssImporter')
 
 const destCssDir = join(destAssetDir, 'css')
 
-const sassImporters = [cssImporter, globImporter()]
+const sassImporters = [globImporter()]
 
 const postcssPlugins = [
   autoprefixer({
