@@ -1,5 +1,5 @@
 /dist/
+/tmp/
 /public/
 /vendor-public/
-/package.json
-*.md
+package.json

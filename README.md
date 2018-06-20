@@ -10,12 +10,12 @@
   - [Babel](https://babeljs.io/)
   - [Browsersync](https://browsersync.io/)
   - [Prettier](https://prettier.io/)など
-- [HTMLテンプレート](#htmlテンプレート)の開発をサポート
+- [HTML テンプレート](#htmlテンプレート)の開発をサポート
   - テンプレートで利用するデータの管理（YAML、JSON）
   - 各ページごとにパスの解決方法を提供
   - 必要なファイルのみを処理することによって規模によるビルド時間の増大を防止
 - 拡張性があり明確な[ディレクトリ構造](#ディレクトリ構造)
-- サブディレクトリを想定した開発に対応（[ディレクトリ構造](#ディレクトリ構造)、[HTMLテンプレート](#htmlテンプレート)を参照）
+- サブディレクトリを想定した開発に対応（[ディレクトリ構造](#ディレクトリ構造)、[HTML テンプレート](#htmlテンプレート)を参照）
 
 ## 目次
 
@@ -30,7 +30,7 @@
   - [`task/`ディレクトリ](#taskディレクトリ)
   - [`tmp/`ディレクトリ](#tmpディレクトリ)
   - [`realworld.config.js`ファイル](#realworldconfigjsファイル)
-- [HTMLテンプレート](#htmlテンプレート)
+- [HTML テンプレート](#htmlテンプレート)
   - [`file`（全ページ共有データ）](#file全ページ共有データ)
   - [`page`（個別ページ用データ）](#page個別ページ用データ)
   - [`origin`](#origin)
@@ -41,21 +41,21 @@
   - [`__DEV__`](#__dev__)
 - [対象ブラウザ](#対象ブラウザ)
 - [レシピ](#レシピ)
-  - [CSSファイルのエントリーポイントの設定](#cssファイルのエントリーポイントの設定)
+  - [CSS ファイルのエントリーポイントの設定](#cssファイルのエントリーポイントの設定)
   - [アセットディレクトリの変更](#アセットディレクトリの変更)
-  - [Server Side Includesの設定](#server-side-includesの設定)
+  - [Server Side Includes の設定](#server-side-includesの設定)
   - [差分納品ファイル管理ガイド](#差分納品ファイル管理ガイド)
 
 ## 推奨環境
 
-- Mac OS XまたはWindows
+- Mac OS X または Windows
 - Yarn
-- Node.js 8.9以降
-- EditorConfigおよびPrettierをサポートするエディタ
+- Node.js 8.9 以降
+- EditorConfig および Prettier をサポートするエディタ
 
 ## 導入
 
-1. 最新版のボイラープレートを取得
+1.  最新版のボイラープレートを取得
 
     ```bash
     git clone https://github.com/yuheiy/real-world-website-boilerplate.git my-project/
@@ -63,8 +63,8 @@
     rm -rf .git/
     ```
 
-1. `yarn install`を実行して依存パッケージのインストール
-1. `yarn start`を実行して開発用サーバーの起動
+1.  `yarn install`を実行して依存パッケージのインストール
+1.  `yarn start`を実行して開発用サーバーの起動
 
 ## 本番用ビルド
 
@@ -143,9 +143,9 @@ yarn build
 
 コンパイルをソースファイルをこのディレクトリに配置します。主にこのディレクトリで作業することになるでしょう。
 
-CSSは`src/css/main.scss`ファイルが、アセットディレクトリの`css/main.bundle.css`ファイルとして生成されます。
+CSS は`src/css/main.scss`ファイルが、アセットディレクトリの`css/main.bundle.css`ファイルとして生成されます。
 
-JavaScriptは`src/js/main.js`ファイルが、アセットディレクトリの`js/main.bundle.js`ファイルとして生成されます。
+JavaScript は`src/js/main.js`ファイルが、アセットディレクトリの`js/main.bundle.js`ファイルとして生成されます。
 
 ### `vendor-public/`ディレクトリ
 
@@ -153,7 +153,7 @@ JavaScriptは`src/js/main.js`ファイルが、アセットディレクトリの
 
 サブディレクトリの設定に関わらず`/`から参照できます。
 
-サイトの下層ページを制作する場合に、共通で読み込む必要のあるCSSファイルなどを配置することを想定しています。
+サイトの下層ページを制作する場合に、共通で読み込む必要のある CSS ファイルなどを配置することを想定しています。
 
 ### `task/`ディレクトリ
 
@@ -165,7 +165,7 @@ JavaScriptは`src/js/main.js`ファイルが、アセットディレクトリの
 
 ### `realworld.config.js`ファイル
 
-プロジェクトのURLを設定します。
+プロジェクトの URL を設定します。
 
 - サブディレクトリを設定しない場合は次のようにします。
 
@@ -184,21 +184,21 @@ JavaScriptは`src/js/main.js`ファイルが、アセットディレクトリの
   }
   ```
 
-## HTMLテンプレート
+## HTML テンプレート
 
-テンプレートエンジンとしてPugを採用しています。
+テンプレートエンジンとして Pug を採用しています。
 
-開発時には、リクエストされたパスと対応するファイルのみをコンパイルすることによって、全体のページ数と比例してビルド時間が増大することを防止しています。Browsersyncのミドルウェアとして[real-world-website-render-helper](https://github.com/yuheiy/real-world-website-render-helper)を利用することによって実現しています。
+開発時には、リクエストされたパスと対応するファイルのみをコンパイルすることによって、全体のページ数と比例してビルド時間が増大することを防止しています。Browsersync のミドルウェアとして[real-world-website-render-helper](https://github.com/yuheiy/real-world-website-render-helper)を利用することによって実現しています。
 
-`src/html/`ディレクトリのファイルは、ディレクトリ構造を維持したままHTMLファイルとして出力されます。`src/html/index.pug`の場合、`/index.html`から参照できます。`_`から始まるファイル及びディレクトリは、個別にHTMLファイルとして出力されません。
+`src/html/`ディレクトリのファイルは、ディレクトリ構造を維持したまま HTML ファイルとして出力されます。`src/html/index.pug`の場合、`/index.html`から参照できます。`_`から始まるファイル及びディレクトリは、個別に HTML ファイルとして出力されません。
 
 ### `file`（全ページ共有データ）
 
-`src/html/_data/`ディレクトリ直下にYAMLファイルまたはJSONファイルを作成することで、`file`変数として対応付けされ、全てのページから参照できるようになります。`src/html/_data/meta.yml`というファイルの場合、`file.meta`から参照できます。
+`src/html/_data/`ディレクトリ直下に YAML ファイルまたは JSON ファイルを作成することで、`file`変数として対応付けされ、全てのページから参照できるようになります。`src/html/_data/meta.yml`というファイルの場合、`file.meta`から参照できます。
 
 ### `page`（個別ページ用データ）
 
-Pugファイルと同名のYAMLファイルまたはJSONファイルを作成することで、対応するファイルのみで有効になるデータを設定できます。`src/html/page.pug`というファイルで利用するデータを指定する場合、`src/html/page.yml`というファイルを作成します。
+Pug ファイルと同名の YAML ファイルまたは JSON ファイルを作成することで、対応するファイルのみで有効になるデータを設定できます。`src/html/page.pug`というファイルで利用するデータを指定する場合、`src/html/page.yml`というファイルを作成します。
 
 自動的に`page.path`にページのパスが設定されます。`src/html/page.pug`の場合は`/page.html`になり、`src/html/index.pug`の場合は省略されて`/`になります。[`absPath()`](#abspathpagepath)などの関数と組み合わせることで、サブディレクトリにも対応したパスを出力できます。
 
@@ -216,11 +216,11 @@ Pugファイルと同名のYAMLファイルまたはJSONファイルを作成す
 
 ### `absUrl(pagePath)`
 
-指定されたサブディレクトリを基準とした相対パスを、絶対URLに変換します。`origin`に`http://example.com`が指定されていた場合、`absUrl('page.html')`は`http://example.com/page.html`になります。
+指定されたサブディレクトリを基準とした相対パスを、絶対 URL に変換します。`origin`に`http://example.com`が指定されていた場合、`absUrl('page.html')`は`http://example.com/page.html`になります。
 
 ### `assetUrl(filePath)`
 
-アセットディレクトリを基準とした相対パスを、絶対URLに変換します。`origin`に`http://example.com`が指定されていた場合、`assetUrl('img/logo.svg')`は`http://example.com/assets/img/logo.svg`になります。
+アセットディレクトリを基準とした相対パスを、絶対 URL に変換します。`origin`に`http://example.com`が指定されていた場合、`assetUrl('img/logo.svg')`は`http://example.com/assets/img/logo.svg`になります。
 
 ### `__DEV__`
 
@@ -228,7 +228,7 @@ Pugファイルと同名のYAMLファイルまたはJSONファイルを作成す
 
 ## 対象ブラウザ
 
-ビルドの対象にするブラウザは`.browserslistrc`で設定します。記述方法は[Browserslistのドキュメント](https://github.com/ai/browserslist)を参照してください。
+ビルドの対象にするブラウザは`.browserslistrc`で設定します。記述方法は[Browserslist のドキュメント](https://github.com/ai/browserslist)を参照してください。
 
 デフォルトでは次のようになっています。
 
@@ -247,13 +247,13 @@ last 1 Safari version
 - [Autoprefixer](https://github.com/postcss/autoprefixer)
 - [babel-preset-env](https://github.com/babel/babel-preset-env)
 
-なお、[IE10以下を対象とする場合、Babelで問題が発生することがあります](https://babeljs.io/docs/usage/caveats/)。
+なお、[IE10 以下を対象とする場合、Babel で問題が発生することがあります](https://babeljs.io/docs/usage/caveats/)。
 
 ## レシピ
 
-### CSSファイルのエントリーポイントの設定
+### CSS ファイルのエントリーポイントの設定
 
-`gulpfile.js`を編集してCSSファイルのエントリーポイントを変更できます。デフォルトでは`src/css/main.scss`がアセットディレクトリに`css/main.bundle.css`として出力されます。
+`gulpfile.js`を編集して CSS ファイルのエントリーポイントを変更できます。デフォルトでは`src/css/main.scss`がアセットディレクトリに`css/main.bundle.css`として出力されます。
 
 ```javascript
 const cssEntries = {
@@ -301,7 +301,7 @@ const cssEntries = {
   +const baseAssetUrl = 'https://assets-cdn.example.com'
   ```
 
-  加えて、HTMLテンプレートでは`assetPath()`を利用せず、`assetUrl()`のみを利用するようにします。`task/renderHtml.js`は次のように変更します。
+  加えて、HTML テンプレートでは`assetPath()`を利用せず、`assetUrl()`のみを利用するようにします。`task/renderHtml.js`は次のように変更します。
 
   ```diff
   const baseLocals = {
@@ -316,11 +316,11 @@ const cssEntries = {
   }
   ```
 
-  デプロイ時は、ビルドによって生成されたアセットディレクトリ以下のファイルをCDNにアップロードしてください。
+  デプロイ時は、ビルドによって生成されたアセットディレクトリ以下のファイルを CDN にアップロードしてください。
 
-### Server Side Includesの設定
+### Server Side Includes の設定
 
-Browsersyncのオプションである`rewriteRules`を設定することで有効になります。読み込む対象のファイルを`vendor-public/`ディレクトリに配置する場合、`gulpfile.js`を次のように変更します。
+Browsersync のオプションである`rewriteRules`を設定することで有効になります。読み込む対象のファイルを`vendor-public/`ディレクトリに配置する場合、`gulpfile.js`を次のように変更します。
 
 ```javascript
 const serve = (done) => {
@@ -364,7 +364,7 @@ const serve = (done) => {
 
 ### 差分納品ファイル管理ガイド
 
-納品ファイルの差分管理が必要な場合、`dist/`ディレクトリをGitにコミットするようにします。`.gitignore`を次のように変更します。
+納品ファイルの差分管理が必要な場合、`dist/`ディレクトリを Git にコミットするようにします。`.gitignore`を次のように変更します。
 
 ```diff
 node_modules/
@@ -376,9 +376,9 @@ yarn-error.log*
 /tmp/
 ```
 
-リリースの毎に`yarn build`を実行して、生成される`dist/`ディレクトリをGitにコミットします。このコミットに、Gitのタグを付けておくと参照しやすくなります。
+リリースの毎に`yarn build`を実行して、生成される`dist/`ディレクトリを Git にコミットします。このコミットに、Git のタグを付けておくと参照しやすくなります。
 
-前回のリリースと対応するコミットが`release-20180101`の場合、次のコマンドで追加・変更したファイルのみをZipファイルとして生成できます。
+前回のリリースと対応するコミットが`release-20180101`の場合、次のコマンドで追加・変更したファイルのみを Zip ファイルとして生成できます。
 
 ```bash
 git archive --format=zip --prefix=htdocs/ HEAD:dist `git diff --diff-filter=ACMR --name-only release-20180101 HEAD | grep "^dist/" | sed -e "s/dist\///"` > htdocs.zip
