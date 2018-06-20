@@ -28,28 +28,23 @@
 }
 
 .SiteHeader__navItem:first-child {
-  font-weight: bold;
-
   @media #{$mq-sm} {
     flex-grow: 1;
   }
 }
 
-.SiteHeader__navItem:nth-last-child(n + 2) {
-  margin-bottom: 0.25rem;
+.SiteHeader__navItem:nth-child(n + 2) {
+  margin-top: 0.5rem;
 
   @media #{$mq-sm} {
-    margin-right: 1.25rem;
-    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 1.25rem;
   }
 }
 
 .SiteHeader__navLink {
-  margin: -4px;
-  padding: 4px;
-  text-underline-position: under;
 }
 
-.SiteHeader__navItem:not(:first-child) .SiteHeader__navLink.-current {
-  box-shadow: 0 0 0 2px;
+.SiteHeader__navLink.-current {
+  font-weight: bold;
 }

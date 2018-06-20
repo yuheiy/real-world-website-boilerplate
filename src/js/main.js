@@ -1,6 +1,6 @@
 import './polyfill'
 import 'what-input'
-import Disclosure from './components/Disclosure'
+import Collapse from './components/Collapse'
 
 if (__DEV__) {
   console.log('development mode')
@@ -8,6 +8,6 @@ if (__DEV__) {
   console.log('production mode')
 }
 
-document.querySelectorAll('.Disclosure').forEach((el) => {
-  Disclosure(el)
+document.querySelectorAll('.Collapse').forEach((root) => {
+  Collapse(root)
 })

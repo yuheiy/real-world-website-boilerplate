@@ -1,14 +1,11 @@
 html {
   font-family: sans-serif;
   line-height: 1.5;
+  text-underline-position: under;
 }
 
 main {
   display: block; // normalize.css v8 removed this
-}
-
-a {
-  text-underline-position: under;
 }
 
 i,
@@ -56,6 +53,10 @@ textarea {
   color: inherit;
   background-color: transparent;
   border: 0;
+}
+
+@include focus-without-keyboard("button") {
+  outline: 0;
 }
 
 fieldset {

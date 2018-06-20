@@ -1,0 +1,19 @@
+.Collapse {
+}
+
+.Collapse__summary {
+}
+
+.Collapse__toggle {
+  padding: 0.25rem 0.75rem;
+  background-color: hsl(0, 0%, 95%);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 1px 0 hsla(0, 0, 0, 0.2);
+}
+
+.Collapse__toggle:active {
+  background-color: hsl(0, 0%, 85%);
+}
+
+.Collapse__details {
+}
