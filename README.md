@@ -30,7 +30,7 @@
   - [`task/`ディレクトリ](#taskディレクトリ)
   - [`tmp/`ディレクトリ](#tmpディレクトリ)
   - [`realworld.config.js`ファイル](#realworldconfigjsファイル)
-- [HTML テンプレート](#htmlテンプレート)
+- [HTML テンプレート](#html-テンプレート)
   - [`file`（全ページ共有データ）](#file全ページ共有データ)
   - [`page`（個別ページ用データ）](#page個別ページ用データ)
   - [`origin`](#origin)
@@ -43,7 +43,7 @@
 - [レシピ](#レシピ)
   - [CSS ファイルのエントリーポイントの設定](#css-ファイルのエントリーポイントの設定)
   - [アセットディレクトリの変更](#アセットディレクトリの変更)
-  - [Server Side Includes の設定](#server-side-includesの設定)
+  - [Server Side Includes の設定](#server-side-includes-の設定)
   - [差分納品ファイル管理ガイド](#差分納品ファイル管理ガイド)
 
 ## 推奨環境
