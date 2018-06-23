@@ -1,14 +1,14 @@
-const { dirname, join, relative } = require('path')
-const { render } = require('node-sass')
+const { join } = require('path')
+const gulp = require('gulp')
+const rename = require('gulp-rename')
+const gulpif = require('gulp-if')
+const sourcemaps = require('gulp-sourcemaps')
+const sass = require('gulp-sass')
 const globImporter = require('node-sass-glob-importer')
-const red = require('ansi-red')
-const postcss = require('postcss')
+const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
 const csswring = require('csswring')
-const makeDir = require('make-dir')
-const { isProd, destAssetDir, writeFileAsync } = require('./util')
-
-const destCssDir = join(destAssetDir, 'css')
+const { isProd, destAssetDir } = require('./util')
 
 const sassImporters = [globImporter()]
 
@@ -19,61 +19,15 @@ const postcssPlugins = [
   isProd && csswring(),
 ].filter(Boolean)
 
-const buildCss = async (entries) => {
-  await Promise.all(
-    Object.entries(entries).map(async ([name, srcPath]) => {
-      const destFilename = `${name}.bundle.css`
-      const destMapFilename = `${destFilename}.map`
-
-      let sassResult
-      try {
-        sassResult = await new Promise((resolve, reject) => {
-          render(
-            {
-              file: srcPath,
-              importer: sassImporters,
-              outFile: join(dirname(srcPath), destFilename),
-              sourceMap: !isProd,
-              sourceMapContents: true,
-            },
-            (err, result) => {
-              if (err) {
-                reject(err)
-                return
-              }
-              resolve(result)
-            },
-          )
-        })
-      } catch (err) {
-        const filePath = relative(__dirname, err.file)
-        console.error(red(`Error in ${filePath}`))
-        console.error(err.formatted.toString())
-        return
-      }
-
-      const postcssResult = await postcss(postcssPlugins).process(
-        sassResult.css,
-        {
-          from: destFilename,
-          to: destFilename,
-          map: !isProd && { prev: JSON.parse(sassResult.map) },
-        },
-      )
-
-      await makeDir(destCssDir)
-      await Promise.all(
-        [
-          writeFileAsync(join(destCssDir, destFilename), postcssResult.css),
-          postcssResult.map &&
-            writeFileAsync(
-              join(destCssDir, destMapFilename),
-              postcssResult.map,
-            ),
-        ].filter(Boolean),
-      )
-    }),
-  )
+const buildCss = (...srcArgs) => {
+  return gulp
+    .src(...srcArgs)
+    .pipe(rename({ suffix: '.bundle' }))
+    .pipe(gulpif(!isProd, sourcemaps.init()))
+    .pipe(sass({ importer: sassImporters }).on('error', sass.logError))
+    .pipe(postcss(postcssPlugins))
+    .pipe(gulpif(!isProd, sourcemaps.write('.')))
+    .pipe(gulp.dest(join(destAssetDir, 'css')))
 }
 
 module.exports = buildCss

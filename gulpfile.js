@@ -20,10 +20,6 @@ const webpackConfig = require('./webpack.config')
 
 const bs = createbrowserSync()
 
-const cssEntries = {
-  main: 'src/css/main.scss',
-}
-
 const renderHelperConfig = {
   input: 'src/html',
   inputExt: 'pug',
@@ -32,9 +28,8 @@ const renderHelperConfig = {
   render: renderHtml,
 }
 
-const css = async () => {
-  await buildCss(cssEntries)
-  bs.reload('*.css')
+const css = () => {
+  return buildCss('src/css/main.scss').pipe(bs.stream({ match: '**/*.css' }))
 }
 
 const js = (done) => {
