@@ -57,7 +57,7 @@ textarea {
   border: 0;
 }
 
-@include focus-without-keyboard("button") {
+@include focus-without-keyboard("button, select") {
   outline: 0;
 }
 

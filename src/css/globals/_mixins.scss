@@ -1,15 +1,23 @@
 // focus selector
-@mixin focus-with-keyboard($element: &) {
-  html[data-whatinput="keyboard"] #{selector-append($element, ":focus")} {
-    @content;
+@mixin focus-with-keyboard($selectors: &) {
+  @at-root {
+    @each $selector in selector-parse($selectors) {
+      html[data-whatinput="keyboard"] #{selector-append($selector, ":focus")} {
+        @content;
+      }
+    }
   }
 }
 
-@mixin focus-without-keyboard($element: &) {
-  html[data-whatinput="initial"] #{selector-append($element, ":focus")},
-  html[data-whatinput="mouse"] #{selector-append($element, ":focus")},
-  html[data-whatinput="touch"] #{selector-append($element, ":focus")} {
-    @content;
+@mixin focus-without-keyboard($selectors: &) {
+  @at-root {
+    @each $selector in selector-parse($selectors) {
+      html[data-whatinput="initial"] #{selector-append($selector, ":focus")},
+      html[data-whatinput="mouse"] #{selector-append($selector, ":focus")},
+      html[data-whatinput="touch"] #{selector-append($selector, ":focus")} {
+        @content;
+      }
+    }
   }
 }
 
