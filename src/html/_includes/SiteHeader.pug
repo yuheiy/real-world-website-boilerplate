@@ -1,0 +1,13 @@
+header.SiteHeader
+  .Centered
+    nav.SiteHeader__nav
+      ul.SiteHeader__navList
+        - const _SiteHeader_isHomeCurrent = '/' === page.path
+        li.SiteHeader__navItem
+          a.SiteHeader__navLink(class={'-current': _SiteHeader_isHomeCurrent} href=absPath('/') aria-current=_SiteHeader_isHomeCurrent && 'page')
+            = data.meta.siteTitle
+            span.VisuallyHidden ホーム
+        each link in data.navigation.siteHeader
+          - const isCurrent = link[1] === page.path
+          li.SiteHeader__navItem
+            a.SiteHeader__navLink(class={'-current': isCurrent} href=absPath(link[1]) aria-current=isCurrent && 'page')= link[0]

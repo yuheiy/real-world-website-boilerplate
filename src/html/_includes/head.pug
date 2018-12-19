@@ -1,0 +1,22 @@
+head(prefix="og: http://ogp.me/ns#")
+  meta(charset="utf-8")
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  if page.title
+    title= `${page.title} - ${data.meta.siteTitle}`
+  else
+    title= data.meta.siteTitle
+  meta(name="description" content=page.description)
+  meta(name="twitter:card" content="summary_large_image")
+  meta(property="og:title" content=page.title || data.meta.siteTitle)
+  meta(property="og:type" content="website")
+  meta(property="og:image" content=`${data.meta.origin}${assetPath('ogp.png')}`)
+  meta(property="og:url" content=`${data.meta.origin}${absPath(page.path)}`)
+  meta(property="og:description" content=page.description)
+  meta(property="og:site_name" content=data.meta.siteTitle)
+  meta(property="og:locale" content=`${data.meta.lang}_${data.meta.region}`)
+  link(rel="canonical" href=absPath(page.path))
+  if absPath() !== '/'
+    link(rel="icon" type="image/x-icon" href=absPath('favicon.ico'))
+  link(rel="stylesheet" href=assetPath('main.bundle.css'))
+  script(type="module" src=assetPath('main.module.bundle.js'))
+  script(nomodule src=assetPath('main.nomodule.bundle.js') defer)

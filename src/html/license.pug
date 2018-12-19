@@ -1,0 +1,8 @@
+extends /_extends/default
+
+block body
+  include /_includes/PageHeader
+
+  section(lang="en")
+    h2= page.licenseContent.split('\n')[0]
+    pre= page.licenseContent.split('\n').slice(2).join('\n')
