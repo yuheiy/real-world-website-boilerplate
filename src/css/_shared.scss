@@ -6,3 +6,16 @@ $mq-sm: "(min-width: #{576px / $font-size-browser-default * 1em})";
 $mq-md: "(min-width: #{768px / $font-size-browser-default * 1em})";
 $mq-lg: "(min-width: #{992px / $font-size-browser-default * 1em})";
 $mq-xl: "(min-width: #{1200px / $font-size-browser-default * 1em})";
+
+// screen reader
+@mixin visually-hidden {
+  position: absolute !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(50%) !important;
+  clip: rect(0, 0, 0, 0) !important; // deprecated
+}
