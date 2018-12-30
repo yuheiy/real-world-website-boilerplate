@@ -9,8 +9,7 @@ export const MEDIA_QUERY_LARGE = `(min-width: ${992 /
 export const MEDIA_QUERY_XLARGE = `(min-width: ${1200 /
   BROWSER_DEFAULT_FONT_SIZE}em)`
 
-// extended version of
-// https://github.com/Polymer/pwa-helpers/blob/d0ff1d2cc5272a79d83fb130bea41e5ca5d25ea3/media-query.js
+// Extended version of
 export const installMediaQueryWatcher = (mediaQuery, layoutChangedCallback) => {
   const mql = window.matchMedia(mediaQuery)
   const listener = (e) => {
