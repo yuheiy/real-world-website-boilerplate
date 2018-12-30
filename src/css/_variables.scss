@@ -1,5 +1,8 @@
+$font-size-browser-default: 16px;
+
 // media query
-$mq-sm: "(min-width: 576px)";
-$mq-md: "(min-width: 768px)";
-$mq-lg: "(min-width: 992px)";
-$mq-xl: "(min-width: 1200px)";
+// use em unit for bugs in Safari https://zellwk.com/blog/media-query-units/
+$mq-sm: "(min-width: #{576px / $font-size-browser-default * 1em})";
+$mq-md: "(min-width: #{768px / $font-size-browser-default * 1em})";
+$mq-lg: "(min-width: #{992px / $font-size-browser-default * 1em})";
+$mq-xl: "(min-width: #{1200px / $font-size-browser-default * 1em})";
