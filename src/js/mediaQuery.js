@@ -10,17 +10,16 @@ export const MEDIA_QUERY_XLARGE = `(min-width: ${1200 /
   BROWSER_DEFAULT_FONT_SIZE}em)`
 
 // Extended version of
+// https://github.com/Polymer/pwa-helpers/blob/5cb02bacb6c6f72ceafeb1345de669e9986fcf70/src/media-query.ts
 export const installMediaQueryWatcher = (mediaQuery, layoutChangedCallback) => {
   const mql = window.matchMedia(mediaQuery)
-  const listener = (e) => {
-    layoutChangedCallback(e.matches)
+  const listener = (ev) => {
+    layoutChangedCallback(ev.matches)
   }
   mql.addListener(listener)
   layoutChangedCallback(mql.matches)
-
   const uninstall = () => {
     mql.removeListener(listener)
   }
   return uninstall
 }
-
