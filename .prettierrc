@@ -1,0 +1,14 @@
+{
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "semi": false,
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": ["*.scss", "*.yaml"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}
