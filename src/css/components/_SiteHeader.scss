@@ -26,7 +26,7 @@
   }
 }
 
-.SiteHeader__navItem:nth-child(n + 2) {
+.SiteHeader__navItem + .SiteHeader__navItem {
   margin-top: 0.5rem;
 
   @media #{$mq-sm} {

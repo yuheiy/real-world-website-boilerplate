@@ -3,10 +3,9 @@ $font-size-browser-default: 16px;
 // Media query
 // Use em unit for bugs in Safari.
 // https://zellwk.com/blog/media-query-units/
-$mq-sm: "(min-width: #{576px / $font-size-browser-default * 1em})";
-$mq-md: "(min-width: #{768px / $font-size-browser-default * 1em})";
-$mq-lg: "(min-width: #{992px / $font-size-browser-default * 1em})";
-$mq-xl: "(min-width: #{1200px / $font-size-browser-default * 1em})";
+$mq-sm: "(min-width: 45em)";
+$mq-md: "(min-width: 60em)";
+$mq-lg: "(min-width: 75em)";
 
 // Screen reader
 @mixin visually-hidden {

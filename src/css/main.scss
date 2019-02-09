@@ -1,9 +1,9 @@
-// shared
-@import "shared";
+// Global
+@import "global";
 
-// base
+// Base
 @import "../../node_modules/normalize.css/normalize";
 @import "base";
 
-// component
+// Component
 @import "components/**/*.scss";
