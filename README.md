@@ -40,7 +40,7 @@
 
 - Mac OS X または Windows
 - Yarn
-- Node.js 8.10.0 以降
+- Node.js 8.9.0 以降
 - EditorConfig および Prettier をサポートするエディタ
 
 ## インストール
